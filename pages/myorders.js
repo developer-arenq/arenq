@@ -1,0 +1,45 @@
+import { getSession } from "next-auth/react";
+import Head from "next/head";
+import dynamic from "next/dynamic";
+
+const OrderCard = dynamic(() => import("../components/orderCard"), {
+  ssr: false,
+});
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const data = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/orders/user/${session.user.id}`
+  );
+  const res = await data.json();
+
+  return {
+    props: {
+      orders: res || [],
+    },
+  };
+}
+
+const MyOrders = ({ orders }) => {
+  return (
+    <>
+      <Head>
+        <title>My Orders</title>
+      </Head>
+
+      <OrderCard orders={orders} />
+    </>
+  );
+};
+
+export default MyOrders;

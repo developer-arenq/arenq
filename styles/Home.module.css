@@ -1,0 +1,5 @@
+.product-image-wrapper {
+    min-height: 520px;      /* prevent layout shift */
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /checkout
+Disallow: /admin
+Disallow: /404
+
+# Allow everything else
+Allow: /
+
+# Sitemap
+Sitemap: https://www.arenq.co.in/sitemap.xml
