@@ -1,5 +1,7 @@
 import { GoogleAuth } from "google-auth-library";
-import serviceKey from "../../../../google-service-key.json";
+const serviceKey = JSON.parse(
+  process.env.GOOGLE_SERVICE_KEY
+);
 
 function extractDescription(draftJson) {
   try {
