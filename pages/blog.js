@@ -6,12 +6,12 @@ import { ArrowRight, Clock, Tag } from "lucide-react";
 
 const categories = [
   "All",
-  "Farmer Stories",
-  "Artisan Stories",
-  "Wellness",
-  "Stories",
-  "Education",
-  "Seasons",
+  "Energy Storage",
+  "Solar Solutions",
+  "Battery Technology",
+  "EV",
+  "Industry",
+  "News",
 ];
 
 export default function BlogLayout() {
@@ -51,7 +51,7 @@ export default function BlogLayout() {
               color: "hsl(12 55% 38%)",
             }}
           >
-            🏔️ Stories from the Mountains
+            ⚡ Energy Insights
           </div>
 
           <h1
@@ -69,8 +69,8 @@ export default function BlogLayout() {
             className="text-sm leading-relaxed"
             style={{ color: "hsl(30 12% 48%)" }}
           >
-            Wellness guides, sourcing stories and Himalayan traditions —
-            straight from the source.
+            Smart insights on energy storage, lithium battery technology, EV solutions,
+            industrial power backup, renewable energy, and the future of sustainable power.
           </p>
         </div>
 
@@ -90,11 +90,10 @@ export default function BlogLayout() {
                   activeCategory === category
                     ? "white"
                     : "hsl(30 12% 38%)",
-                border: `1.5px solid ${
-                  activeCategory === category
+                border: `1.5px solid ${activeCategory === category
                     ? "hsl(12 55% 38%)"
                     : "hsl(35 15% 82%)"
-                }`,
+                  }`,
               }}
             >
               {category}
@@ -307,7 +306,7 @@ export default function BlogLayout() {
           </>
         )}
 
-        
+
       </div>
     </div>
   );

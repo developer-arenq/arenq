@@ -253,7 +253,7 @@ uppercase tracking-[3px]
 text-xs font-semibold
 "
               style={{
-                color: "hsl(145 70% 38%)"
+                color: "#FFB600"
               }}
             >              Explore Solutions
             </p>

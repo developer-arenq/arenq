@@ -275,9 +275,9 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
           <div className="d-flex flex-row align-items-start bg-white">
 
 
-            <div className="hidden md:block sticky top-40 z-5 w-64 bg-white px-4">
+            {/* <div className="hidden md:block sticky top-40 z-5 w-64 bg-white px-4">
               <div className="flex justify-between items-center mb-2">
-                <h1 className="font-medium text-md ">Filter By</h1>
+                <h2 className="font-medium text-md ">Filter By</h2>
                 <button
                   className="text-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded border border-gray-300"
                   type="button"
@@ -287,7 +287,6 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
                 </button>
               </div>
 
-              {/* Price Filter */}
               <div className="mb-3 w-full">
                 <h6 className="font-medium text-md py-2">Price</h6>
                 <div className="flex items-center w-full relative">
@@ -331,7 +330,6 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
                 </div>
               </div>
 
-              {/* Customer Ratings */}
               <div className="mb-3">
                 <h6 className="font-medium text-md py-2">Customer Ratings</h6>
                 <div className="flex flex-col gap-y-2">
@@ -358,7 +356,6 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
                 </div>
               </div>
 
-              {/* Discount */}
               <div className="mb-3">
                 <h6 className="font-medium text-md py-2">Discount</h6>
                 <div className="flex flex-col gap-y-2">
@@ -378,7 +375,7 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
                   ))}
                 </div>
               </div>
-            </div>
+            </div> */}
 
 
             {/* Product Grid Section */}
@@ -404,7 +401,7 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
                 </div>
 
                 {/* Right: Sort Dropdown */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <label htmlFor="sort_by" className="text-sm text-gray-600 hidden sm:block">
                     Sort
                   </label>
@@ -420,7 +417,7 @@ const productScreen = ({ prod, pro_category, pro_subcat, query }) => {
                     <option value="a-z">A to Z</option>
                     <option value="z-a">Z to A</option>
                   </select>
-                </div>
+                </div> */}
               </div>
               <div className="mx-auto p-2">
                 <div className="mt-6 grid grid-cols-2 gap-x-2 gap-y-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-4 ">

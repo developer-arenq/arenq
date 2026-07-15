@@ -383,7 +383,7 @@ export default function Header() {
                 priority
               />
 
-             
+
             </button>
 
             {/* Desktop Nav */}
@@ -955,8 +955,23 @@ export default function Header() {
         <div className="fixed inset-0 z-50 flex">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
           <div className="relative w-72 h-full flex flex-col shadow-2xl" style={{ background: 'hsl(210 30% 98%)' }}>
-            <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: 'hsl(210 20% 86%)' }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, color: '#0A528F' }}>ARENQ</span>
+            <div className="flex items-center justify-between p-2 border-b" style={{ borderColor: 'hsl(210 20% 86%)' }}>
+              <button
+                onClick={() => router.push('/')}
+                className="flex items-center  flex-shrink-0"
+                data-testid="link-logo"
+              >
+
+                <Image
+                  src="https://arenq.co.in/wp-content/uploads/2025/06/Arenq-logo-animation.2.gif"
+                  width={170}
+                  height={70}
+                  alt="Logo"
+                  priority
+                />
+
+
+              </button>
               <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg hover:bg-black/5" aria-label="Close menu"><X size={20} /></button>
             </div>
             <nav className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
@@ -997,9 +1012,7 @@ export default function Header() {
                   { label: 'About Us', href: '/about-us' },
                   { label: 'Our Story', href: '/our-story' },
                   { label: 'Blog', href: '/blog' },
-                  { label: 'Gifting & Hampers', href: '/gifting' },
                   { label: 'Media & Press', href: '/media-press' },
-                  { label: 'Loyalty & Rewards', href: '/loyalty' },
                   { label: 'Contact Us', href: '/contact-us' },
                 ].map(({ label, href }) => (
                   <button key={label} onClick={() => { router.push(href); setMobileOpen(false); }} className="text-left w-full px-4 py-2.5 rounded-xl text-sm transition-colors hover:bg-black/5" style={{ fontFamily: 'var(--font-body)' }}>{label}</button>
