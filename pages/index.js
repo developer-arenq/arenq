@@ -12,6 +12,7 @@ import CustomersSay from "../components/Customers-Say";
 import OurStory from "../components/OurStory";
 import Occasion from "../components/Occasion";
 import Videosec from "../components/Videosec";
+import About from "../components/About-Arenq";
 /* ---------------------------
    Intersection Lazy Wrapper
 ---------------------------- */
@@ -162,7 +163,8 @@ export default function Home() {
         <Slider />
         {/* <Heading /> */}
         <CategorySlider />
-        <FreshStock />
+        <About/>
+        {/* <FreshStock /> */}
         {/* <ProductList />
         <BestSeller />
         <TeaSpecial /> */}

@@ -304,37 +304,41 @@ export default function Header() {
   return (
     <>
       {/* Announcement Bar */}
-      <div style={{
-        background:
-          "linear-gradient(90deg,hsl(218 55% 12%),hsl(145 70% 42%))",
-
-        color: "white"
-      }}
-        className="relative overflow-hidden py-2">
-        <div className="flex items-center gap-0">
+      <div
+        style={{
+          background: "linear-gradient(90deg, #0A528F 0%, #0D6BB8 50%, #FFB600 100%)",
+          color: "#ffffff",
+          borderBottom: "2px solid #FFB600",
+        }}
+        className="relative overflow-hidden py-2 shadow-md"
+      >
+        <div className="flex items-center">
           <div className="announcement-ticker">
-            {
-              [
-                "🔋 Advanced Lithium Battery Solutions",
-                "⚡ Powering EV, Solar & Industrial Applications",
-                "🌱 Clean Energy • Reliable Storage • Sustainable Future",
-                "🚀 High Performance LiFePO4 Battery Technology",
-                "🔧 Custom Battery Solutions For Every Industry",
-                "🌍 ARENQ — Forward To Future",
+            {[
+              "🔋 Advanced Lithium Battery Solutions",
+              "⚡ Powering EV, Solar & Industrial Applications",
+              "🌱 Clean Energy • Reliable Storage • Sustainable Future",
+              "🚀 High Performance LiFePO4 Battery Technology",
+              "🔧 Custom Battery Solutions For Every Industry",
+              "🌍 ARENQ — Forward To Future",
 
-                "🔋 Advanced Lithium Battery Solutions",
-                "⚡ Powering EV, Solar & Industrial Applications",
-                "🌱 Clean Energy • Reliable Storage • Sustainable Future",
-                "🚀 High Performance LiFePO4 Battery Technology",
-                "🔧 Custom Battery Solutions For Every Industry",
-                "🌍 ARENQ — Forward To Future",
-              ].map((msg, i) => (
-                <span key={i} className="px-6 text-xs font-medium tracking-wide">{msg}</span>
-              ))}
+              "🔋 Advanced Lithium Battery Solutions",
+              "⚡ Powering EV, Solar & Industrial Applications",
+              "🌱 Clean Energy • Reliable Storage • Sustainable Future",
+              "🚀 High Performance LiFePO4 Battery Technology",
+              "🔧 Custom Battery Solutions For Every Industry",
+              "🌍 ARENQ — Forward To Future",
+            ].map((msg, i) => (
+              <span
+                key={i}
+                className="px-6 text-xs md:text-sm font-semibold tracking-wider"
+              >
+                {msg}
+              </span>
+            ))}
           </div>
         </div>
       </div>
-
       {/* Main Header */}
       <header
         className="sticky top-0 z-40 transition-all duration-300"
@@ -348,7 +352,7 @@ export default function Header() {
             : "1px solid transparent",
 
           boxShadow: scrolled
-            ? "0 8px 30px hsl(218 55% 12% / .08)"
+            ? "0 10px 30px rgb(10 82 143 / 12%)"
             : "none"
         }}
       >
@@ -372,17 +376,14 @@ export default function Header() {
             >
 
               <Image
-                src="/images/logo/Arenq_light.png"
-                width={70}
+                src="https://arenq.co.in/wp-content/uploads/2025/06/Arenq-logo-animation.2.gif"
+                width={170}
                 height={70}
                 alt="Logo"
                 priority
               />
 
-              <div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, color: "hsl(145 70% 42%)", lineHeight: 1.1 }}>ARENQ</div>
-                <div style={{ fontSize: '0.6rem', letterSpacing: '0.12em', color: 'hsl(215 15% 45%)', textTransform: 'uppercase', fontWeight: 500 }}>Forward To Future</div>
-              </div>
+             
             </button>
 
             {/* Desktop Nav */}
@@ -440,7 +441,7 @@ export default function Header() {
                     <div
                       className="p-3 border-b"
                       style={{
-                        background: "hsl(218 55% 16%)"
+                        background: "#0A528F"
                       }}
                     >
 
@@ -543,7 +544,7 @@ export default function Header() {
                   onClick={() => setAboutOpen(v => !v)}
                   className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-black/5"
                   style={{
-                    color: aboutOpen ? "hsl(145 70% 42%)" : "hsl(218 55% 12%)",
+                    color: aboutOpen ? "#0A528F" : "hsl(218 55% 12%)",
                     fontFamily: "var(--font-body)",
                   }}
                 >
@@ -571,7 +572,7 @@ export default function Header() {
                       className="p-3 border-b"
                       style={{
                         borderColor: "hsl(35 15% 90%)",
-                        background: "hsl(145 70% 42%)",
+                        background: "#0A528F",
                       }}
                     >
                       <p
@@ -642,7 +643,7 @@ export default function Header() {
                 <button
                   onClick={() => setB2bOpen(v => !v)}
                   className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-black/5"
-                  style={{ color: b2bOpen ? 'hsl(145 70% 42%)' : 'hsl(218 55% 12%)', fontFamily: 'var(--font-body)' }}
+                  style={{ color: b2bOpen ? '#0A528F' : 'hsl(218 55% 12%)', fontFamily: 'var(--font-body)' }}
                   aria-label="B2B & Wholesale"
                   aria-expanded={b2bOpen}
                 >
@@ -661,7 +662,7 @@ export default function Header() {
                       zIndex: 100,
                     }}
                   >
-                    <div className="p-3 border-b" style={{ borderColor: 'hsl(35 15% 90%)', background: 'hsl(218 55% 16%)' }}>
+                    <div className="p-3 border-b" style={{ borderColor: 'hsl(35 15% 90%)', background: '#0A528F' }}>
                       <p className="text-xs font-bold uppercase tracking-widest" style={{ color: 'hsl(145 20% 72%)' }}>Business Partnerships</p>
                       <p className="text-xs mt-0.5" style={{ color: 'hsl(145 20% 60%)' }}>Wholesale, distribution & hospitality</p>
                     </div>
@@ -688,7 +689,7 @@ export default function Header() {
                       <button
                         onClick={() => { router.push('/wholesale'); setB2bOpen(false); }}
                         className="w-full py-2 rounded-xl text-xs font-semibold transition-all"
-                        style={{ background: 'hsl(145 70% 42%)', color: 'white' }}
+                        style={{ background: '#0A528F', color: 'white' }}
                       >
                         View All B2B Programs →
                       </button>
@@ -741,7 +742,7 @@ export default function Header() {
                   <span
                     className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center"
                     style={{
-                      background: "hsl(145 70% 42%)",
+                      background: "#0A528F",
                       color: "white",
                     }}
                   >
@@ -767,7 +768,7 @@ export default function Header() {
                   autoFocus
                   className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm outline-none border transition-colors"
                   style={{ background: 'hsl(36 28% 96%)', border: '1.5px solid hsl(210 20% 86%)', fontFamily: 'var(--font-body)' }}
-                  onFocus={e => (e.target.style.borderColor = 'hsl(145 70% 42%)')}
+                  onFocus={e => (e.target.style.borderColor = '#0A528F')}
                   onBlur={e => (e.target.style.borderColor = 'hsl(210 20% 86%)')}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -955,7 +956,7 @@ export default function Header() {
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
           <div className="relative w-72 h-full flex flex-col shadow-2xl" style={{ background: 'hsl(210 30% 98%)' }}>
             <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: 'hsl(210 20% 86%)' }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, color: 'hsl(145 70% 42%)' }}>ARENQ</span>
+              <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, color: '#0A528F' }}>ARENQ</span>
               <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg hover:bg-black/5" aria-label="Close menu"><X size={20} /></button>
             </div>
             <nav className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
