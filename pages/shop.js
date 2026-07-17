@@ -106,7 +106,7 @@ export default function Shop({ initialProducts, pagination, initialCategory }) {
   return (
     <>
       <Head>
-        <title>Shop | Apneehatti</title>
+        <title>Shop | Arenq</title>
         <meta
           name="description"
           content="Explore authentic mountain-made products — Tea, Chocolates, Handicrafts, and more."

@@ -49,9 +49,9 @@ export default async function handler(req, res) {
 
   const emailHtml = `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
   <div style="text-align: center;">
-    <img src="https://arenq.s3.amazonaws.com/image-1727026815300.png" alt="ApneeHatti Logo" style="width: 150px; margin-bottom: 20px;" />
+    <img src="https://arenq.s3.ap-south-1.amazonaws.com/logo.png" alt="Arenq Logo" style="width: 150px; margin-bottom: 20px;" />
   </div>
-  <h2 style="color: #333; text-align: center;">Welcome to ApneeHatti!</h2>
+  <h2 style="color: #333; text-align: center;">Welcome to Arenq !</h2>
   <p style="color: #555; font-size: 16px; text-align: center;">
     We're excited to have you on board. To complete your registration, please use the OTP code below:
   </p>
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
       For any support, contact us at <a href="mailto:info@arenq.co.in">info@arenq.co.in</a>
     </p>
     <p style="color: #888; font-size: 12px;">
-      © 2024 ApneeHatti, All rights reserved.
+      © 2024 Arenq, All rights reserved.
     </p>
   </div>
 </div>

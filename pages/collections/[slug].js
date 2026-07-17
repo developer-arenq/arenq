@@ -45,9 +45,9 @@ export async function getStaticProps({ params }) {
 }
 
 export default function CategoryPage({ category, products }) {
-  const title = `${category.name} | Himalayan Organic Products - Apneehatti`;
+  const title = `${category.name} | Himalayan Organic Products - Arenq`;
 
-  const description = `Buy ${category.name} from Himalayan region. Explore organic, handmade and natural products from Dharamshala at Apneehatti.`;
+  const description = `Buy ${category.name} from Himalayan region. Explore organic, handmade and natural products from Dharamshala at Arenq.`;
 
   return (
     <>
@@ -168,7 +168,7 @@ export default function CategoryPage({ category, products }) {
           </p>
 
           <p className="mt-2">
-            Shop from Apneehatti to experience genuine Himalayan quality and
+            Shop from Arenq to experience genuine Himalayan quality and
             support sustainable practices.
           </p>
         </section>

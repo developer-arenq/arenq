@@ -23,7 +23,7 @@ const Policy = () => {
   return (
     <>
       <Head>
-        <title>Policies | Apneehatti</title>
+        <title>Policies | Arenq</title>
       </Head>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-4">Our Policies</h1>

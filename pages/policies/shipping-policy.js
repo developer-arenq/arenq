@@ -8,12 +8,12 @@ const ShippingPolicy = () => {
 
       <div className='w-5/6 m-auto'>
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Shipping Information – Apneehatti
+        Shipping Information – Arenq
       </h1>
 
       <section className="mb-8">
         <p className="text-gray-700 leading-relaxed">
-          At <strong>Apneehatti</strong>, we’re committed to delivering handcrafted and mountain-made products from the heart of the Himalayas right to your doorstep, safely and on time.
+          At <strong>Arenq</strong>, we’re committed to delivering handcrafted and mountain-made products from the heart of the Himalayas right to your doorstep, safely and on time.
         </p>
       </section>
 

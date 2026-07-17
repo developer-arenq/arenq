@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     await transporter.verify();
 
     await transporter.sendMail({
-      from: `"Apneehatti" <${process.env.MAIL}>`,
+      from: `"Arenq" <${process.env.MAIL}>`,
       to: "info@arenq.co.in",
       subject: "Out of Stock Product Requested",
       html: `

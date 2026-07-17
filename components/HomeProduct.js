@@ -226,7 +226,7 @@ const ProductList = () => {
      <div className="w-full overflow-hidden">
         <img
           src="/images/sl/crazydeals-sec.png"
-          alt="Fresh Stock At Apneehatti"
+          alt="Fresh Stock At Arenq"
           className="
           w-full
           h-auto

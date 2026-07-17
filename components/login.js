@@ -236,7 +236,7 @@ const login = ({ onClose, headerHeight }) => {
         draggable
         pauseOnHover
       />
-      <div style={{ background: 'hsl(12 55% 38%)', color: 'hsl(36 28% 96%)' }} className="mx-2 p-8 rounded-xl w-96  shadow-lg">
+      <div style={{ background: '#0A528F', color: 'hsl(36 28% 96%)' }} className="mx-2 p-8 rounded-xl w-96  shadow-lg">
 
         <div className="flex justify-end">
           <button
@@ -291,7 +291,7 @@ const login = ({ onClose, headerHeight }) => {
                 <input
                   id="email"
                   type="email"
-                  className="flex-grow p-2 border rounded"
+                  className="flex-grow p-2 border rounded text-black"
                   placeholder="Email"
                   onChange={handleInputChange}
                   required
@@ -313,21 +313,21 @@ const login = ({ onClose, headerHeight }) => {
                   <>
                     <input
                       type="text"
-                      className="flex-grow p-2 border rounded"
+                      className="flex-grow p-2 border rounded text-black"
                       placeholder="Enter OTP"
                       onChange={(e) => setOtp(e.target.value)}
                     />
                     <div className="flex justify-between gap-3">
                       <button
                         type="button"
-                        className="flex-1 bg-white text-black px-4 py-2 rounded-full"
+                        className="flex-1 bg-white text-black px-1 py-2 rounded-full"
                         onClick={verifyOtp}
                       >
                         Verify OTP
                       </button>
                       <button
                         type="button"
-                        className="flex-1 bg-gray-500 text-white px-4 py-2 rounded-full"
+                        className="flex-1 bg-gray-500 text-white px-1 py-2 rounded-full"
                         disabled={otpSending}
                         onClick={sendOtp}
                       >
@@ -346,7 +346,7 @@ const login = ({ onClose, headerHeight }) => {
                 <input
                   id="fullname"
                   type="text"
-                  className="w-full p-2 border rounded mb-3"
+                  className="w-full p-2 border rounded mb-3 text-black"
                   placeholder="Full Name"
                   onChange={handleInputChange}
                   required
@@ -354,7 +354,7 @@ const login = ({ onClose, headerHeight }) => {
                 <input
                   id="mobile"
                   type="number"
-                  className="w-full p-2 border rounded mb-3"
+                  className="w-full p-2 border rounded mb-3 text-black"
                   placeholder="Mobile Number (10 digits)"
                   onChange={handleInputChange}
                   required
@@ -362,7 +362,7 @@ const login = ({ onClose, headerHeight }) => {
                 <input
                   type="password"
                   id="password"
-                  className="w-full p-2 border rounded mb-3"
+                  className="w-full p-2 border rounded mb-3 text-black"
                   placeholder="Password"
                   onChange={handleInputChange}
                   required
@@ -370,7 +370,7 @@ const login = ({ onClose, headerHeight }) => {
                 <input
                   type="password"
                   id="confirmPassword"
-                  className="w-full p-2 border rounded mb-3"
+                  className="w-full p-2 border rounded mb-3 text-black"
                   placeholder="Confirm Password"
                   onChange={handleInputChange}
                   required
@@ -392,7 +392,7 @@ const login = ({ onClose, headerHeight }) => {
             <input
               id="email"
               type="email"
-              className="w-full p-2 border rounded mb-3 "
+              className="w-full p-2 border rounded mb-3 text-black"
               placeholder="Email"
               onChange={handleInputChange}
               required
@@ -400,7 +400,7 @@ const login = ({ onClose, headerHeight }) => {
             <input
               type="password"
               id="password"
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-2 border rounded mb-3 text-black"
               placeholder="Password"
               onChange={handleInputChange}
               required
@@ -414,7 +414,7 @@ const login = ({ onClose, headerHeight }) => {
             </button>
           </form>
         )}
-        <button
+        {/* <button
           onClick={() => signIn("google")}
           className=" w-full flex items-center justify-center gap-3 border border-gray-300 rounded-md p-1 shadow-sm hover:shadow-md transition duration-150 ease-in-out bg-white"
         >
@@ -426,7 +426,7 @@ const login = ({ onClose, headerHeight }) => {
             className="inline-block"
           />
           <span className="text-gray-700 font-medium">Sign in with Google</span>
-        </button>
+        </button> */}
         <button
           className="w-full text-white text-sm p-2"
           onClick={handleForgotPasswordClick}
@@ -443,7 +443,7 @@ const login = ({ onClose, headerHeight }) => {
                 : "Don't have an account?"}
             </p>
             <button
-              className="text-blue-600 font-medium"
+              className="text-[#FFB600] font-medium"
               onClick={isSignUpActive ? handleSignInClick : handleSignUpClick}
             >
               {isSignUpActive ? "Sign In" : "Create Account"}

@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
 
       <section className="mb-6">
         <p className="leading-relaxed">
-          At <strong>Apneehatti</strong>, we value your privacy and are committed to protecting your personal information. By using our website or services, you agree to the terms of this policy.
+          At <strong>Arenq</strong>, we value your privacy and are committed to protecting your personal information. By using our website or services, you agree to the terms of this policy.
         </p>
       </section>
 
@@ -104,7 +104,7 @@ const PrivacyPolicy = () => {
         </p>
         <p>
           <strong>Address:</strong><br />
-          Apneehatti<br />
+          Arenq<br />
           Bhagsunag Road, Opposite Hotel Green,<br />
           McLeod Ganj, Dharamshala,<br />
           Himachal Pradesh – 176219

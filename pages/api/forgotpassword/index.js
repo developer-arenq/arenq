@@ -105,13 +105,13 @@ const forgotPassword = async (req, res) => {
     <body>
         <div className="email-container">
             <div className="header">
-                <img src="https://arenq.s3.amazonaws.com/image-1727026815300.png" alt="ApneeHatti Logo" className="logo">
+                <img src="https://arenq.s3.ap-south-1.amazonaws.com/logo.png" alt="Arenq Logo" className="logo">
                 <h1>Password Reset Request</h1>
             </div>
             
             <p>Hi ${user.fullname},</p>
             
-            <p>You recently requested to reset your password for your ApneeHatti account. Click the button below to proceed:</p>
+            <p>You recently requested to reset your password for your Arenq account. Click the button below to proceed:</p>
             
             <a href="${resetLink}" className="reset-button">Reset Password</a>
             
@@ -124,7 +124,7 @@ const forgotPassword = async (req, res) => {
             <p style="word-break: break-all;">${resetLink}</p>
             
             <div className="footer">
-                <p>© 2024 ApneeHatti. All rights reserved.</p>
+                <p>© 2024 Arenq. All rights reserved.</p>
                 <p>If you're having trouble, contact us at <a href="mailto:info@arenq.co.in">info@arenq.co.in</a></p>
             </div>
         </div>

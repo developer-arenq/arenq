@@ -255,7 +255,7 @@ export default function LoginPage() {
           )}
 
           {/* ---------- GOOGLE ---------- */}
-          <button
+          {/* <button
             onClick={handleGoogleLogin}
             className="mt-4 w-full flex items-center justify-center gap-3 bg-white rounded p-2"
           >
@@ -266,7 +266,7 @@ export default function LoginPage() {
               height={24}
             />
             <span className="text-gray-700">Sign in with Google</span>
-          </button>
+          </button> */}
 
           {/* ---------- SWITCH ---------- */}
           <div className="mt-4 text-center text-white">

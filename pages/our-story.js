@@ -176,7 +176,7 @@ export default function OurStoryPage() {
         />
       </section>
 
-      {/* Chapter 2: Building ApneeHatti */}
+      {/* Chapter 2: Building Arenq */}
       <section style={{ padding: '80px 24px', background: '#F5F0E8' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
           <div

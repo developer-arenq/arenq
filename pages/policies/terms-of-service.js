@@ -12,7 +12,7 @@ const TermsOfService = () => {
 
       <section className="mb-6">
         <p>
-          Welcome to <strong>Apneehatti</strong>! By using our website (<a href="https://www.arenq.co.in" className="text-blue-600 underline hover:text-blue-800">www.arenq.co.in</a>) or any of our services, you agree to be bound by the following Terms of Service. Please read them carefully.
+          Welcome to <strong>Arenq</strong>! By using our website (<a href="https://www.arenq.co.in" className="text-blue-600 underline hover:text-blue-800">www.arenq.co.in</a>) or any of our services, you agree to be bound by the following Terms of Service. Please read them carefully.
         </p>
       </section>
 
@@ -20,7 +20,7 @@ const TermsOfService = () => {
         {
           title: "1. About Us",
           content:
-            "Apneehatti is an online platform offering authentic Himalayan products including food, wellness items, and handicrafts. We work closely with local farmers, artisans, and small producers.",
+            "Arenq is an online platform offering authentic Himalayan products including food, wellness items, and handicrafts. We work closely with local farmers, artisans, and small producers.",
         },
         {
           title: "2. User Agreement",
@@ -54,7 +54,7 @@ const TermsOfService = () => {
             <ul className="list-disc list-inside space-y-2">
               <li>Orders are confirmed only after successful payment.</li>
               <li>We accept payments via secure third-party gateways.</li>
-              <li>Apneehatti may cancel orders at its discretion.</li>
+              <li>Arenq may cancel orders at its discretion.</li>
             </ul>
           ),
         },
@@ -81,7 +81,7 @@ const TermsOfService = () => {
         {
           title: "8. Intellectual Property",
           content:
-            "All content (text, images, logos) belongs to Apneehatti or is used with permission. You may not reproduce or use any content without written approval.",
+            "All content (text, images, logos) belongs to Arenq or is used with permission. You may not reproduce or use any content without written approval.",
         },
         {
           title: "9. Prohibited Use",
@@ -107,12 +107,12 @@ const TermsOfService = () => {
         {
           title: "12. Limitation of Liability",
           content:
-            "Apneehatti is not responsible for any losses, damages, or interruptions arising from use of our platform.",
+            "Arenq is not responsible for any losses, damages, or interruptions arising from use of our platform.",
         },
         {
           title: "13. Indemnity",
           content:
-            "You agree to hold Apneehatti harmless from any claims or issues arising from your use of our site or violation of these terms.",
+            "You agree to hold Arenq harmless from any claims or issues arising from your use of our site or violation of these terms.",
         },
         {
           title: "14. Legal Jurisdiction",
@@ -137,7 +137,7 @@ const TermsOfService = () => {
               <p>📞 Phone: +91 8956225134</p>
               <p className="mt-2">
                 📍 <strong>Address:</strong><br />
-                Apneehatti<br />
+                Arenq<br />
                 Bhagsunag Road, Opposite Hotel Green,<br />
                 McLeod Ganj, Dharamshala,<br />
                 Himachal Pradesh – 176219

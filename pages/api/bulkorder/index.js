@@ -93,7 +93,7 @@ const BulkOrder = async (req, res) => {
                 <p>${message}</p>
               </div>
               <div class="footer">
-                <p>This email was sent from the ApneeHatti bulk order form.</p>
+                <p>This email was sent from the Arenq bulk order form.</p>
               </div>
             </div>
           </body>

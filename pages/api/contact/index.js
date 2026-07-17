@@ -54,7 +54,7 @@ const Contact = async (req, res) => {
     </div>
 
     <p style="margin-top:30px;font-size:12px;color:#888;text-align:center">
-      This email was sent from the Apneehatti contact form.
+      This email was sent from the Arenq contact form.
     </p>
   </div>
 </body>

@@ -171,7 +171,7 @@ export default function WholesalePage() {
             for businesses, industries and a sustainable future.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-            <a href="https://wa.me/918956225134?text=Hello%2C%20I%20am%20interested%20in%20a%20wholesale%20partnership%20with%20ApneeHatti" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3 inline-flex items-center gap-2 justify-center">
+            <a href="https://wa.me/918956225134?text=Hello%2C%20I%20am%20interested%20in%20a%20wholesale%20partnership%20with%20Arenq" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3 inline-flex items-center gap-2 justify-center">
               <MessageCircle size={16} />
               WhatsApp Us
             </a>
@@ -315,7 +315,7 @@ export default function WholesalePage() {
             Our B2B team is available Monday–Saturday, 9AM–7PM. We typically respond to all partnership enquiries within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="https://wa.me/918956225134?text=Hello%2C%20I%20am%20interested%20in%20a%20business%20partnership%20with%20ApneeHatti" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-sm" style={{ background: 'white', color: 'hsl(12 55% 38%)' }}>
+            <a href="https://wa.me/918956225134?text=Hello%2C%20I%20am%20interested%20in%20a%20business%20partnership%20with%20Arenq" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-sm" style={{ background: 'white', color: 'hsl(12 55% 38%)' }}>
               <MessageCircle size={16} />
               WhatsApp: +91 78767 52516
             </a>

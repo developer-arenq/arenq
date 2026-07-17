@@ -10,7 +10,7 @@ export default async function handler(req, res) {
           "places.id,places.displayName",
       },
       body: JSON.stringify({
-        textQuery: "Apneehatti Dharamshala",
+        textQuery: "Arenq Dharamshala",
       }),
     }
   );

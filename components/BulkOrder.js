@@ -85,7 +85,7 @@ const BulkOrder = () => {
                         Bulk Orders – Bringing the Mountains to You, in Bulk
                     </h2>
                     <p className="text-md sm:text-lg text-gray-700 mt-4 max-w-3xl mx-auto">
-                        Whether you‘re a business, event planner, NGO, or government body — Apneehatti offers curated bulk ordering options that support artisans, farmers, and mountain communities.
+                        Whether you‘re a business, event planner, NGO, or government body — Arenq offers curated bulk ordering options that support artisans, farmers, and mountain communities.
                     </p>
                 </div>
 
@@ -127,7 +127,7 @@ const BulkOrder = () => {
                         <div>
                             <h3 className="text-xl font-semibold flex items-center gap-2 text-green-700 font-sans">
                                 <FaMountain className="text-green-500" />
-                                Why Order from Apneehatti?
+                                Why Order from Arenq?
                             </h3>
                             <ul className="list-disc list-inside text-gray-800 mt-2">
                                 <li>Special Bulk Pricing</li>

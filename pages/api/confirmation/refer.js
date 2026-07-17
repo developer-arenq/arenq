@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
     // 3️⃣ Mail options
     const mailData = {
-      from: `"Apneehatti" <${process.env.MAIL}>`,
+      from: `"Arenq" <${process.env.MAIL}>`,
       to: email,
       subject: "Password Reset Request",
       html: `
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
               </a>
             </p>
             <p>If you didn’t request this, please ignore this email.</p>
-            <p>Best regards,<br>Apneehatti Team</p>
+            <p>Best regards,<br>Arenq Team</p>
           </body>
         </html>
       `,

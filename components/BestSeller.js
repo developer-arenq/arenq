@@ -224,7 +224,7 @@ const BestSeller = () => {
      <div className="w-full overflow-hidden">
         <img
           src="/images/sl/bestseller-sec.png"
-          alt="Best Sellers At Apneehatti"
+          alt="Best Sellers At Arenq"
           className="
           w-full
           h-auto

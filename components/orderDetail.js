@@ -157,7 +157,7 @@ const OrderDetail = ({ order, shipping_address, user }) => {
                 order={order}
                 billing_address={shipping_address}
                 shipping_address={shipping_address}
-                logo={"/images/logo/apneehatti_logo.png"}
+                logo={"/images/logo/Arenq_logo.png"}
                 signature={"/images/signature/signature.png"}
               />
             </div>

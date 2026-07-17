@@ -355,9 +355,9 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
           key: RAZORPAY_KEY,
           amount: rpData.amount,
           currency: "INR",
-          name: "Apneehatti Pvt Ltd",
+          name: "Arenq Pvt Ltd",
           description: "Order Payment",
-          image: "https://arenq.s3.amazonaws.com/image-1727026815300.png",
+          image: "https://arenq.s3.ap-south-1.amazonaws.com/logo.png",
           order_id: rpData.id,
 
           handler: async function (paymentResults) {

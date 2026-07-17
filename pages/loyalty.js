@@ -56,7 +56,7 @@ const TIERS = [
 ];
 
 const HOW_IT_WORKS = [
-  { step: '01', title: 'Join Free', desc: 'Create your ApneeHatti account — takes 30 seconds. No fees, no subscriptions.', icon: '✨' },
+  { step: '01', title: 'Join Free', desc: 'Create your Arenq account — takes 30 seconds. No fees, no subscriptions.', icon: '✨' },
   { step: '02', title: 'Shop', desc: 'Browse 200+ Himalayan products. Every purchase earns points automatically.', icon: '🛒' },
   { step: '03', title: 'Earn Points', desc: '₹1 spent = 1 point. Bonus points on birthdays, referrals, and reviews.', icon: '⭐' },
   { step: '04', title: 'Redeem', desc: 'Use points for discounts, free products, or exclusive mountain experiences.', icon: '🎁' },
@@ -248,7 +248,7 @@ export default function LoyaltyPage() {
               <p className="text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: '#C96A28' }}>Referral Program</p>
               <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#F5F0E8', fontFamily: 'Georgia, serif' }}>Share the Mountains</h2>
               <p className="text-base mb-6 leading-relaxed" style={{ color: 'rgba(245,240,232,0.8)' }}>
-                Share ApneeHatti with friends and family. When they make their first purchase, they get ₹100 off — and you earn 200 bonus points.
+                Share Arenq with friends and family. When they make their first purchase, they get ₹100 off — and you earn 200 bonus points.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-4 p-4 rounded-xl" style={{ backgroundColor: 'rgba(245,240,232,0.1)', border: '1px solid rgba(245,240,232,0.2)' }}>
@@ -281,7 +281,7 @@ export default function LoyaltyPage() {
                 <p className="text-xs mb-4" style={{ color: 'rgba(245,240,232,0.6)' }}>Share this code or use the link below</p>
                 <div className="flex gap-2">
                   <a
-                    href="https://wa.me/?text=Use%20my%20ApneeHatti%20referral%20code%20for%20₹100%20off!"
+                    href="https://wa.me/?text=Use%20my%20Arenq%20referral%20code%20for%20₹100%20off!"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold"

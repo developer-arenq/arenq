@@ -217,7 +217,7 @@ const TeaSpecial = () => {
      <div className="w-full overflow-hidden">
         <img
           src="/images/sl/tea-sec.png"
-          alt="Tea Specials At Apneehatti"
+          alt="Tea Specials At Arenq"
           className="
           w-full
           h-auto

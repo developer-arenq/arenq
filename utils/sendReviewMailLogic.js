@@ -91,7 +91,7 @@ export async function sendReviewMailLogic(orderId) {
         </p>
 
         <p style="font-size:15px;color:#374151;margin:0 0 20px;line-height:1.6;">
-          Thank you for shopping with <strong>ApneeHatti</strong>!  
+          Thank you for shopping with <strong>Arenq</strong>!  
           Your order <b>#${order._id}</b> has been delivered.  
           We’d love to hear your thoughts on the products below.
         </p>
@@ -115,7 +115,7 @@ export async function sendReviewMailLogic(orderId) {
       <!-- FOOTER -->
       <div style="background:#f9fafb;color:#6b7280;text-align:center;
         padding:18px;font-size:12px;">
-        © ${new Date().getFullYear()} <strong>ApneeHatti</strong> · All rights reserved<br/>
+        © ${new Date().getFullYear()} <strong>Arenq</strong> · All rights reserved<br/>
         <a href="${process.env.NEXTAUTH_URL}"
           style="color:#15803d;text-decoration:none;font-weight:500;">
           Visit our store
@@ -135,7 +135,7 @@ export async function sendReviewMailLogic(orderId) {
       await transporter.sendMail({
 
         from:
-          `"ApneeHatti" <${process.env.MAIL}>`,
+          `"Arenq" <${process.env.MAIL}>`,
 
         to:
           order.shipping_address.email,

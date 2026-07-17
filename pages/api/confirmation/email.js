@@ -79,7 +79,7 @@ export default async function (req, res) {
               <tr>
                 <td align="center" style="background-color: #15803d; padding: 30px;">
                   <h1 style="color: #ffffff; margin: 0; font-size: 26px;">Order Confirmed 🎉</h1>
-                  <p style="color: #dcfce7; margin: 6px 0 0;">Thank you for shopping with ApneeHatti!</p>
+                  <p style="color: #dcfce7; margin: 6px 0 0;">Thank you for shopping with Arenq!</p>
                 </td>
               </tr>
 
@@ -156,7 +156,7 @@ export default async function (req, res) {
               <!-- Footer -->
               <tr>
                 <td align="center" style="background-color: #f0fdf4; padding: 15px;">
-                  <p style="color: #15803d; font-size: 14px;">© ${new Date().getFullYear()} ApneeHatti. All rights reserved.</p>
+                  <p style="color: #15803d; font-size: 14px;">© ${new Date().getFullYear()} Arenq. All rights reserved.</p>
                 </td>
               </tr>
 
@@ -171,7 +171,7 @@ export default async function (req, res) {
     await transporter.sendMail({
       from: "info@arenq.co.in",
       to: email,
-      subject: "🎉 Order Confirmed – Thank You for Shopping with ApneeHatti!",
+      subject: "🎉 Order Confirmed – Thank You for Shopping with Arenq!",
       html,
     });
 

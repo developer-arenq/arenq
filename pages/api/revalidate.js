@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  if (req.query.secret !== "apneehatti123") {
+  if (req.query.secret !== "Arenq123") {
     return res.status(401).json({ message: "Invalid token" });
   }
   try {

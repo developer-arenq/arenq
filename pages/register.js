@@ -73,7 +73,7 @@ const Register = () => {
       if (data.error) {
         toast.error(data.error, { autoClose: 3000, position: "top-right" });
       } else {
-        toast.success("Registration successful! Welcome to apnnehatti.", {
+        toast.success("Registration successful! Welcome to Arenq.", {
           autoClose: 3000,
           position: "top-right",
         });
@@ -198,7 +198,7 @@ const Register = () => {
           </p>
 
           <p className="mt-4 text-xs text-gray-500 text-center">
-            By continuing, you agree to Apneehatti&apos;s{" "}
+            By continuing, you agree to Arenq&apos;s{" "}
             <a href="#" className="underline text-green-600">
               Conditions of Use
             </a>{" "}

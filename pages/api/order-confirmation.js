@@ -21,7 +21,7 @@ const order = {
     "order_items": [
         {
             "id": "6721cd2c3aec1b9cffa9c7c1",
-            "title": "Happiness Box – Himalayan Dark Chocolate Combo (240g) | Apneehatti",
+            "title": "Happiness Box – Himalayan Dark Chocolate Combo (240g) | Arenq",
             "slug": "happiness-box-himalayan-dark-chocolate-combo",
             "quantity": 1,
             "image": [
@@ -162,7 +162,7 @@ const html = `
               <tr>
                 <td align="center" style="background-color: #15803d; padding: 30px;">
                   <h1 style="color: #ffffff; margin: 0; font-size: 26px;">Order Confirmed 🎉</h1>
-                  <p style="color: #dcfce7; margin: 6px 0 0;">Thank you for shopping with ApneeHatti!</p>
+                  <p style="color: #dcfce7; margin: 6px 0 0;">Thank you for shopping with Arenq!</p>
                 </td>
               </tr>
 
@@ -239,7 +239,7 @@ const html = `
               <!-- Footer -->
               <tr>
                 <td align="center" style="background-color: #f0fdf4; padding: 15px;">
-                  <p style="color: #15803d; font-size: 14px;">© ${new Date().getFullYear()} ApneeHatti. All rights reserved.</p>
+                  <p style="color: #15803d; font-size: 14px;">© ${new Date().getFullYear()} Arenq. All rights reserved.</p>
                 </td>
               </tr>
 
@@ -251,9 +251,9 @@ const html = `
     `;
 
 await transporter.sendMail({
-    from: `"ApneeHatti" <${process.env.MAIL}>`,
+    from: `"Arenq" <${process.env.MAIL}>`,
     to: email,
-    subject: "🎉 Order Confirmed – Thank You for Shopping with ApneeHatti!",
+    subject: "🎉 Order Confirmed – Thank You for Shopping with Arenq!",
     html
 });
 

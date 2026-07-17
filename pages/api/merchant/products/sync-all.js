@@ -58,7 +58,7 @@ async function uploadToGoogle(product) {
 
     targetCountry: "IN",
 
-    brand: "Apneehatti",
+    brand: "Arenq",
 
     condition: "new",
 

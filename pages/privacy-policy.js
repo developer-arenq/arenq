@@ -4,10 +4,10 @@ export default function PrivacyPolicy() {
     return (
         <>
             <Head>
-                <title>Privacy Policy | ApneeHatti</title>
+                <title>Privacy Policy | Arenq</title>
                 <meta
                     name="description"
-                    content="Read the privacy policy of ApneeHatti to understand how we collect, use, and protect your personal information."
+                    content="Read the privacy policy of Arenq to understand how we collect, use, and protect your personal information."
                 />
                 <link rel="canonical" href="https://www.arenq.co.in/privacy-policy" />
             </Head>
@@ -18,7 +18,7 @@ export default function PrivacyPolicy() {
                     <p className="mb-4">Last Updated: August 8, 2025</p>
 
                     <p className="mb-6">
-                        At <strong>ApneeHatti</strong>, we value your privacy and are committed to protecting your personal information.
+                        At <strong>Arenq</strong>, we value your privacy and are committed to protecting your personal information.
                         This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or make a purchase.
                     </p>
 
