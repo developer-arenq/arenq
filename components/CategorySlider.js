@@ -274,8 +274,8 @@ font-bold mt-2
             href="/search"
             className="hidden md:flex items-center gap-2 text-sm font-semibold  hover:text-black transition"
             style={{
- color:"hsl(198 90% 40%)"
-}}
+              color: "hsl(198 90% 40%)"
+            }}
           >
             View All →
           </Link>
@@ -352,8 +352,8 @@ font-bold mt-2
             href="/search"
             className="font-semibold "
             style={{
- color:"hsl(198 90% 40%)"
-}}
+              color: "hsl(198 90% 40%)"
+            }}
           >
             View All →
           </Link>

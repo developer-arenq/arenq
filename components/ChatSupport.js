@@ -197,7 +197,7 @@ WhatsApp:
           width: '52px',
           height: '52px',
           borderRadius: '50%',
-          background: 'hsl(145 35% 22%)',
+          background: '#0A528F',
           color: 'white',
           border: 'none',
           display: 'flex',
@@ -234,9 +234,9 @@ WhatsApp:
           }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3" style={{ background: 'hsl(145 35% 22%)', color: 'white' }}>
+          <div className="flex items-center justify-between px-4 py-3" style={{ background: '#0A528F', color: 'white' }}>
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'hsl(145 30% 30%)' }}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: '#FFB600' }}>
                 <span>🔋</span>
               </div>
               <div>
@@ -255,7 +255,7 @@ WhatsApp:
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.from === 'bot' && (
-                  <div className="w-6 h-6 rounded-full flex-shrink-0 mr-2 flex items-center justify-center text-sm" style={{ background: 'hsl(145 35% 22%)', marginTop: '2px' }}>
+                  <div className="w-6 h-6 rounded-full flex-shrink-0 mr-2 flex items-center justify-center text-sm" style={{ background: '#FFB600', marginTop: '2px' }}>
                     <span style={{ fontSize: '0.65rem' }}>🏔️</span>
                   </div>
                 )}
@@ -263,7 +263,7 @@ WhatsApp:
                   <div
                     className="rounded-2xl px-3 py-2 text-xs leading-relaxed max-w-xs"
                     style={{
-                      background: msg.from === 'bot' ? 'white' : 'hsl(145 35% 22%)',
+                      background: msg.from === 'bot' ? 'white' : '#FFB600',
                       color: msg.from === 'bot' ? 'hsl(20 25% 15%)' : 'white',
                       border: msg.from === 'bot' ? '1px solid hsl(35 15% 88%)' : 'none',
                       whiteSpace: 'pre-line',
@@ -325,14 +325,14 @@ WhatsApp:
               onClick={handleSend}
               disabled={!input.trim()}
               className="w-8 h-8 rounded-xl flex items-center justify-center transition-all"
-              style={{ background: input.trim() ? 'hsl(145 35% 22%)' : 'hsl(35 15% 88%)', color: 'white' }}
+              style={{ background: input.trim() ? '#FFB600' : 'hsl(35 15% 88%)', color: 'white' }}
             >
               <Send size={14} />
             </button>
           </div>
 
           {/* WhatsApp fallback */}
-          <div className="px-4 py-2.5 text-center text-xs" style={{ background: 'hsl(145 35% 22%)', color: 'hsl(145 20% 72%)' }}>
+          <div className="px-4 py-2.5 text-center text-xs" style={{ background: '#0A528F', color: 'hsl(145 20% 72%)' }}>
             Need energy solution assistance?{' '}
             <a href="https://wa.me/918956225134" target="_blank" rel="noopener noreferrer" className="font-semibold underline" style={{ color: 'hsl(28 65% 70%)' }}>
               WhatsApp us

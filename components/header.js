@@ -303,42 +303,7 @@ export default function Header() {
 
   return (
     <>
-      {/* Announcement Bar */}
-      <div
-        style={{
-          background: "linear-gradient(90deg, #0A528F 0%, #0D6BB8 50%, #FFB600 100%)",
-          color: "#ffffff",
-          borderBottom: "2px solid #FFB600",
-        }}
-        className="relative overflow-hidden py-2 shadow-md"
-      >
-        <div className="flex items-center">
-          <div className="announcement-ticker">
-            {[
-              "🔋 Advanced Lithium Battery Solutions",
-              "⚡ Powering EV, Solar & Industrial Applications",
-              "🌱 Clean Energy • Reliable Storage • Sustainable Future",
-              "🚀 High Performance LiFePO4 Battery Technology",
-              "🔧 Custom Battery Solutions For Every Industry",
-              "🌍 ARENQ — Forward To Future",
-
-              "🔋 Advanced Lithium Battery Solutions",
-              "⚡ Powering EV, Solar & Industrial Applications",
-              "🌱 Clean Energy • Reliable Storage • Sustainable Future",
-              "🚀 High Performance LiFePO4 Battery Technology",
-              "🔧 Custom Battery Solutions For Every Industry",
-              "🌍 ARENQ — Forward To Future",
-            ].map((msg, i) => (
-              <span
-                key={i}
-                className="px-6 text-xs md:text-sm font-semibold tracking-wider"
-              >
-                {msg}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+      
       {/* Main Header */}
       <header
         className="sticky top-0 z-40 transition-all duration-300"

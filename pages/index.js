@@ -13,7 +13,8 @@ import OurStory from "../components/OurStory";
 import Occasion from "../components/Occasion";
 import Videosec from "../components/Videosec";
 import About from "../components/About-Arenq";
-import HeroPowerAnimation from "../components/Home";
+import HeroPowerAnimation from "../components/Power";
+import HomePage from "../components/Home";
 /* ---------------------------
    Intersection Lazy Wrapper
 ---------------------------- */
@@ -161,11 +162,12 @@ export default function Home() {
 
 
       <main className="">
-        <HeroPowerAnimation/>
+        <HomePage/>
         {/* <Slider /> */}
         {/* <Heading /> */}
         <CategorySlider />
         <About/>
+        <HeroPowerAnimation/>
         {/* <FreshStock /> */}
         {/* <ProductList />
         <BestSeller />

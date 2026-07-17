@@ -2787,3 +2787,117 @@ h1 span {
   }
 }
 
+.hotspot-dot {
+  width: 18px;
+  height: 18px;
+  background: #FFB600;
+  border-radius: 50%;
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.hotspot-dot::before,
+.hotspot-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #FFB600;
+  animation: pulse 2s infinite;
+}
+
+.hotspot-dot::after {
+  animation-delay: 1s;
+}
+
+.hotspot-active .hotspot-dot {
+  background: #0A528F;
+}
+
+.hotspot-active .hotspot-dot::before,
+.hotspot-active .hotspot-dot::after {
+  border-color: #0A528F;
+}
+
+.hotspot-tooltip {
+  position: absolute;
+  left: 50%;
+  top: -42px;
+  transform: translateX(-50%);
+  background: #0A528F;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  transition: .3s;
+  pointer-events: none;
+  z-index: 100;
+}
+
+
+
+.group:hover .hotspot-tooltip,
+.hotspot-active .hotspot-tooltip {
+  opacity: 1;
+}
+
+@keyframes pulse {
+
+  0%{
+    transform:scale(1);
+    opacity:.8;
+  }
+
+  100%{
+    transform:scale(3);
+    opacity:0;
+  }
+
+}
+
+@media(max-width:768px){
+
+.hotspot-dot{
+width:14px;
+height:14px;
+}
+
+}
+
+
+
+
+.hotspot-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #0A528F;
+}
+
+
+
+/* Mobile */
+@media (max-width:768px){
+
+  .mobile-tooltip{
+      opacity:1 !important;
+      top:-36px;
+      font-size:10px;
+      padding:4px 8px;
+      border-radius:6px;
+  }
+
+  .hotspot-dot{
+      width:14px;
+      height:14px;
+  }
+
+}
