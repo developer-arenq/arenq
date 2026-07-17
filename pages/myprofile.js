@@ -206,13 +206,13 @@ export default function MyProfile({ profile }) {
               <div className="flex justify-center gap-4">
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
-                  className="px-5 py-2 rounded-lg bg-[#2d241b] text-white"
+                  className="px-2 py-1 rounded-lg bg-[#2d241b] text-white"
                 >
                   Sign Out
                 </button>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="px-5 py-2 rounded-lg border"
+                  className="px-2 py-1 rounded-lg border"
                 >
                   Cancel
                 </button>

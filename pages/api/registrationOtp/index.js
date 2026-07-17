@@ -1,28 +1,43 @@
-import nodemailer from 'nodemailer';
-import User from "../../../models/userSchema"
-import Otp from '../../../models/otpSchema';
+import nodemailer from "nodemailer";
+import main from "../../../database/conn";
+import User from "../../../models/userSchema";
+import Otp from "../../../models/otpSchema";
 
 export default async function handler(req, res) {
+  await main().catch((err) => {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Database connection failed",
+    });
+  });
+
   const { email } = req.body;
-  const userdetails=await User.findOne({ email });
- 
+  const userdetails = await User.findOne({ email });
+
   // check mail exists in the database or  not
-  if (userdetails){
-   return res.status(409).json({ success: false,message: "Email already exists" });
+  if (userdetails) {
+    return res.status(409).json({ success: false, message: "Email already exists" });
   }
 
   const existingOtp = await Otp.findOne({ email });
 
   if (existingOtp && existingOtp.expiry > Date.now()) {
-    const remainingTime = (existingOtp.expiry - Date.now()) / 1000; // time left in seconds
-    if (remainingTime > 0) {
+    const remainingSeconds = Math.ceil((existingOtp.expiry - Date.now()) / 1000);
+
+    if (remainingSeconds > 0) {
+      const timeLeft =
+        remainingSeconds >= 60
+          ? `${Math.ceil(remainingSeconds / 60)} minute(s)`
+          : `${remainingSeconds} second(s)`;
+
       return res.status(200).json({
         success: false,
-        message: `Please use the existing OTP sent to your email. It is valid for another ${Math.floor(remainingTime / 60)} minute(s).`
+        message: `Please use the existing OTP. It is valid for another ${timeLeft}.`,
       });
     }
   }
-   
+
   const expiry = Date.now() + 5 * 60 * 1000;
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -36,8 +51,8 @@ export default async function handler(req, res) {
     const otpEntry = new Otp({ email, otp, expiry });
     await otpEntry.save();
   }
-  
-   
+
+
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -83,15 +98,23 @@ export default async function handler(req, res) {
     html: emailHtml,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return res.status(500).json({ success: false, message: 'Error sending OTP' });
-    }
-    return res.status(200).json({ success: true, message: 'OTP sent to your mail successfully' });
-  });
+  try {
+    await transporter.sendMail(mailOptions);
+
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent to your mail successfully",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Error sending OTP",
+    });
+  }
 }
 
 
 
-  
-  
+

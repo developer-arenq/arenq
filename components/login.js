@@ -113,7 +113,8 @@ const login = ({ onClose, headerHeight }) => {
         body: JSON.stringify({ email: loginDetails.email }),
       });
       const data = await res.json();
-      if (res.ok) {
+
+      if (res.ok && data.success) {
         toast.success(data.message, defaultToastOptions);
         setOtpSent(true);
       } else {
@@ -138,7 +139,7 @@ const login = ({ onClose, headerHeight }) => {
 
       const data = await res.json();
 
-      if (res.ok) {
+      if (res.ok && data.success) {
         setEmailVerified(true);
         toast.success(data.message, defaultToastOptions);
       } else {
@@ -406,7 +407,7 @@ const login = ({ onClose, headerHeight }) => {
               required
             />
             <button
-            
+
               className="w-full bg-white text-gray-700  p-2 rounded mb-3 font-medium"
               type="submit"
             >
