@@ -78,16 +78,38 @@ export default async function (req, res) {
               <!-- Header -->
               <tr>
                 <td align="center" style="background-color: #15803d; padding: 30px;">
-                  <h1 style="color: #ffffff; margin: 0; font-size: 26px;">Order Confirmed 🎉</h1>
-                  <p style="color: #dcfce7; margin: 6px 0 0;">Thank you for shopping with Arenq!</p>
+                 <div style="text-align:center;">
+  <img src="https://arenq.s3.ap-south-1.amazonaws.com/logo.png"
+       alt="Arenq"
+       style="max-width:180px;margin-bottom:20px;" />
+
+  <h1 style="color:#ffffff;margin:0;font-size:28px;">
+    Thank You for Your Order!
+  </h1>
+
+  <p style="color:#dbeafe;margin-top:10px;font-size:15px;">
+    Forward To Future
+  </p>
+</div>
                 </td>
               </tr>
 
               <!-- Body -->
               <tr>
                 <td style="padding: 30px;">
-                  <p style="font-size: 16px; color: #1f2937;">Hi <strong>${user || "Customer"}</strong>,</p>
-                  <p style="color: #374151;">We’re excited to let you know your order has been successfully placed. Here are the details:</p>
+                 <p style="font-size:16px;color:#1f2937;">
+  Dear <strong>${user || "Customer"}</strong>,
+</p>
+
+<p style="color:#4b5563;line-height:1.8;">
+  Thank you for choosing <strong>Arenq</strong>.
+  Your order has been successfully placed and is now being processed.
+</p>
+
+<p style="color:#4b5563;line-height:1.8;">
+  We appreciate your trust in Arenq for reliable energy storage solutions.
+  Below are your order details.
+</p>
 
                   <!-- Order Summary -->
                   <table width="100%" style="margin-top: 20px; border-collapse: collapse;">
@@ -130,10 +152,12 @@ export default async function (req, res) {
                   <!-- Shipping Address -->
                   <h3 style="color: #15803d; margin-top: 35px;">Shipping Address</h3>
                   <p style="color: #374151; line-height: 1.6;">
-                    ${shippingAddress?.name || ""}<br/>
-                    ${shippingAddress?.street || ""}<br/>
-                    ${shippingAddress?.city || ""}, ${shippingAddress?.state || ""} - ${shippingAddress?.zip || ""}<br/>
-                    ${shippingAddress?.phone ? `📞 ${shippingAddress.phone}` : ""}
+                   ${shippingAddress?.firstName || ""} ${shippingAddress?.lastName || ""}<br/>
+${shippingAddress?.address_line || ""}<br/>
+${shippingAddress?.city || ""}, ${shippingAddress?.state || ""} - ${shippingAddress?.postal_code || ""}<br/>
+${shippingAddress?.country || ""}<br/>
+${shippingAddress?.mobile ? `📞 ${shippingAddress.mobile}` : ""}<br/>
+${shippingAddress?.email || ""}
                   </p>
 
                   <!-- Button -->
@@ -142,7 +166,7 @@ export default async function (req, res) {
                       style="background-color: #15803d; color: #ffffff; text-decoration: none; 
                       padding: 14px 36px; border-radius: 8px; font-weight: bold; font-size: 16px;
                       display: inline-block;">
-                      View My Order
+                      Track Your Order
                     </a>
                   </div>
 
@@ -156,7 +180,32 @@ export default async function (req, res) {
               <!-- Footer -->
               <tr>
                 <td align="center" style="background-color: #f0fdf4; padding: 15px;">
-                  <p style="color: #15803d; font-size: 14px;">© ${new Date().getFullYear()} Arenq. All rights reserved.</p>
+                  <p style="color:#15803d;font-size:14px;margin-bottom:5px;">
+  <strong>Arenq</strong><br/>
+  Forward To Future
+</p>
+
+<p style="font-size:13px;color:#4b5563;margin:5px 0;">
+  Email:
+  <a href="mailto:info@arenq.co.in" style="color:#15803d;">
+    info@arenq.co.in
+  </a>
+</p>
+
+<p style="font-size:13px;color:#4b5563;margin:5px 0;">
+  Phone: +91 89562 25134
+</p>
+
+<p style="font-size:13px;color:#4b5563;margin:5px 0;">
+  Website:
+  <a href="https://arenq.co.in" style="color:#15803d;">
+    www.arenq.co.in
+  </a>
+</p>
+
+<p style="font-size:12px;color:#6b7280;margin-top:15px;">
+  © ${new Date().getFullYear()} Arenq. All Rights Reserved.
+</p>
                 </td>
               </tr>
 
@@ -169,7 +218,7 @@ export default async function (req, res) {
 
     // Send mail
     await transporter.sendMail({
-      from: "info@arenq.co.in",
+      from: `"Arenq" <${process.env.MAIL}>`,
       to: email,
       subject: "🎉 Order Confirmed – Thank You for Shopping with Arenq!",
       html,
