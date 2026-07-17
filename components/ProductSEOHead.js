@@ -293,7 +293,7 @@ const ProductSEOHead = ({ product }) => {
     url: "https://www.arenq.co.in",
 
     logo:
-      "https://arenq.s3.ap-south-1.amazonaws.com/Arenq_light.png",
+      "https://arenq.s3.ap-south-1.amazonaws.com/logo.png",
 
     description:
       "ARENQ provides advanced lithium battery technology, EV batteries, solar energy storage and industrial power solutions.",

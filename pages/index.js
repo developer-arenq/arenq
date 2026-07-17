@@ -114,7 +114,7 @@ export default function Home() {
 
         <meta
           property="og:image"
-          content="https://arenq.s3.ap-south-1.amazonaws.com/Arenq_light.png"
+          content="https://arenq.s3.ap-south-1.amazonaws.com/logo.png"
         />
 
         <meta property="og:type" content="website" />
@@ -141,7 +141,7 @@ export default function Home() {
               "@type": "Organization",
               name: "Arenq",
               image:
-                "https://arenq.s3.ap-south-1.amazonaws.com/Arenq_light.png",
+                "https://arenq.s3.ap-south-1.amazonaws.com/logo.png",
               url: "https://arenq.co.in",
               description:
                 "Arenq provides lithium battery technology, energy storage systems, EV battery solutions and renewable energy innovations.",

@@ -28,7 +28,7 @@ export default function Document() {
               "@type": "Organization",
               name: "Arenq",
               url: "https://www.arenq.co.in",
-              logo: "https://arenq.s3.ap-south-1.amazonaws.com/Arenq_light.png",
+              logo: "https://arenq.s3.ap-south-1.amazonaws.com/logo.png",
             }),
           }}
         />
