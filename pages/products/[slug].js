@@ -32,11 +32,6 @@ const RelatedProduct = dynamic(() => import("../../components/relatedProduct"), 
 const TextEditorView = dynamic(() => import("../../components/textEditorView"), { ssr: true });
 
 /* ─────────────────────────────────────────── */
-/*  STYLES                                     */
-/* ─────────────────────────────────────────── */
-
-
-/* ─────────────────────────────────────────── */
 /*  DATA FETCHING                              */
 /* ─────────────────────────────────────────── */
 export async function getStaticPaths() {
@@ -82,6 +77,18 @@ export async function getStaticProps({ params }) {
 }
 
 /* ─────────────────────────────────────────── */
+/*  HELPERS                                    */
+/* ─────────────────────────────────────────── */
+
+// Pulls the numeric Ah value out of strings like "30Ah" so the
+// battery-cell picker can render a real, proportional charge-fill.
+const parseCapacity = (capacityStr) => {
+  if (!capacityStr) return 0;
+  const match = String(capacityStr).match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : 0;
+};
+
+/* ─────────────────────────────────────────── */
 /*  COMPONENT                                  */
 /* ─────────────────────────────────────────── */
 const ProductDetail = ({ product_data, pro_review, recommendations }) => {
@@ -92,7 +99,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
 
   const [reviews, setReviews] = useState(pro_review || []);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedVariant, setSelectedVariant] = useState(product_data.variants?.[0]);
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [localQty, setLocalQty] = useState(1);
   const [showShareDropdown, setShowShareDropdown] = useState(false);
   const [showNotifyModal, setShowNotifyModal] = useState(false);
@@ -113,6 +120,12 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
   const shareRef = useRef();
   const videoRef = useRef(null);
 
+  const variants = product_data.variants || [];
+  const selectedVariant = variants[selectedVariantIndex] || variants[0];
+
+  // Highest Ah across all variants — the denominator for each cell's charge-fill.
+  const maxCapacity = Math.max(1, ...variants.map((v) => parseCapacity(v.capacity)));
+
   const mainImgg = product_data?.images?.[currentIndex]
     ? product_data.images[currentIndex].replace(/\s+/g, "-")
     : "/images/placeholder.jpg";
@@ -132,7 +145,11 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
   }, []);
 
   useEffect(() => {
-    setLocalQty(cartItems.find((i) => i.id === product_data._id && i.variant?.id === selectedVariant?._id)?.quantity || 1);
+    setLocalQty(
+      cartItems.find(
+        (i) => i.id === product_data._id && i.variant?.sku === selectedVariant?.sku
+      )?.quantity || 1
+    );
   }, [cartItems, selectedVariant, product_data._id]);
 
   useEffect(() => {
@@ -169,7 +186,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
 
   const handleAddToCart = async (id, variant, out_of_stock) => {
     if (out_of_stock) { toast.warning("This product is currently out of stock."); return; }
-    const finalVariant = variant || selectedVariant || product_data.variants?.[0] || null;
+    const finalVariant = variant || selectedVariant || variants[0] || null;
     if (!session?.user?.id) {
       dispatch(initialCart(addToGuestCart(product_data, finalVariant, 1)));
       toast.success("Added to cart"); return;
@@ -283,7 +300,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
   };
 
   return (
-    <>
+    <div className="pd-root">
       <ProductSEOHead product={product_data} />
 
       {/* ── BREADCRUMB ── */}
@@ -305,24 +322,8 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
             {/* ── LEFT: IMAGES ── */}
             <div className="pd-img-col">
               {/* Mobile title */}
-              <h1 className="pd-name-mobile">{product_data.name}</h1>
 
-              {/* Share */}
-              <div className="pd-share-wrap" ref={shareRef}>
-                {/* <button className="pd-share-btn" onClick={() => setShowShareDropdown(!showShareDropdown)}><FiShare2 /></button> */}
-                {showShareDropdown && (
-                  <div className="pd-share-dropdown">
-                    {[
-                      { icon: <FaWhatsapp />, label: "WhatsApp", action: () => window.open(`https://wa.me/?text=${encodeURIComponent(productUrl)}`) },
-                      { icon: <FaFacebookF />, label: "Facebook", action: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`) },
-                      { icon: <FaTwitter />, label: "Twitter", action: () => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(productUrl)}`) },
-                      { icon: <MdContentCopy />, label: "Copy Link", action: () => { navigator.clipboard.writeText(productUrl); toast.success("Copied!"); } },
-                    ].map(({ icon, label, action }) => (
-                      <button key={label} className="pd-share-item" onClick={() => { action(); setShowShareDropdown(false); }}>{icon} {label}</button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              
 
               {/* Main image */}
               <div className="pd-main-img-wrap">
@@ -346,11 +347,11 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
               <h1 className="pd-name-desktop">{product_data.name}</h1>
 
               {/* Rating */}
-              <div className="pd-rating-row">
+              {/* <div className="pd-rating-row">
                 <StarRating rating={product_data.rating} />
                 <span className="pd-rating-val">{product_data.rating || 0}</span>
-                <span className="pd-rating-count">· {product_data.numReviews || 0} Reviews</span>
-              </div>
+                <span className="pd-rating-count">· {product_data.review_count || 0} Reviews</span>
+              </div> */}
               {product_data.purchase_count > 0 && (
                 <div className="pd-purchase-count"><FaUsers /> {product_data.purchase_count} people bought this</div>
               )}
@@ -363,21 +364,37 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
               </div>
               {discount > 0 && <p className="pd-mrp-label">M.R.P. <span style={{ textDecoration: "line-through" }}><CurrencyFormatter price={selectedVariant?.MRP} /></span></p>}
 
-              {/* <p className="pd-sold-by">Sold by <span>{product_data.brand_id?.name}</span></p>
-              <span className="pd-policy-link" onClick={openNewWindow}>Check Policy</span> */}
+              {product_data.brand_id?.name && (
+                <p className="pd-sold-by">
+                  Sold by <span>{product_data.brand_id.name}</span>
+                  <span className="pd-policy-link" onClick={openNewWindow}> · Check Policy</span>
+                </p>
+              )}
 
-              {/* Variants */}
-              {product_data.variants?.length > 0 && (
+              {/* Variants — battery-cell picker: fill % is driven by real Ah capacity */}
+              {variants.length > 0 && (
                 <>
-                  <p className="pd-variant-label">Select Size</p>
+                  <p className="pd-variant-label">Select Configuration</p>
                   <div className="pd-variants">
-                    {product_data.variants.map((variant) => (
-                      <div key={variant._id} className={`pd-variant-card ${selectedVariant?._id === variant._id ? "active" : ""}`} onClick={() => setSelectedVariant(variant)}>
-                        <p className="pd-variant-size">{variant.value}</p>
-                        <p className="pd-variant-price">₹{variant.price}</p>
-                        {variant.price !== variant.MRP && <p className="pd-variant-mrp">₹{variant.MRP}</p>}
-                      </div>
-                    ))}
+                    {variants.map((variant, idx) => {
+                      const capacityNum = parseCapacity(variant.capacity);
+                      const fillPct = Math.max(8, Math.round((capacityNum / maxCapacity) * 100));
+                      return (
+                        <div
+                          key={variant.sku || idx}
+                          className={`pd-variant-card ${selectedVariantIndex === idx ? "active" : ""}`}
+                          onClick={() => setSelectedVariantIndex(idx)}
+                        >
+                          <div className="pd-variant-cell">
+                            <div className="pd-variant-cell-fill" style={{ width: `${fillPct}%` }} />
+                          </div>
+                          <span className="pd-variant-voltage">{variant.voltage}</span>
+                          <p className="pd-variant-size">{variant.capacity}</p>
+                          <p className="pd-variant-price">₹{variant.price}</p>
+                          {variant.price !== variant.MRP && <p className="pd-variant-mrp">₹{variant.MRP}</p>}
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               )}
@@ -387,13 +404,13 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
                 <div className="pd-qty-wrap">
                   <button className="pd-qty-btn" onClick={() => { if (localQty > 1) setLocalQty(q => q - 1); minus(product_data._id, selectedVariant); }}><FaMinus /></button>
                   <span className="pd-qty-val">{localQty}</span>
-                  <button className="pd-qty-btn" onClick={() => { setLocalQty(q => q + 1); handleAddToCart(product_data._id, selectedVariant || product_data.variants?.[0], product_data.out_of_stock); }}><FaPlus /></button>
+                  <button className="pd-qty-btn" onClick={() => { setLocalQty(q => q + 1); handleAddToCart(product_data._id, selectedVariant || variants[0], product_data.out_of_stock); }}><FaPlus /></button>
                 </div>
               </div>
 
               {/* CTA Buttons */}
               <div className="pd-cta-wrap">
-                <button className="pd-btn-cart" onClick={() => handleAddToCart(product_data._id, selectedVariant || product_data.variants?.[0], product_data.out_of_stock)}>
+                <button className="pd-btn-cart" onClick={() => handleAddToCart(product_data._id, selectedVariant || variants[0], product_data.out_of_stock)}>
                   <FaShoppingCart /> Add to Cart
                 </button>
                 {product_data?.out_of_stock
@@ -422,7 +439,37 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
                 <TextEditorView desc={product_data.desc} />
               </div>
 
-              {/* Benefits */}
+              {/* Key Features */}
+              {product_data.key_features?.length > 0 && (
+                <div className="pd-section-block">
+                  <h2 className="pd-section-title">Key Features</h2>
+                  <ul className="pd-list">
+                    {product_data.key_features.flatMap((block) => String(block).split(/\r?\n/)).filter(Boolean).map((item, i) => <li key={i}>{item}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              {/* Applications */}
+              {product_data.applications?.length > 0 && (
+                <div className="pd-section-block">
+                  <h2 className="pd-section-title">Applications</h2>
+                  <ul className="pd-list">
+                    {product_data.applications.flatMap((block) => String(block).split(/\r?\n/)).filter(Boolean).map((item, i) => <li key={i}>{item}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              {/* Advantages */}
+              {product_data.advantages?.length > 0 && (
+                <div className="pd-section-block">
+                  <h2 className="pd-section-title">Advantages</h2>
+                  <ul className="pd-list">
+                    {product_data.advantages.flatMap((block) => String(block).split(/\r?\n/)).filter(Boolean).map((item, i) => <li key={i}>{item}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              {/* Benefits (legacy field, kept for other product types) */}
               {product_data.benefits?.length > 0 && (
                 <div className="pd-section-block">
                   <h2 className="pd-section-title">Benefits</h2>
@@ -454,7 +501,6 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
                 </div>
               )}
 
-              
               {/* Nutrition */}
               {product_data.nutritional_info &&
                 Object.values(product_data.nutritional_info).some(Boolean) && (
@@ -481,6 +527,20 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
                   </div>
                 )}
 
+              {/* Compatible Devices */}
+              {product_data.compatible_devices?.length > 0 && (
+                <div className="pd-section-block">
+                  <h2 className="pd-section-title">Compatible With</h2>
+                  <div className="pd-info-grid">
+                    {product_data.compatible_devices.flatMap((block) => String(block).split(/\r?\n/)).filter(Boolean).map((item, i) => (
+                      <div key={i} className="pd-info-pill">
+                        <p className="pd-info-pill-val">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Product Info */}
               {(product_data.taste_profile || product_data.origin || product_data.region || product_data.country_of_origin) && (
                 <div className="pd-section-block">
@@ -505,15 +565,15 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
               {product_data.why_choose_section && (
                 <div className="pd-section-block">
                   <h2 className="pd-section-title">Why Choose This Product?</h2>
-                  <p style={{ fontSize: 13, color: "var(--text-mid)", lineHeight: 1.7 }}>{product_data.why_choose_section}</p>
+                  <p style={{ fontSize: 13, color: "var(--pd-slate)", lineHeight: 1.7 }}>{product_data.why_choose_section}</p>
                 </div>
               )}
 
               {/* Expert Review */}
               {product_data.expert_review && (
-                <div className="pd-section-block" style={{ borderLeft: "3px solid var(--green-lt)" }}>
+                <div className="pd-section-block" style={{ borderLeft: "3px solid var(--pd-amber)", paddingLeft: 16 }}>
                   <h2 className="pd-section-title">Expert Review</h2>
-                  <p style={{ fontSize: 13, color: "var(--text-mid)", lineHeight: 1.7, fontStyle: "italic" }}>{product_data.expert_review}</p>
+                  <p style={{ fontSize: 13, color: "var(--pd-slate)", lineHeight: 1.7, fontStyle: "italic" }}>{product_data.expert_review}</p>
                 </div>
               )}
 
@@ -532,13 +592,10 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
                 <div className="pd-section-block">
                   <h2 className="pd-section-title">Explore More</h2>
                   {product_data.internal_links.map((url, i) => (
-                    <a key={i} href={url} className="pd-blog-link" style={{ color: "var(--green-md)" }}>{url}</a>
+                    <a key={i} href={url} className="pd-blog-link">{url}</a>
                   ))}
                 </div>
               )}
-
-              {/* Mobile bottom padding */}
-              {/* <div className="pd-mobile-pad" /> */}
             </div>
           </div>
         </div>
@@ -546,7 +603,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
 
       {/* ── VIDEO REEL ── */}
       {showVideoModal && product_data.videos?.length > 0 && (
-        <div className="pd-reel-outer ">
+        <div className="pd-reel-outer">
           <div className={`pd-reel-inner ${isExpanded ? "expanded" : ""}`} onClick={() => !isExpanded && setIsExpanded(true)}>
             {isExpanded && <div style={{ position: "fixed", inset: 0 }} onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} />}
             <div className="pd-reel-video-wrap" onClick={(e) => e.stopPropagation()}>
@@ -581,7 +638,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
 
       {/* ── VIDEO SECTION ── */}
       {product_data.videos?.length > 0 && (
-        <div className="pd-video-section pd-root bg-slate-50">
+        <div className="pd-video-section pd-root">
           <div className="pd-video-inner">
             <video autoPlay muted controls className="pd-video-el" poster={product_data.main_image}>
               <source src={product_data.videos[0]} type="video/mp4" />
@@ -619,7 +676,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
 
       {/* ── LOGIN PROMPT ── */}
       {showLoginPrompt && <Login onClose={() => setShowLoginPrompt(false)} />}
-    </>
+    </div>
   );
 };
 

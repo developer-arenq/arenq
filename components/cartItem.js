@@ -30,7 +30,7 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
     if (!session) {
       const updatedCart = updateGuestCartQty(
         id,
-        variant?.id,
+        variant?.sku,
         -1
       );
       dispatch(initialCart(updatedCart));
@@ -42,8 +42,9 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         product_id: id,
-        selectedVariant: variant,
-        quantity: 1,
+        selectedVariant: {
+          sku: variant?.sku
+        }
       }),
     });
 
@@ -55,7 +56,7 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
     if (!session) {
       const updatedCart = updateGuestCartQty(
         id,
-        variant?.id,
+        variant?.sku,
         1
       );
       dispatch(initialCart(updatedCart));
@@ -67,8 +68,9 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         product_id: id,
-        selectedVariant: variant,
-        quantity: 1,
+        selectedVariant: {
+          sku: variant?.sku
+        }
       }),
     });
 
@@ -78,7 +80,7 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
 
   const removeItem = async () => {
     if (!session) {
-      const updatedCart = removeGuestCartItem(id, variant?.id);
+      const updatedCart = removeGuestCartItem(id, variant?.sku);
       dispatch(initialCart(updatedCart));
       return;
     }
@@ -138,10 +140,12 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
               {title}
             </h3>
 
-            {variant?.value && (
-              <p className="text-xs text-gray-500 mt-1">
-                {variant.value}
-              </p>
+            {variant && (
+              <div className="text-xs text-gray-500 mt-1 space-y-1">
+                {variant.model && <p>Model: {variant.model}</p>}
+                {/* {variant.voltage && <p>Voltage: {variant.voltage}</p>}
+                {variant.capacity && <p>Capacity: {variant.capacity}</p>} */}
+              </div>
             )}
 
             <p className="text-sm text-gray-500 mt-1">

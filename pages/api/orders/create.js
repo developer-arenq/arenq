@@ -7,11 +7,6 @@ import Address from "../../../models/userAddressSchema";
 import Cart from "../../../models/cartSchema";
 import { getToken } from "next-auth/jwt";
 import { validateOrderItems } from "../../../lib/validateOrderItems";
-import {
-  shiprocketLogin,
-  buildShiprocketOrderPayload,
-  createShiprocketOrder,
-} from "../../../lib/shiprocket";
 
 const getShippingPrice = (method) => (method === "cod" ? 100 : 70);
 
@@ -58,18 +53,49 @@ const Create = async (req, res) => {
     let taxAmount = 0;
 
     const finalItems = validatedItems.map((item) => {
-      const base = item.price * item.quantity;
+      const base = Number(item.price) * Number(item.quantity);
+
       subtotal += base;
 
-      const taxPercent = item.taxPercentage || 0;
+      const taxPercent = Number(item.taxPercentage || 0);
+
       const lineTax = Number(((base * taxPercent) / 100).toFixed(2));
 
       taxAmount += lineTax;
 
       return {
-        ...item,
+        id: item.id,
+        title: item.title,
+        slug: item.slug,
+        thumbnail: item.thumbnail,
+        SKU: item.SKU,
+        image: item.image,
+        alt_text: item.alt_text,
+
+        quantity: item.quantity,
+
+        weight: item.weight,
+
+        price: item.price,
+        MRP: item.MRP,
+
+        taxPercentage: taxPercent,
         taxAmount: lineTax,
+
         total: Number((base + lineTax).toFixed(2)),
+
+        delivery_status: "order_confirmed",
+
+        variant: {
+          sku: item.variant?.sku,
+          model: item.variant?.model,
+          voltage: item.variant?.voltage,
+          capacity: item.variant?.capacity,
+          price: item.variant?.price,
+          MRP: item.variant?.MRP,
+          stock: item.variant?.stock,
+          image: item.variant?.image || "",
+        },
       };
     });
 
@@ -149,33 +175,7 @@ const Create = async (req, res) => {
       console.warn("Email failed:", e.message);
     }
 
-    /* ---------------- SHIPROCKET (COD ONLY) ---------------- */
-    if (payment_method === "cod") {
-      try {
-        const srToken = await shiprocketLogin();
-
-        const payload = buildShiprocketOrderPayload({
-          order,
-          address,
-        });
-
-        const srOrder = await createShiprocketOrder(payload, srToken);
-
-        // ✅ ONLY SAVE ORDER + SHIPMENT ID
-        await Order.findByIdAndUpdate(order._id, {
-          shiprocket_order_id: srOrder.order_id,
-          shiprocket_shipment_id: srOrder.shipment_id,
-
-          // ❌ NO AWB / NO COURIER AUTO ASSIGN
-          shiprocket_awb: "",
-          shiprocket_courier: "",
-        });
-
-      } catch (err) {
-        console.error("❌ Shiprocket error:", err.message);
-      }
-    }
-
+  
 
     return res.status(201).json({ id: order._id });
   } catch (err) {

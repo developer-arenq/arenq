@@ -5,7 +5,6 @@ import CurrencyFormatter from "../../helper/currencyFormatter";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import useRazorpay from "react-razorpay";
 import { getSession } from "next-auth/react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button, Modal } from "flowbite-react";
@@ -41,13 +40,11 @@ export async function getServerSideProps({ req }) {
   }
   // Filter the enabled addresses and set the Razorpay key
 
-  const RAZORPAY_KEY = process.env.RAZORPAY_KEY_ID;
 
   // Return the fetched data as props
   return {
     props: {
       saved_address: saved_address,
-      RAZORPAY_KEY: RAZORPAY_KEY,
       user_idd: userid,
     },
   };
@@ -66,13 +63,12 @@ const formatDate = (dateStr) => {
   });
 };
 
-const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
+const CheckOut = ({ saved_address, user_idd }) => {
   const { cartItems, total, subtotal } = useSelector((state) => state.cart);
   const [shipping, setShipping] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
-  const Razorpay = useRazorpay();
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -86,7 +82,7 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
     city: "",
     postal_code: "",
     email: session && session.user.email,
-    payment_method: "netbanking",
+    payment_method: "cod",
     shipping_price: shipping,
     order_items: cartItems,
     total: total,
@@ -389,7 +385,7 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
                 },
                 body: JSON.stringify({
                   order_items: cartItems,
-                  payment_method: "netbanking",
+                  payment_method: "cod",
                   shipping_address: address.shipping_address,
                   coupon: address.coupon || null,
                   discount: discount || 0,
@@ -477,14 +473,7 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
       if (data?.shipping_address) {
         updatedAddress.shipping_address = data.shipping_address;
 
-        if (updatedAddress.payment_method === "netbanking") {
-          await razorpayHandler(updatedAddress);
-        }
-
-
-        else {
-          await createOrderFun(updatedAddress);
-        }
+        await createOrderFun(updatedAddress);
       } else {
         toast.error("Failed to save shipping address");
       }
@@ -499,15 +488,6 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
 
   };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   const createOrderWithoutAddress = async () => {
     if (!address.shipping_address) {
@@ -515,17 +495,10 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
       return;
     }
 
-    const shipping_price = address.payment_method === "netbanking" ? 70 : 100;
+    const shipping_price = 100;
     const updatedAddress = { ...address, shipping_price };
 
-    if (updatedAddress.payment_method === "netbanking") {
-      await razorpayHandler(updatedAddress);
-    }
-
-
-    else {
-      await createOrderFun(updatedAddress);
-    }
+    await createOrderFun(updatedAddress);
   };
 
   useEffect(() => {
@@ -537,7 +510,7 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
     setDis(totalDiscount);
 
     // Update address total
-    const shippingPrice = address.payment_method === "netbanking" ? 70 : 100;
+    const shippingPrice = 100;
     setAddress((prev) => ({
       ...prev,
       shipping_price: shippingPrice,
@@ -902,20 +875,20 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
             <div className="bg-white shadow-lg rounded-xl p-6">
               <h2 className="text-lg sm:text-xl font-bold mb-4">Your Items</h2>
 
-            <div className="lg:col-span-2 flex flex-col gap-4">
-              {cartItems.map((item) => (
-                <div
-                  key={`${item.id}-${item.variant?.id || ""}`}
-                  className="bg-white border border-[#ddd] rounded-2xl p-4 shadow-sm"
-                >
-                  <CartItem
-                    item={item}
-                    itemcount={cartItems.length}
-                  />
-                </div>
-              ))}
-            </div>
-             
+              <div className="lg:col-span-2 flex flex-col gap-4">
+                {cartItems.map((item) => (
+                  <div
+                    key={`${item.id}-${item.variant?.id || ""}`}
+                    className="bg-white border border-[#ddd] rounded-2xl p-4 shadow-sm"
+                  >
+                    <CartItem
+                      item={item}
+                      itemcount={cartItems.length}
+                    />
+                  </div>
+                ))}
+              </div>
+
             </div>
 
 
@@ -1101,7 +1074,7 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
               <h2 className="text-xl font-bold mb-4">Payment</h2>
 
               <div className="space-y-3">
-                <label className="flex gap-3 items-center">
+                {/* <label className="flex gap-3 items-center">
                   <input
                     type="radio"
                     value="netbanking"
@@ -1111,12 +1084,13 @@ const CheckOut = ({ saved_address, RAZORPAY_KEY, user_idd }) => {
                     }
                   />
                   Net Banking
-                </label>
+                </label> */}
 
                 <label className="flex gap-3 items-center">
                   <input
                     type="radio"
                     value="cod"
+
                     checked={address.payment_method === "cod"}
                     onChange={(e) =>
                       setAddress((prev) => ({ ...prev, payment_method: e.target.value }))

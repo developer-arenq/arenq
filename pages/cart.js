@@ -12,7 +12,7 @@ const Login = dynamic(() => import("../components/login"), {
     ssr: false,
 });
 
-const SHIPPING_CHARGE = 70;
+const SHIPPING_CHARGE = 100;
 
 const deliveryCharge = SHIPPING_CHARGE;
 

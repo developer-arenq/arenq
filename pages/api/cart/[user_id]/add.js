@@ -10,51 +10,95 @@ const addItem = async (req, res) => {
     const { product_id, quantity, selectedVariant } = req.body;
 
     if (!product_id || !quantity) {
-      return res.status(400).json({ error: "Missing product_id or quantity" });
+      return res
+        .status(400)
+        .json({ error: "Missing product_id or quantity" });
     }
-
 
     let cart = await Cart.findOne({ user_id });
 
-    const product = await Product.findById(product_id).select(
-      "name price MRP images alt_text weight SKU slug tax"
+    const product = await Product.findById(product_id).lean();
+
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    const qty = Number(quantity);
+
+    // Variant
+    let variant = null;
+
+    if (selectedVariant) {
+      variant =
+        product.variants?.find((v) => {
+          if (selectedVariant.sku) {
+            return v.sku === selectedVariant.sku;
+          }
+
+          return (
+            v.model === selectedVariant.model &&
+            v.voltage === selectedVariant.voltage &&
+            v.capacity === selectedVariant.capacity
+          );
+        }) || selectedVariant;
+    }
+
+    const price = Number(variant?.price ?? product.price ?? 0);
+    const mrp = Number(variant?.MRP ?? product.MRP ?? price);
+
+    const sku =
+      variant?.sku ||
+      selectedVariant?.sku ||
+      product.sku ||
+      `SKU-${product._id}`;
+
+    const taxPercentage = Number(product.tax ?? 0);
+
+    const weight = Number(
+      product.specifications?.get?.("weight") ??
+      product.specifications?.weight ??
+      109
     );
 
-    if (!product) return res.status(404).json({ error: "Product not found" });
+    const taxAmount = Number(
+      ((price * qty * taxPercentage) / 100).toFixed(2)
+    );
 
-    const qty = Number(quantity);
-    const basePrice = selectedVariant?.price || product.price;
-    const taxPercentage = selectedVariant?.tax ?? product.tax ?? 0;
+    const total = Number(
+      (price * qty + taxAmount).toFixed(2)
+    );
 
-    const taxAmount = Number(((basePrice * qty * taxPercentage) / 100).toFixed(2));
-    const itemTotal = Number((basePrice * qty + taxAmount).toFixed(2));
-
-    const renamed_product = {
+    const cartItem = {
       id: product._id,
       title: product.name,
       slug: product.slug,
-      thumbnail: product.images[0],
-      image: product.images,
-      alt_text: product.alt_text,
-      price: basePrice,
-      MRP: selectedVariant?.MRP || product.MRP,
-      weight: typeof product.weight === "number" ? product.weight : 109,
-      SKU: product.SKU,
+
+      thumbnail: product.images?.[0] || "",
+      image: product.images || [],
+      alt_text: product.alt_text || "",
+
+      SKU: sku,
+
       quantity: qty,
-      variantValue: selectedVariant?.value || "",
-      variant: selectedVariant
-        ? {
-          id: selectedVariant._id,
-          type: selectedVariant.type,
-          value: selectedVariant.value,
-          price: selectedVariant.price,
-          MRP: selectedVariant.MRP,
-          tax: selectedVariant.tax,
-        }
-        : undefined,
+      price,
+      MRP: mrp,
+      weight,
+
       taxPercentage,
       taxAmount,
-      total: itemTotal,
+      total,
+
+      variant: variant
+        ? {
+          sku: variant.sku,
+          model: variant.model,
+          voltage: variant.voltage,
+          capacity: variant.capacity,
+          price: variant.price,
+          MRP: variant.MRP,
+          stock: variant.stock,
+          image: variant.image || "",
+        }
+        : null,
     };
 
     if (!cart) {
@@ -69,61 +113,91 @@ const addItem = async (req, res) => {
       });
     }
 
-    const existingCartItem = cart.items.find((item) => {
-      const sameProduct = item.id.toString() === product_id;
-      const bothNoVariant = !item.variant && !selectedVariant;
-      const bothHaveSameVariant =
-        item.variant &&
-        selectedVariant &&
-        item.variant.type === selectedVariant.type &&
-        item.variant.value === selectedVariant.value;
-      return sameProduct && (bothNoVariant || bothHaveSameVariant);
+    const existingItem = cart.items.find((item) => {
+      if (item.id.toString() !== product._id.toString()) {
+        return false;
+      }
+
+      if (!item.variant && !variant) {
+        return true;
+      }
+
+      if (item.variant && variant) {
+        return item.variant.sku === variant.sku;
+      }
+
+      return false;
     });
 
-    if (existingCartItem) {
-      existingCartItem.quantity += qty;
+    if (existingItem) {
+      existingItem.quantity += qty;
 
-      const base = existingCartItem.price * existingCartItem.quantity;
-      existingCartItem.taxAmount = Number(
-        ((base * existingCartItem.taxPercentage) / 100).toFixed(2)
+      const base = existingItem.price * existingItem.quantity;
+
+      existingItem.taxAmount = Number(
+        (
+          (base * existingItem.taxPercentage) /
+          100
+        ).toFixed(2)
       );
-      existingCartItem.total = Number((base + existingCartItem.taxAmount).toFixed(2));
+
+      existingItem.total = Number(
+        (base + existingItem.taxAmount).toFixed(2)
+      );
     } else {
-      cart.items.push(renamed_product);
+      cart.items.push(cartItem);
     }
 
-    const round = (num) => Math.round(num * 100) / 100;
-
-
+    const round = (n) => Math.round(n * 100) / 100;
 
     cart.shipping = 0;
 
-    cart.subtotal = cart.items.reduce(
-      (sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 0),
-      0
+    cart.subtotal = round(
+      cart.items.reduce(
+        (sum, item) =>
+          sum + item.price * item.quantity,
+        0
+      )
     );
 
-    cart.taxAmount = cart.items.reduce(
-      (sum, item) => sum + Number(item.taxAmount || 0),
-      0
+    cart.taxAmount = round(
+      cart.items.reduce(
+        (sum, item) =>
+          sum + (item.taxAmount || 0),
+        0
+      )
     );
 
-    cart.total = cart.subtotal + cart.taxAmount + cart.shipping;
+    cart.total = round(
+      cart.subtotal +
+      cart.taxAmount +
+      cart.shipping
+    );
 
     cart.taxPercentage =
       cart.subtotal > 0
-        ? Number(((cart.taxAmount / cart.subtotal) * 100).toFixed(2))
+        ? Number(
+          (
+            (cart.taxAmount /
+              cart.subtotal) *
+            100
+          ).toFixed(2)
+        )
         : 0;
 
-    cart.subtotal = round(cart.subtotal);
-    cart.taxAmount = round(cart.taxAmount);
-    cart.total = round(cart.total);
-
+    console.log("Product SKU:", product.sku);
+    console.log("Selected Variant:", selectedVariant);
+    console.log("Cart Item:", cartItem);
     await cart.save();
-    res.json(cart);
+
+    return res.status(200).json(cart);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal server error" });
+
+    return res.status(500).json({
+      error: "Internal server error",
+      details: err.message,
+    });
   }
 };
 

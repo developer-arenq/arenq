@@ -8,35 +8,40 @@ const Faq = ({ faq }) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const parseFaq = (faqData) => {
-    if (!faqData) return [];
+ const parseFaq = (faqData) => {
+  if (!faqData) return [];
 
-    let faqString = "";
-
-    if (Array.isArray(faqData)) {
-      faqString = faqData.join(" ");
-    } else {
-      faqString = faqData;
-    }
-
-    faqString = faqString
-      .replace(/,Ans\./gi, " Ans.")
-      .replace(/\s+/g, " ")
-      .trim();
-
-    const regex =
-      /Q\d+\.\s*(.*?)\?\s*Ans\.\s*(.*?)(?=Q\d+\.|$)/gi;
-
-    const matches = [...faqString.matchAll(regex)];
-
-    return matches.map((match) => ({
-      question: match[1].trim() + "?",
-      answer: match[2].trim(),
+  // New format
+  if (
+    Array.isArray(faqData) &&
+    faqData.length > 0 &&
+    typeof faqData[0] === "object"
+  ) {
+    return faqData.map((item) => ({
+      question: item.question,
+      answer: item.answer,
     }));
-  };
+  }
 
-  const faqItems = parseFaq(faq);
+  // Old string format (backward compatibility)
+  let faqString = Array.isArray(faqData)
+    ? faqData.join(" ")
+    : faqData;
 
+  faqString = faqString
+    .replace(/,Ans\./gi, " Ans.")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const regex = /Q\d+\.\s*(.*?)\?\s*Ans\.\s*(.*?)(?=Q\d+\.|$)/gi;
+
+  return [...faqString.matchAll(regex)].map((match) => ({
+    question: match[1].trim() + "?",
+    answer: match[2].trim(),
+  }));
+};
+
+const faqItems = Array.isArray(faq) ? faq : [];
 
 
   if (!faqItems.length) return null;
@@ -47,7 +52,7 @@ const Faq = ({ faq }) => {
         Frequently Asked Questions
       </h2>
 
-      <div className="space-y-3">
+      <div className="space-y-3 mt-6">
         {faqItems.map((item, index) => (
           <div
             key={index}

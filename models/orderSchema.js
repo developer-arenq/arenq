@@ -16,6 +16,30 @@ const orderSchema = new Schema(
         quantity: { type: Number, required: true },
 
         image: [{ type: String, required: true }],
+        thumbnail: {
+          type: String,
+          default: "",
+        },
+
+        alt_text: {
+          type: String,
+          default: "",
+        },
+
+        SKU: {
+          type: String,
+          default: "",
+        },
+
+        weight: {
+          type: Number,
+          default: 0,
+        },
+
+        MRP: {
+          type: Number,
+          default: 0,
+        },
 
         price: { type: Number, required: true },
 
@@ -29,13 +53,46 @@ const orderSchema = new Schema(
         },
 
         deliveredAt: Date,
-
         variant: {
-          type: { type: String },
-          value: String,
-          price: Number,
-          MRP: Number,
-          tax: { type: Number, default: 0 },
+          sku: {
+            type: String,
+            default: "",
+          },
+
+          model: {
+            type: String,
+            default: "",
+          },
+
+          voltage: {
+            type: String,
+            default: "",
+          },
+
+          capacity: {
+            type: String,
+            default: "",
+          },
+
+          price: {
+            type: Number,
+            default: 0,
+          },
+
+          MRP: {
+            type: Number,
+            default: 0,
+          },
+
+          stock: {
+            type: Number,
+            default: 0,
+          },
+
+          image: {
+            type: String,
+            default: "",
+          },
         },
       },
     ],

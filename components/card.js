@@ -84,8 +84,7 @@ const Product = ({ product }) => {
     variants: Array.isArray(product?.variants) ? product.variants : [],
   };
 
-  const defaultVariant =
-    normalizedProduct.variants.length > 0 ? normalizedProduct.variants[0] : null;
+  const defaultVariant = normalizedProduct.variants.length > 0 ? normalizedProduct.variants[0] : null;
 
   const {
     _id,
@@ -205,10 +204,10 @@ const Product = ({ product }) => {
 ">
 
 
-
+{/* 
           {discount > 0 && (
             <div className="badge-sale">-{discount}%</div>
-          )}
+          )} */}
 
           {/* ⭐⭐⭐ LABEL + WISHLIST UI */}
           {/* <div className="absolute top-2 right-2 z-10 flex items-center gap-1">
@@ -298,7 +297,7 @@ const Product = ({ product }) => {
             </h3>
 
             {/* Price */}
-            <div className="
+            {/* <div className="
  flex 
  items-baseline 
  gap-2
@@ -309,7 +308,7 @@ const Product = ({ product }) => {
               {discount > 0 && (
                 <span className="text-xs font-semibold" style={{ color: 'hsl(145 35% 30%)' }}>Save ₹{MRP - price}</span>
               )}
-            </div>
+            </div> */}
 
             {/* Rating */}
             {/* <div className="flex items-center mt-1">

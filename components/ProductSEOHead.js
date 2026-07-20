@@ -256,29 +256,14 @@ const ProductSEOHead = ({ product }) => {
       ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: product.faq.flatMap((item) => {
-          const normalized = item.replace(/,Ans\./g, " Ans.");
-
-          const matches =
-            normalized.match(
-              /Q\d+\.\s*(.*?)\?\s*Ans\.\s*(.*?)(?=Q\d+\.|$)/gs
-            ) || [];
-
-          return matches.map((entry) => {
-            const parts = entry.split("Ans.");
-
-            return {
-              "@type": "Question",
-              name: parts[0]
-                .replace(/Q\d+\./, "")
-                .trim(),
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: parts[1]?.trim() || "",
-              },
-            };
-          });
-        }),
+        mainEntity: (product.faq || []).map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
       }
       : null;
 

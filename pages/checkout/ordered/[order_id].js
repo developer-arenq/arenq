@@ -183,7 +183,7 @@ const OrderPage = ({ order, user, payment }) => {
                       className="flex items-center gap-4 border-b pb-4"
                     >
                       <Image
-                        src={item?.image?.[0]}
+                        src={item.image?.[0]}
                         width={80}
                         height={80}
                         className="object-contain"
@@ -191,21 +191,78 @@ const OrderPage = ({ order, user, payment }) => {
                       />
 
                       <div className="flex-1">
-                        <h4 className="text-sm font-medium">
+                        <h4 className="text-sm font-semibold text-gray-900">
                           {item.title}
                         </h4>
-                        <p className="text-xs text-gray-500">
-                          Qty: {item.quantity}
-                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 mt-2 text-xs text-gray-600">
+
+                          {item.SKU && (
+                            <p>
+                              <span className="font-medium">SKU:</span> {item.SKU}
+                            </p>
+                          )}
+
+                          {item.variant?.model && (
+                            <p>
+                              <span className="font-medium">Model:</span>{" "}
+                              {item.variant.model}
+                            </p>
+                          )}
+
+                          {item.variant?.voltage && (
+                            <p>
+                              <span className="font-medium">Voltage:</span>{" "}
+                              {item.variant.voltage}
+                            </p>
+                          )}
+
+                          {item.variant?.capacity && (
+                            <p>
+                              <span className="font-medium">Capacity:</span>{" "}
+                              {item.variant.capacity}
+                            </p>
+                          )}
+
+                          <p>
+                            <span className="font-medium">Qty:</span>{" "}
+                            {item.quantity}
+                          </p>
+
+
+                          <p>
+                            <span className="font-medium">MRP:</span>{" "}
+                            <CurrencyFormatter price={item.MRP || item.variant?.MRP || 0} />
+                          </p>
+
+
+
+
+
+
+
+                          <p>
+                            <span className="font-medium">Status:</span>{" "}
+                            <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-green-700 capitalize">
+                              {item.delivery_status.replace(/_/g, " ")}
+                            </span>
+                          </p>
+
+                        </div>
                       </div>
 
-                      <div className="text-sm font-semibold">
-                        <CurrencyFormatter
-                          price={item.quantity * item.price}
-                        />
+                      <div className="text-right min-w-[110px]">
+                        <p className="text-base font-bold">
+                          <CurrencyFormatter price={item.total} />
+                        </p>
+
+                        <p className="text-xs text-gray-500">
+                          {item.quantity} × <CurrencyFormatter price={item.price} />
+                        </p>
                       </div>
                     </div>
                   ))}
+
                 </div>
               </div>
             </div>

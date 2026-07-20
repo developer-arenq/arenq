@@ -1,39 +1,50 @@
-import { models, model, Schema } from "mongoose";
-import slugify from "slugify";
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 import Category from "./categorySchema";
+
 import Brand from "./brandSchema";
 
-const productSchema = new Schema(
+const VariantSchema = new Schema(
   {
-    name: { type: String, required: true },
-    slug: { type: String, required: true, unique: true, index: true },
-    desc: { type: String, required: true },
+    sku: String,
 
-    images: [{ type: String, required: true }],
-    main_image: { type: String, default: null },
+    model: String,
+    voltage: String,
+    capacity: String,
 
-    alt_text: { type: String, default: "Product_image" },
+    price: Number,
+    MRP: Number,
+    stock: Number,
 
-    price: { type: Number, required: true },
-    MRP: { type: Number, required: true },
+    image: String
+  },
+  { _id: false });
 
-    discount_id: { type: String },
-
-    rating: { type: Number, default: 0, index: true },
-    numReviews: { type: Number, default: 0 },
-
-    structured_data: {
-      ratingValue: { type: Number, default: 0 },
-      reviewCount: { type: Number, default: 0 },
+const ProductSchema = new Schema(
+  {
+    // Basic
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
-    SKU: { type: String, required: true, index: true },
+    slug: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
 
+    desc: String,
+    short_desc: String,
+    long_description: String,
+
+    // Category
     category_id: {
       type: Schema.Types.ObjectId,
       ref: "Category",
       required: true,
-      index: true,
     },
 
     brand_id: {
@@ -42,201 +53,110 @@ const productSchema = new Schema(
       required: true,
     },
 
-    featured: { type: String, default: "new_arrival" },
+    subcat: String,
 
-    out_of_stock: { type: Boolean, default: false },
-
-    active: { type: Boolean, default: true, index: true },
-
-    seo: {
-      title: { type: String, default: "" },
-      description: { type: String, default: "" },
-      keywords: [{ type: String }],
-      canonical: { type: String, default: "" },
-    },
-
-    short_desc: { type: String, default: "" },
-
-    long_description: { type: String, default: "" },
-
-    benefits: [{ type: String }],
-
-    health_benefits: [{ type: String }],
-
-    ingredients: [{ type: String }],
-
-    how_to_use: [{ type: String }],
-
-    storage_instructions: [{ type: String }],
-
-    taste_profile: { type: String, default: "" },
-
-    origin: { type: String, default: "" },
-
-    region: { type: String, default: "" },
-
-    state_of_origin: { type: String, default: "" },
-
-    country_of_origin: {
-      type: String,
-      default: "India",
-    },
-
-    trust_badges: [{ type: String }],
-
-    comparison_section: {
-      type: String,
-      default: "",
-    },
-
-    why_choose_section: {
-      type: String,
-      default: "",
-    },
-
-    expert_review: {
-      type: String,
-      default: "",
-    },
-
-    featured_snippet_content: {
-      type: String,
-      default: "",
-    },
-
-    ai_overview_content: {
-      type: String,
-      default: "",
-    },
-
-    semantic_keywords: [{ type: String }],
-
-    voice_search_keywords: [{ type: String }],
-
-    internal_links: [{ type: String }],
-
-    related_blogs: [
-      {
-        title: String,
-        slug: String,
-      },
-    ],
-
-    youtube_video: {
-      type: String,
-      default: "",
-    },
-
-    instagram_reel: {
-      type: String,
-      default: "",
-    },
-
-    nutritional_info: {
-      calories: { type: String, default: "" },
-      protein: { type: String, default: "" },
-      carbs: { type: String, default: "" },
-      sugar: { type: String, default: "" },
-      fat: { type: String, default: "" },
-    },
-
-    purchase_count: {
-      type: Number,
-      default: 0,
-    },
-
-    faq: [{ type: String }],
-
-    videos: [{ type: String }],
-
-    subcat: {
-      type: String,
-      default: "",
-    },
-
+    // Pricing
+    price: Number,
+    MRP: Number,
     tax: {
       type: Number,
       default: 0,
     },
 
-    oldSlugs: [{ type: String }],
+    sku: String,
 
-    variants: [
+    // Inventory
+    stock: {
+      type: Number,
+      default: 0,
+    },
+
+    active: {
+      type: Boolean,
+      default: true,
+    },
+
+    out_of_stock: {
+      type: Boolean,
+      default: false,
+    },
+
+    // Media
+    images: [String],
+    videos: [String],
+    main_image: String,
+    alt_text: String,
+
+    // Documents
+    datasheet: String,
+    catalogue: String,
+    manual: String,
+    warranty: String,
+
+    // Specifications (Generic)
+    specifications: {
+      type: Map,
+      of: String,
+    },
+
+    // Features
+    key_features: [String],
+    applications: [String],
+    advantages: [String],
+    compatible_devices: [String],
+
+    // FAQ
+    faq: [
       {
-        type: {
-          type: String,
-          default: "",
-        },
-
-        value: {
-          type: String,
-          default: "",
-        },
-
-        price: Number,
-
-        MRP: Number,
-
-        SKU: String,
-
-        stock: {
-          type: Number,
-          default: 0,
-        },
-
-        tax: {
-          type: Number,
-          default: 0,
-        },
+        question: String,
+        answer: String,
       },
     ],
 
-    label: {
+    // SEO
+    seo: {
+      title: String,
+      description: String,
+      keywords: [String],
+      canonical: String,
+    },
+
+    // Tags
+    tags: [String],
+
+    label: String,
+
+    featured: {
       type: String,
       enum: [
         "new_arrival",
-        "new_launch",
-        "trending_now",
-        "hot_selling",
         "best_seller",
-        "selling_fast",
-        "limited_stock",
-        "only_few_left",
-        "big_savings",
-        "flash_sale",
-        "clearance_sale",
-        "mega_discount",
-        "festive_deals",
-        "diwali_special",
-        "christmas_sale",
-        "premium_quality",
-        "organic",
-        "handcrafted",
-        "luxury_pick",
+        "top_deals",
+        "featured",
         "none",
       ],
       default: "none",
     },
+
+    // Variants
+    variants: [VariantSchema],
+
+    // Reviews
+    rating: {
+      type: Number,
+      default: 0,
+    },
+
+    review_count: {
+      type: Number,
+      default: 0,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-productSchema.pre("validate", function (next) {
-  if (!this.slug && this.name) {
-    this.slug = slugify(this.name, { lower: true, strict: true });
-  }
-  next();
-});
-
-productSchema.pre("save", function (next) {
-  this.structured_data = {
-    ratingValue: this.rating || 0,
-    reviewCount: this.numReviews || 0,
-  };
-
-  next();
-});
-
-const Product = models.Product || model("Product", productSchema);
-
-export default Product;
+module.exports =
+  mongoose.models.Product ||
+  mongoose.model("Product", ProductSchema);
