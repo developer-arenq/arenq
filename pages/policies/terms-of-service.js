@@ -1,156 +1,241 @@
 // pages/policies/terms-of-service.js
 
-import React from 'react';
+import React from "react";
 
 const TermsOfService = () => {
   return (
-  <main className="px-4  py-10 text-gray-800 bg-white">
+    <main className="px-4 py-10 bg-white text-gray-800">
+      <div className="w-full max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-2">
+          Terms of Service
+        </h1>
 
-      <div className='w-5/6 m-auto'>
-      <h1 className="text-3xl font-bold mb-2 text-center">Terms of Service</h1>
-      <p className="text-sm text-gray-500 text-center mb-8">Effective Date: 11/07/2025</p>
-
-      <section className="mb-6">
-        <p>
-          Welcome to <strong>Arenq</strong>! By using our website (<a href="https://www.arenq.co.in" className="text-blue-600 underline hover:text-blue-800">www.arenq.co.in</a>) or any of our services, you agree to be bound by the following Terms of Service. Please read them carefully.
+        <p className="text-sm text-gray-500 text-center mb-8">
+          Effective Date: 11/07/2025
         </p>
-      </section>
 
-      {[
-        {
-          title: "1. About Us",
-          content:
-            "Arenq is an online platform offering authentic Himalayan products including food, wellness items, and handicrafts. We work closely with local farmers, artisans, and small producers.",
-        },
-        {
-          title: "2. User Agreement",
-          content:
-            "By accessing our platform, you confirm that you are at least 18 years old or using it under guardian supervision. Your use of this site means you accept these terms.",
-        },
-        {
-          title: "3. Account & Information",
-          content: (
-            <ul className="list-disc list-inside space-y-2">
-              <li>Provide accurate and true details</li>
-              <li>Keep your login credentials private</li>
-              <li>You are responsible for all activity under your account</li>
-              <li>We reserve the right to suspend accounts for misuse or false information.</li>
-            </ul>
-          ),
-        },
-        {
-          title: "4. Products & Pricing",
-          content: (
-            <ul className="list-disc list-inside space-y-2">
-              <li>We aim to provide accurate product details, but slight variations may occur due to handmade or natural processes.</li>
-              <li>Prices are subject to change without notice.</li>
-              <li>All prices are final at the time of order placement.</li>
-            </ul>
-          ),
-        },
-        {
-          title: "5. Orders & Payment",
-          content: (
-            <ul className="list-disc list-inside space-y-2">
-              <li>Orders are confirmed only after successful payment.</li>
-              <li>We accept payments via secure third-party gateways.</li>
-              <li>Arenq may cancel orders at its discretion.</li>
-            </ul>
-          ),
-        },
-        {
-          title: "6. Shipping",
-          content: (
-            <ul className="list-disc list-inside space-y-2">
-              <li>We deliver across India. Delivery charges and timelines are shown at checkout.</li>
-              <li>Delays may occur due to external factors.</li>
-              <li>Ensure your shipping address is correct.</li>
-            </ul>
-          ),
-        },
-        {
-          title: "7. Returns & Cancellations",
-          content: (
-            <ul className="list-disc list-inside space-y-2">
-              <li>Refer to our <a href="/policies/refund-policy" className="text-blue-600 underline hover:text-blue-800">Return & Refund Policy</a>.</li>
-              <li>Cancellations are accepted only before shipping.</li>
-              <li>Perishable/custom products may not be eligible for return.</li>
-            </ul>
-          ),
-        },
-        {
-          title: "8. Intellectual Property",
-          content:
-            "All content (text, images, logos) belongs to Arenq or is used with permission. You may not reproduce or use any content without written approval.",
-        },
-        {
-          title: "9. Prohibited Use",
-          content: (
-            <ul className="list-disc list-inside space-y-2">
-              <li>Violate laws</li>
-              <li>Spread false or harmful content</li>
-              <li>Infringe on rights of others</li>
-              <li>Access restricted areas</li>
-            </ul>
-          ),
-        },
-        {
-          title: "10. External Links",
-          content:
-            "Our site may include links to other websites. We are not responsible for their content, policies, or services.",
-        },
-        {
-          title: "11. No Warranties",
-          content:
-            'All services and products are offered "as is" without any warranties. We do not guarantee error-free or uninterrupted service.',
-        },
-        {
-          title: "12. Limitation of Liability",
-          content:
-            "Arenq is not responsible for any losses, damages, or interruptions arising from use of our platform.",
-        },
-        {
-          title: "13. Indemnity",
-          content:
-            "You agree to hold Arenq harmless from any claims or issues arising from your use of our site or violation of these terms.",
-        },
-        {
-          title: "14. Legal Jurisdiction",
-          content:
-            "These terms are governed by Indian law. Any disputes will be under the jurisdiction of courts in Dharamshala, Himachal Pradesh.",
-        },
-        {
-          title: "15. Policy Updates",
-          content:
-            "We may revise these terms anytime. Continued use of the site implies acceptance of the changes.",
-        },
-        {
-          title: "16. Contact Us",
-          content: (
-            <div>
-              <p>
-                📧 Email:{" "}
-                <a href="mailto:info@arenq.co.in" className="text-blue-600 underline hover:text-blue-800">
-                  info@arenq.co.in
-                </a>
-              </p>
-              <p>📞 Phone: +91 8956225134</p>
-              <p className="mt-2">
-                📍 <strong>Address:</strong><br />
-                Arenq<br />
-                Bhagsunag Road, Opposite Hotel Green,<br />
-                McLeod Ganj, Dharamshala,<br />
-                Himachal Pradesh – 176219
-              </p>
-            </div>
-          ),
-        },
-      ].map((section, index) => (
-        <section className="mb-6" key={index}>
-          <h2 className="text-xl font-semibold mb-2 text-left">{section.title}</h2>
-          <div className="leading-relaxed">{section.content}</div>
+        <section className="mb-6">
+          <p>
+            Welcome to <strong>Arenq</strong>. By accessing or using our website
+            (
+            <a
+              href="https://arenq.co.in"
+              className="text-blue-600 underline"
+            >
+              www.arenq.co.in
+            </a>
+            ), you agree to comply with and be bound by these Terms of Service.
+            If you do not agree with these terms, please do not use our website
+            or services.
+          </p>
         </section>
-      ))}
+
+        {[
+          {
+            title: "1. About Arenq",
+            content:
+              "Arenq specializes in advanced lithium battery technology, battery energy storage systems (BESS), industrial batteries, EV batteries, telecom batteries, UPS batteries, inverter batteries, renewable energy storage solutions, and other energy storage products for residential, commercial, and industrial applications.",
+          },
+
+          {
+            title: "2. Acceptance of Terms",
+            content:
+              "By using this website, you confirm that you are at least 18 years of age or are using the website under the supervision of a parent or legal guardian.",
+          },
+
+          {
+            title: "3. User Accounts",
+            content: (
+              <ul className="list-disc list-inside space-y-2">
+                <li>Provide accurate and up-to-date information.</li>
+                <li>Maintain the confidentiality of your account credentials.</li>
+                <li>You are responsible for all activities under your account.</li>
+                <li>
+                  Arenq reserves the right to suspend or terminate accounts for
+                  misuse or fraudulent activity.
+                </li>
+              </ul>
+            ),
+          },
+
+          {
+            title: "4. Products & Specifications",
+            content: (
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Product specifications, images, and technical information are
+                  provided for reference purposes.
+                </li>
+                <li>
+                  Actual products may vary slightly due to manufacturing
+                  improvements.
+                </li>
+                <li>
+                  Arenq reserves the right to modify specifications or pricing
+                  without prior notice.
+                </li>
+              </ul>
+            ),
+          },
+
+          {
+            title: "5. Orders & Payment",
+            content: (
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Orders are confirmed only after successful payment or order
+                  confirmation by Arenq.
+                </li>
+                <li>
+                  We reserve the right to reject or cancel any order for any
+                  reason.
+                </li>
+                <li>
+                  Prices displayed on the website are subject to applicable
+                  taxes unless otherwise stated.
+                </li>
+              </ul>
+            ),
+          },
+
+          {
+            title: "6. Shipping & Delivery",
+            content: (
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Delivery timelines are estimates and may vary depending on
+                  product availability and shipping location.
+                </li>
+                <li>
+                  Customers are responsible for providing accurate delivery
+                  information.
+                </li>
+                <li>
+                  Arenq is not liable for delays caused by logistics partners or
+                  force majeure events.
+                </li>
+              </ul>
+            ),
+          },
+
+          {
+            title: "7. Warranty & Returns",
+            content: (
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Warranty coverage varies depending on the product category.
+                </li>
+                <li>
+                  Please refer to our{" "}
+                  <a
+                    href="/policies/refund-policy"
+                    className="text-blue-600 underline"
+                  >
+                    Refund & Return Policy
+                  </a>
+                  .
+                </li>
+                <li>
+                  Products damaged due to misuse or unauthorized modifications
+                  are not covered under warranty.
+                </li>
+              </ul>
+            ),
+          },
+
+          {
+            title: "8. Intellectual Property",
+            content:
+              "All trademarks, logos, product images, graphics, technical documents, and website content are the intellectual property of Arenq unless otherwise stated. Unauthorized use is strictly prohibited.",
+          },
+
+          {
+            title: "9. Acceptable Use",
+            content: (
+              <ul className="list-disc list-inside space-y-2">
+                <li>Do not misuse or interfere with website functionality.</li>
+                <li>Do not attempt unauthorized access.</li>
+                <li>Do not upload malicious software or harmful content.</li>
+                <li>Do not violate applicable laws or regulations.</li>
+              </ul>
+            ),
+          },
+
+          {
+            title: "10. Third-Party Services",
+            content:
+              "Our website may contain links to third-party websites or services. Arenq is not responsible for the content, policies, or practices of third-party websites.",
+          },
+
+          {
+            title: "11. Disclaimer",
+            content:
+              'All products, services, and website content are provided on an "as available" and "as is" basis without warranties of any kind except where required by law.',
+          },
+
+          {
+            title: "12. Limitation of Liability",
+            content:
+              "To the fullest extent permitted by law, Arenq shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our products or website.",
+          },
+
+          {
+            title: "13. Indemnification",
+            content:
+              "You agree to indemnify and hold Arenq harmless against any claims, liabilities, damages, losses, or expenses arising from your misuse of the website or violation of these Terms.",
+          },
+
+          {
+            title: "14. Governing Law",
+            content:
+              "These Terms of Service shall be governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the competent courts of Maharashtra, India.",
+          },
+
+          {
+            title: "15. Changes to Terms",
+            content:
+              "Arenq reserves the right to modify these Terms of Service at any time. Updated versions will be published on this page.",
+          },
+
+          {
+            title: "16. Contact Us",
+            content: (
+              <div>
+                <p>
+                  📧 Email:{" "}
+                  <a
+                    href="mailto:info@arenq.co.in"
+                    className="text-blue-600 underline"
+                  >
+                    info@arenq.co.in
+                  </a>
+                </p>
+
+                <p>📞 Phone: +91 89562 25134</p>
+
+                <p className="mt-2">
+                  🌐 Website:{" "}
+                  <a
+                    href="https://arenq.co.in"
+                    className="text-blue-600 underline"
+                  >
+                    www.arenq.co.in
+                  </a>
+                </p>
+              </div>
+            ),
+          },
+        ].map((section, index) => (
+          <section key={index} className="mb-7">
+            <h2 className="text-xl font-semibold mb-3">
+              {section.title}
+            </h2>
+
+            <div className="leading-7 text-gray-700">
+              {section.content}
+            </div>
+          </section>
+        ))}
       </div>
     </main>
   );

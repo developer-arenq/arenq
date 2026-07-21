@@ -1,19 +1,29 @@
 "use client";
+
 import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
-import Image from "next/image";
 import { useDispatch } from "react-redux";
+import { useSession } from "next-auth/react";
+
 import { initialCart } from "../slices/cart";
 import CurrencyFormatter from "../helper/currencyFormatter";
-import { useSession } from "next-auth/react";
 import {
   updateGuestCartQty,
   removeGuestCartItem,
 } from "../helper/guestCart";
 
-const CartItem = ({ item, clearCartFun, itemcount }) => {
+const CartItem = ({ item, itemcount }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
-  const { id, thumbnail, title, price, quantity, variant, MRP } = item;
+
+  const {
+    id,
+    thumbnail,
+    title,
+    price,
+    quantity,
+    variant,
+    MRP,
+  } = item;
 
   const reloadCart = (response) => {
     dispatch(
@@ -33,24 +43,29 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
         variant?.sku,
         -1
       );
+
       dispatch(initialCart(updatedCart));
       return;
     }
 
     const res = await fetch(`/api/cart/${session.user.id}/minus`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         product_id: id,
+        quantity: 1,
         selectedVariant: {
-          sku: variant?.sku
-        }
+          sku: variant?.sku,
+        },
       }),
     });
 
-    if (res.ok) reloadCart(await res.json());
+    if (res.ok) {
+      reloadCart(await res.json());
+    }
   };
-
 
   const add = async () => {
     if (!session) {
@@ -59,33 +74,41 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
         variant?.sku,
         1
       );
+
       dispatch(initialCart(updatedCart));
       return;
     }
 
     const res = await fetch(`/api/cart/${session.user.id}/add`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         product_id: id,
+        quantity: 1,
         selectedVariant: {
-          sku: variant?.sku
-        }
+          sku: variant?.sku,
+        },
       }),
     });
 
-    if (res.ok) reloadCart(await res.json());
+    if (res.ok) {
+      reloadCart(await res.json());
+    }
   };
-
 
   const removeItem = async () => {
     if (!session) {
-      const updatedCart = removeGuestCartItem(id, variant?.sku);
+      const updatedCart = removeGuestCartItem(
+        id,
+        variant?.sku
+      );
+
       dispatch(initialCart(updatedCart));
       return;
     }
 
-    // Last item in cart
     if (itemcount === 1) {
       const res = await fetch(
         `/api/cart/${session.user.id}/clear`,
@@ -112,15 +135,22 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
       `/api/cart/${session.user.id}/removeItem`,
       {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product_id: id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          product_id: id,
+          selectedVariant: {
+            sku: variant?.sku,
+          },
+        }),
       }
     );
 
-    if (res.ok) reloadCart(await res.json());
+    if (res.ok) {
+      reloadCart(await res.json());
+    }
   };
-
-
 
   return (
     <div className="flex items-center gap-4">
@@ -128,23 +158,44 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
         <img
           src={thumbnail}
           alt={title}
-
-          className="object-contain p-2"
+          className="w-full h-full object-contain p-2"
         />
       </div>
 
       <div className="flex-1">
         <div className="flex justify-between">
           <div>
-            <h3 className="font-medium text-[#1f1f1f] text-sm md:text-base" style={{ fontFamily: 'var(--font-body)' }}>
+            <h3
+              className="font-medium text-[#1f1f1f] text-sm md:text-base"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
               {title}
             </h3>
 
             {variant && (
               <div className="text-xs text-gray-500 mt-1 space-y-1">
-                {variant.model && <p>Model: {variant.model}</p>}
-                {/* {variant.voltage && <p>Voltage: {variant.voltage}</p>}
-                {variant.capacity && <p>Capacity: {variant.capacity}</p>} */}
+                {(variant?.attributes?.model || variant?.model) && (
+                  <p>
+                    Model:{" "}
+                    {variant?.attributes?.model || variant?.model}
+                  </p>
+                )}
+
+                {/* {(variant?.attributes?.voltage || variant?.voltage) && (
+                  <p>
+                    Voltage:{" "}
+                    {variant?.attributes?.voltage ||
+                      variant?.voltage}
+                  </p>
+                )}
+
+                {(variant?.attributes?.capacity || variant?.capacity) && (
+                  <p>
+                    Capacity:{" "}
+                    {variant?.attributes?.capacity ||
+                      variant?.capacity}
+                  </p>
+                )} */}
               </div>
             )}
 
@@ -189,7 +240,7 @@ const CartItem = ({ item, clearCartFun, itemcount }) => {
               />
             </p>
 
-            {MRP && (
+            {!!MRP && (
               <p className="text-xs text-gray-400 line-through">
                 <CurrencyFormatter
                   price={MRP * quantity}

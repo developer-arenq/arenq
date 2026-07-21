@@ -56,7 +56,7 @@ const categories = [
   {
     name: "Electric Vehicle Battery",
     sub: "EV Mobility Power",
-    category: "electric-vehicle-battery",
+    category: "ev-battery",
     img: "https://arenq.co.in/wp-content/uploads/2025/06/11-1.jpeg",
     icon: "🚗",
   },

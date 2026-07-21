@@ -33,15 +33,21 @@ export async function getServerSideProps({ res }) {
 
   /* 🔥 CATEGORY URLS */
   const categories = [
-    "himalayan-products",
-    "organic-products",
-    "handmade-products",
-    "handlooms",
-    "skincare-and-beauty",
-    "handcrafts",
-    "Natural-Food-Products",
-    "health-care",
-    "gift-and-hamper",
+    "industrial-ups-battery",
+    "ev-battery",
+    "engine-cranking-battery",
+    "golf-cart-buggy-battery",
+    "marine-battery",
+    "robotics-battery",
+    "mhe-battery",
+    "power-sector-battery",
+    "electromagnetic-crane-battery",
+    "bess-battery",
+    "telecom-battery",
+    "medical-battery",
+    "inverter-battery",
+    "agricultural-battery",
+    "solar-street-light-battery",
   ];
 
   const categoryUrls = categories

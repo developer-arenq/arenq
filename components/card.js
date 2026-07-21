@@ -270,7 +270,7 @@ const Product = ({ product }) => {
 ">            {/* Label INSIDE */}
             {label && (
               <span
-                className={`w-fit px-2 py-[2px] rounded-full text-[9px] sm:text-xs font-semibold shadow-sm mb-1 bg-opacity-10 border ${getLabelColor(label.toLowerCase())} border-current text-gray-700`}
+                className={`w-fit px-2 py-[2px] rounded-full text-[9px] sm:text-xs font-semibold shadow-sm mb-1 bg-opacity-10 border ${getLabelColor(label.toLowerCase())} border-current text-[#002240]`}
               >
                 {formatLabelText(label)}
               </span>
@@ -290,7 +290,7 @@ const Product = ({ product }) => {
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 'var(--text-sm)',
-                color: 'hsl(20 25% 12%)'
+                color: '#002240'
               }}
             >
               {title}
@@ -337,7 +337,7 @@ const Product = ({ product }) => {
  gap-2
     ${out_of_stock
                 ? "bg-gray-400 cursor-not-allowed text-white"
-                : "bg-[#2d241b] hover:bg-[#524232] text-white"
+                : "bg-[#0A528F] hover:bg-[#002240] text-white"
               }`}
           >
 

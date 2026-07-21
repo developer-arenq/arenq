@@ -14,7 +14,6 @@ const Login = dynamic(() => import("../components/login"), {
 
 const SHIPPING_CHARGE = 100;
 
-const deliveryCharge = SHIPPING_CHARGE;
 
 const CartPage = () => {
     const router = useRouter();
@@ -92,7 +91,7 @@ const CartPage = () => {
                             <div className="lg:col-span-2 flex flex-col gap-4">
                                 {cartItems.map((item) => (
                                     <div
-                                        key={`${item.id}-${item.variant?.id || ""}`}
+                                        key={`${item.id}-${item.variant?.sku || "default"}`}
                                         className="bg-white border border-[#ddd] rounded-2xl p-4 shadow-sm"
                                     >
                                         <CartItem
@@ -205,7 +204,7 @@ const CartPage = () => {
                         </div>
 
                         <button
-                            onClick={() => router.push("/checkout")}
+                            onClick={handleCheckout}
                             className="bg-[#8b4b32] text-white px-6 py-2 rounded-lg"
                         >
                             Checkout

@@ -313,7 +313,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2">
               {[
                 ['Industrial UPS Battery', '/search?q=industrial-ups-battery'],
-                ['Electric Vehicle Battery', '/search?q=electric-vehicle-battery'],
+                ['Electric Vehicle Battery', '/search?q=ev-battery'],
                 ['Engine Cranking Battery', '/search?q=engine-cranking-battery'],
                 ['MHE Battery', '/search?q=mhe-battery'],
                 ['Power Sector Battery', '/search?q=power-sector-battery'],

@@ -1,47 +1,89 @@
 import main from "../../../../database/conn";
 import Cart from "../../../../models/cartSchema";
-import Product from "../../../../models/productSchema";
+
+const round = (num) => Math.round(num * 100) / 100;
 
 const removeItem = async (req, res) => {
   try {
-    await main().catch((err) => console.error(err));
+    await main();
+
     const { user_id } = req.query;
-    const { product_id } = req.body;
+    const { product_id, selectedVariant } = req.body;
 
-    let cart = await Cart.findOne({ user_id });
-    const existingCartItemIndex = cart.items.findIndex(
-      (item) => item.id.toString() === product_id
-    );
+    const cart = await Cart.findOne({ user_id });
 
-    if (existingCartItemIndex !== -1) {
-      const existingCartItem = cart.items[existingCartItemIndex];
-      // console.log({ existingCartItem });
-      const removeItemTotalPrice =
-        existingCartItem.price * existingCartItem.quantity;
-      cart.items.splice(existingCartItemIndex, 1);
-      cart.subtotal -= Number(removeItemTotalPrice);
-      // console.log(
-      //   "cart.subtotal ",
-      //   cart.subtotal,
-      //   removeItemTotalPrice,
-      //   existingCartItem
-      // );
+    if (!cart) {
+      return res.status(404).json({
+        error: "Cart not found",
+      });
     }
 
-    // Free shipping after 1000 logic
-    // if (cart.subtotal > 1000) {
-    //   cart.shipping = 0;
-    // } else {
-    cart.shipping = 50;
-    // }
+    const itemIndex = cart.items.findIndex((item) => {
+      if (item.id.toString() !== product_id) {
+        return false;
+      }
 
-    cart.total = Number(cart.subtotal + cart.shipping);
+      if (!item.variant && !selectedVariant) {
+        return true;
+      }
+
+      if (item.variant && selectedVariant) {
+        return item.variant.sku === selectedVariant.sku;
+      }
+
+      return false;
+    });
+
+    if (itemIndex === -1) {
+      return res.status(404).json({
+        error: "Item not found",
+      });
+    }
+
+    cart.items.splice(itemIndex, 1);
+
+    cart.subtotal = round(
+      cart.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      )
+    );
+
+    cart.taxAmount = round(
+      cart.items.reduce(
+        (sum, item) => sum + (item.taxAmount || 0),
+        0
+      )
+    );
+
+    cart.shipping = cart.items.length ? 0 : 0;
+
+    cart.total = round(
+      cart.subtotal +
+        cart.taxAmount +
+        cart.shipping
+    );
+
+    cart.taxPercentage =
+      cart.subtotal > 0
+        ? Number(
+            (
+              (cart.taxAmount / cart.subtotal) *
+              100
+            ).toFixed(2)
+          )
+        : 0;
 
     await cart.save();
-    res.json(cart);
+
+    return res.status(200).json(cart);
   } catch (err) {
-    console.log({ err });
-    res.status(500).json({ error: "Internal server error" });
+    console.error(err);
+
+    return res.status(500).json({
+      error: "Internal server error",
+      details: err.message,
+    });
   }
 };
 

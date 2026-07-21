@@ -5,15 +5,7 @@ const webpack = require("webpack");
 const nextConfig = {
   reactStrictMode: true,
 
-  async redirects() {
-    return [
-      {
-        source: "/products/himalayan-sea-buckthorn-juice",
-        destination: "/products/sea-buckthorn-juice",
-        permanent: true, // 308 redirect (SEO friendly)
-      },
-    ];
-  },
+
 
   images: {
     remotePatterns: [
