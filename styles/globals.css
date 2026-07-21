@@ -1233,10 +1233,7 @@
   background: var(--green-lt);
 }
 
-/* ── REVIEW SECTION ── */
-.pd-review-section {
-  padding: 32px 0;
-}
+
 
 .pd-review-container {
   max-width: 1280px;
@@ -1264,16 +1261,9 @@
   box-shadow: var(--shadow-md);
 }
 
-/* ── FAQ ── */
-.pd-faq-section {
-  padding: 0 0 32px;
-}
 
-.pd-faq-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+
+
 
 /* ── RELATED ── */
 .pd-related {
@@ -3244,7 +3234,7 @@ height:14px;
 }
 
 /* ── Review / video / faq / related sections ── */
-.pd-review-section, .pd-faq-section{ background: var(--pd-white); padding: 48px 24px; }
+.pd-review-section, .pd-faq-section{  padding: 38px 24px; }
 .pd-review-container, .pd-faq-container{ max-width: 1280px; margin: 0 auto; }
 .pd-video-section{ padding: 48px 24px; }
 .pd-video-inner{ max-width: 860px; margin: 0 auto; border-radius: var(--pd-radius-lg); overflow: hidden; box-shadow: var(--pd-shadow); }

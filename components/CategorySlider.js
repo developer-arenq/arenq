@@ -111,7 +111,7 @@ const categories = [
   {
     name: "BESS Battery",
     sub: "Battery Energy Storage System",
-    category: "bess-battery",
+    category: "battery-energy-storage-system-bess",
     img: "https://arenq.co.in/wp-content/uploads/2025/07/Bess.jpg",
     icon: "🔋",
   },

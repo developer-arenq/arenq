@@ -29,8 +29,8 @@ const RelatedProduct = ({ recommendations }) => {
   if (!recommendations?.length) return null;
 
   return (
-    <div className="bg-white py-1">
-      <h2 className="text-xl md:text-2xl font-bold text-center text-green-700 mb-4">
+    <div className="py-1">
+      <h2 className="text-xl md:text-2xl font-bold text-center text-[#0A528F] mb-4">
         Related Products
       </h2>
 

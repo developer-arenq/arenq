@@ -4,10 +4,6 @@ import dynamic from "next/dynamic";
 import ProductSkeleton from "../components/cardSkeleton";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const ShopSlider = dynamic(
-  () => import("../components/ShopSlider").then((mod) => mod.default || mod.ShopSlider),
-  { ssr: false }
-);
 
 const Product = dynamic(
   () => import("../components/card").then((mod) => mod.default || mod.Card),
