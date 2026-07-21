@@ -52,7 +52,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/08/49266.jpg",
     icon: "🏭",
   },
-
   {
     name: "Electric Vehicle Battery",
     sub: "EV Mobility Power",
@@ -60,7 +59,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/06/11-1.jpeg",
     icon: "🚗",
   },
-
   {
     name: "Engine Cranking Battery",
     sub: "High Starting Power",
@@ -68,15 +66,13 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/08/969.jpg",
     icon: "⚙️",
   },
-
   {
     name: "Golf Cart & Buggy Battery",
     sub: "Smart Mobility Energy",
-    category: "golf-cart-buggy-battery",
+    category: "golf-cart-and-buggy-battery", // ✅ Fixed
     img: "https://arenq.co.in/wp-content/uploads/2025/07/2429.jpg",
     icon: "⛳",
   },
-
   {
     name: "Marine Battery",
     sub: "Marine Power Solutions",
@@ -84,7 +80,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/18789.jpg",
     icon: "🚢",
   },
-
   {
     name: "Robotics Battery",
     sub: "Automation Energy",
@@ -92,7 +87,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/7297.jpg",
     icon: "🤖",
   },
-
   {
     name: "MHE Battery",
     sub: "Material Handling Equipment",
@@ -100,7 +94,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/57189.jpg",
     icon: "🏗️",
   },
-
   {
     name: "Power Sector Battery",
     sub: "Grid & Power Solutions",
@@ -108,7 +101,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/08/8350.jpg",
     icon: "⚡",
   },
-
   {
     name: "Electromagnetic Crane Battery",
     sub: "Heavy Duty Industrial Power",
@@ -116,7 +108,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/08/12624.jpg",
     icon: "🏭",
   },
-
   {
     name: "BESS Battery",
     sub: "Battery Energy Storage System",
@@ -124,7 +115,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/Bess.jpg",
     icon: "🔋",
   },
-
   {
     name: "Telecom Battery",
     sub: "Telecom Backup Power",
@@ -132,7 +122,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/45509.jpg",
     icon: "📡",
   },
-
   {
     name: "Medical Battery",
     sub: "Healthcare Power Solutions",
@@ -140,7 +129,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/8389.jpg",
     icon: "🏥",
   },
-
   {
     name: "Inverter Battery",
     sub: "Home & Business Backup",
@@ -148,7 +136,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/07/New-Project-50.png",
     icon: "🔌",
   },
-
   {
     name: "Agricultural Battery",
     sub: "Smart Farming Energy",
@@ -156,7 +143,6 @@ const categories = [
     img: "https://arenq.co.in/wp-content/uploads/2025/08/259.jpg",
     icon: "🚜",
   },
-
   {
     name: "Solar Street Light Battery",
     sub: "Renewable Lighting Power",
