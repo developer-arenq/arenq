@@ -8,7 +8,7 @@ const desktopPoints = [
     name: "Agriculture Battery",
     top: "14%",
     left: "28%",
-    href: "/products/agriculture-battery",
+    href: "/products/agricultural-battery",
   },
   {
     id: 2,
@@ -60,7 +60,7 @@ const mobilePoints = [
     name: "Agriculture Battery",
     top: "15%",
     left: "16%",
-    href: "/products/agriculture-battery",
+    href: "/products/agricultural-battery",
   },
   {
     id: 2,
