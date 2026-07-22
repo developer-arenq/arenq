@@ -38,7 +38,7 @@ export async function getServerSideProps({ res }) {
     "engine-cranking-battery",
     "golf-cart-buggy-battery",
     "marine-battery",
-    "robotics-battery",
+    "agv-battery",
     "mhe-battery",
     "power-sector-battery",
     "electromagnetic-crane-battery",

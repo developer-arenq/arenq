@@ -69,7 +69,7 @@ const categories = [
   {
     name: "Golf Cart & Buggy Battery",
     sub: "Smart Mobility Energy",
-    category: "golf-cart-and-buggy-battery", // ✅ Fixed
+    category: "golf-cart-buggy-battery", // ✅ Fixed
     img: "https://arenq.co.in/wp-content/uploads/2025/07/2429.jpg",
     icon: "⛳",
   },
@@ -83,7 +83,7 @@ const categories = [
   {
     name: "Robotics Battery",
     sub: "Automation Energy",
-    category: "robotics-battery",
+    category: "agv-battery",
     img: "https://arenq.co.in/wp-content/uploads/2025/07/7297.jpg",
     icon: "🤖",
   },
@@ -121,13 +121,6 @@ const categories = [
     category: "telecom-battery",
     img: "https://arenq.co.in/wp-content/uploads/2025/07/45509.jpg",
     icon: "📡",
-  },
-  {
-    name: "Medical Battery",
-    sub: "Healthcare Power Solutions",
-    category: "medical-battery",
-    img: "https://arenq.co.in/wp-content/uploads/2025/07/8389.jpg",
-    icon: "🏥",
   },
   {
     name: "Inverter Battery",
@@ -278,7 +271,7 @@ font-bold mt-2
                 className="keen-slider__slide"
               >
                 <Link
-                  href={`/search?q=${cat.category}`}
+                  href={`/products/${cat.category}`}
                   className="group block overflow-hidden rounded-3xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   {/* Image */}
