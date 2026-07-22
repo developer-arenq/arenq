@@ -161,17 +161,17 @@ export default function Home() {
       {/* 🔥 HERO */}
 
 
-      <main className="">
-        <HomePage/>
+      <main style={{
+        background:
+          "linear-gradient(180deg,#f8fbff,#eef5f8)"
+      }} className="">
+        <HomePage />
         {/* <Slider /> */}
         {/* <Heading /> */}
         <CategorySlider />
-        <About/>
-        <HeroPowerAnimation/>
-        {/* <FreshStock /> */}
-        {/* <ProductList />
-        <BestSeller />
-        <TeaSpecial /> */}
+        <FreshStock />
+        <About />
+        <HeroPowerAnimation />
         <Sourcing />
         <WhyChooseUs />
         <Process />

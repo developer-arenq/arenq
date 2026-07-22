@@ -223,12 +223,12 @@ const FreshStock = () => {
   return (
     <>
    
-      <div className="relative mx-auto w-[100%] lg:w-[95%] max-w-[1400px] px-2 py-6">
+      <div  className="relative mx-auto w-[100%] lg:w-[95%] max-w-[1400px] px-2 py-6">
 
         <div className="w-full flex items-center justify-between gap-2">
           <div className="flex-1 flex justify-start">
-            <h2 style={{ fontFamily: 'var(--font-body)' }} className="text-[18px] sm:text-[28px] md:text-[36px] lg:text-[40px] font-bold text-[#2d241b] leading-tight tracking-wide">
-              Fresh Stock
+            <h2 style={{ fontFamily: 'var(--font-body)' }} className="text-[18px] sm:text-[28px] md:text-[36px] lg:text-[40px] font-bold text-[#0A528F] leading-tight tracking-wide">
+              Our Collection
             </h2>
           </div>
 
@@ -237,7 +237,7 @@ const FreshStock = () => {
           <div className="flex-1 flex justify-end">
             <Link
               href="/shop"
-              className="px-3 py-1 sm:px-4 sm:py-2 bg-[#2d241b] text-white rounded-lg shadow hover:bg-[#524232] transition text-xs sm:text-sm whitespace-nowrap"
+              className="px-3 py-1 sm:px-4 sm:py-2 bg-[#0A528F] text-white rounded-lg shadow hover:bg-[#01223e] transition text-xs sm:text-sm whitespace-nowrap"
             >
               View All
             </Link>
@@ -297,16 +297,18 @@ duration-300
 flex
 flex-col
 h-full
-min-h-[380px]
-sm:min-h-[500px]
+
 "                >
+  {/* min-h-[380px]
+sm:min-h-[500px] */}
+
                   <Link href={`/products/${p.slug}`}>
                     <div className="relative overflow-hidden flex flex-col h-full">
 
 
-                      {hasDiscount && discountPercent > 0 && (
+                      {/* {hasDiscount && discountPercent > 0 && (
                         <div className="badge-sale">{discountPercent}% OFF</div>
-                      )}
+                      )} */}
 
                       {/* Out of Stock */}
                       {out && (
@@ -370,7 +372,7 @@ min-h-[42px]
                         </h3>
 
                         {/* Price */}
-                        <div className="
+                        {/* <div className="
 flex
 items-baseline
 gap-2
@@ -385,9 +387,9 @@ min-h-[35px]
                         </div>
 
 
-                      </div>
+                      </div> */}
 
-                      <div className="p-2 mt-auto">
+                      {/* <div className="p-2 mt-auto">
                         {out ? (
                           <button
 
@@ -416,7 +418,7 @@ min-h-[35px]
                             <ShoppingCart size={13} />
                             Add to Cart
                           </button>
-                        )}
+                        )} */}
 
 
 
