@@ -1,7 +1,7 @@
 import { Rating } from "flowbite-react";
 const ProductSkeleton = () => {
   return (
-    <div className=" animate-pulse">
+    <div className="animate-pulse">
       <div className="block bg-white border border-gray-50 shadow group  overflow-hidden">
         <div className="min-h-[395px] relative">
           <div className="h-[220px] mb-2 relative overflow-hidden group transition">
