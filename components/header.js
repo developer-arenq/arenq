@@ -110,42 +110,42 @@ const productLinks = [
     icon: Package,
     label: "EV Batteries",
     desc: "E-Rickshaw & Electric Vehicle Batteries",
-    href: "/search?q=ev-battery",
+    href: "/products/ev-battery",
     accent: "hsl(205 90% 40%)",
   },
   {
     icon: Package,
     label: "Solar Batteries",
     desc: "Renewable energy storage solutions",
-    href: "/search?q=solar",
+    href: "/products/solar-street-light-battery",
     accent: "hsl(45 95% 50%)",
   },
   {
     icon: Package,
     label: "Industrial Batteries",
     desc: "UPS & Industrial power backup",
-    href: "/search?q=industrial",
+    href: "/products/industrial-ups-battery",
     accent: "hsl(200 80% 45%)",
   },
   {
     icon: Package,
     label: "Telecom Batteries",
     desc: "Reliable telecom power solutions",
-    href: "/search?q=telecom",
+    href: "/products/telecom-battery",
     accent: "hsl(180 70% 40%)",
   },
   {
     icon: Package,
     label: "Golf Cart Batteries",
     desc: "High performance mobility batteries",
-    href: "/search?q=golf",
+    href: "/products/golf-cart-buggy-battery",
     accent: "hsl(120 60% 40%)",
   },
   {
     icon: Package,
     label: "Energy Storage System",
     desc: "BESS & smart energy solutions",
-    href: "/search?q=energy-storage",
+    href: "/products/battery-energy-storage-system-bess",
     accent: "hsl(220 80% 45%)",
   },
 ];
@@ -371,7 +371,7 @@ export default function Header() {
 
 
 
-              {/* Himalayan Dropdown */}
+              {/* arenq Dropdown */}
 
               <div ref={himalayanRef} className="relative">
 
@@ -421,7 +421,7 @@ export default function Header() {
                           color: "rgba(255,255,255,.7)"
                         }}
                       >
-                        Lithium Batteries & Energy Storage
+                        Our Best Products
                       </p>
 
                     </div>
