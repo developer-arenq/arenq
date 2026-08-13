@@ -293,7 +293,7 @@ export default function Header() {
   return (
     <>
 
-      {/* Main Header */}
+      {/* Main Header r*/}
       <header
         className="fixed top-0 left-0 w-full z-40 transition-all duration-300"
         ref={headerRef}
