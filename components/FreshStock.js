@@ -85,7 +85,7 @@ const FreshStock = () => {
       try {
         const res = await fetch("/api/products/featured/new_arrival");
         const data = await res.json();
-        if (active) setProducts(data.slice(-12).reverse());
+        if (active) setProducts(data.slice(-20).reverse());
       } catch {
         toast.error("Failed to load products.");
       } finally {

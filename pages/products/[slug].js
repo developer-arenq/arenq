@@ -400,16 +400,16 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
               )}
 
               {/* Qty */}
-              <div className="pd-qty-row">
+              {/* <div className="pd-qty-row">
                 <div className="pd-qty-wrap">
                   <button className="pd-qty-btn" onClick={() => { if (localQty > 1) setLocalQty(q => q - 1); minus(product_data._id, selectedVariant); }}><FaMinus /></button>
                   <span className="pd-qty-val">{localQty}</span>
                   <button className="pd-qty-btn" onClick={() => { setLocalQty(q => q + 1); handleAddToCart(product_data._id, selectedVariant || variants[0], product_data.out_of_stock); }}><FaPlus /></button>
                 </div>
-              </div>
+              </div> */}
 
               {/* CTA Buttons */}
-              <div className="pd-cta-wrap">
+              {/* <div className="pd-cta-wrap">
                 <button className="pd-btn-cart" onClick={() => handleAddToCart(product_data._id, selectedVariant || variants[0], product_data.out_of_stock)}>
                   <FaShoppingCart /> Add to Cart
                 </button>
@@ -417,7 +417,7 @@ const ProductDetail = ({ product_data, pro_review, recommendations }) => {
                   ? <button className="pd-btn-notify" onClick={() => handleNotifyMe(product_data)}><FaBell /> Notify Me</button>
                   : <button className="pd-btn-buynow" onClick={() => handleBuyNow(product_data._id)}><FaShoppingBag /> Buy Now</button>
                 }
-              </div>
+              </div> */}
 
               {/* Trust badges */}
               <div className="pd-badges">

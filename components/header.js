@@ -1,32 +1,30 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Building2,
   Package,
-  Store,
-  Coffee,
-  TrendingUp,
-  Star,
   Info,
   BookOpen,
   Newspaper,
   Phone,
-  Droplets,
-  GlassWater,
-  Candy,
-  HeartPulse,
   Menu,
   ChevronDown,
-  User,
-  ShoppingCart,
-  Search,
   X,
+  Award,
+  Users,
+  ShieldCheck,
+  FlaskRound,
+  Battery,
+  Factory,
+  Truck,
+  Tractor,
+  Heart,
+  RadioTower,
+  Construction,
   Leaf,
-  Home,
-  Gift,
+  Cpu,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
@@ -43,110 +41,159 @@ const aboutLinks = [
   {
     icon: Info,
     label: "About Us",
-    desc: "Know more about Arenq",
+    desc: "Know more about ARENQ",
     href: "/about-us",
-    accent: "hsl(205 90% 40%)",
+    accent: "#0A528F",
+  },
+
+  {
+    icon: Award,
+    label: "Our Certifications",
+    desc: "Industry certifications & standards",
+    href: "/certifications",
+    accent: "#0A528F",
   },
   {
-    icon: BookOpen,
-    label: "Our Journey",
-    desc: "Innovation & milestones",
-    href: "/our-story",
-    accent: "hsl(45 95% 50%)",
+    icon: Users,
+    label: "Our Leadership",
+    desc: "Meet our leadership team",
+    href: "/our-leadership",
+    accent: "#FFB600",
   },
   {
-    icon: BookOpen,
-    label: "Blogs",
-    desc: "Battery technology insights",
-    href: "/blog",
-    accent: "hsl(205 90% 40%)",
+    icon: ShieldCheck,
+    label: "Quality Assurance",
+    desc: "Ensuring quality at every stage",
+    href: "/quality-assurance",
+    accent: "#0A528F",
   },
   {
-    icon: Newspaper,
-    label: "Media & News",
-    desc: "Latest company updates",
-    href: "/media-press",
-    accent: "hsl(200 70% 45%)",
-  },
-  {
-    icon: Phone,
-    label: "Contact Us",
-    desc: "Connect with Arenq team",
-    href: "/contact-us",
-    accent: "hsl(40 90% 50%)",
+    icon: FlaskRound,
+    label: "Research & Development",
+    desc: "Driving innovation through R&D",
+    href: "/research-development",
+    accent: "#FFB600",
   },
 ];
-
-const b2bLinks = [
-  {
-    icon: Building2,
-    label: "OEM Partnerships",
-    desc: "Battery manufacturing solutions",
-    href: "/wholesale"
-  },
-  {
-    icon: TrendingUp,
-    label: "Become Distributor",
-    desc: "Join Arenq distribution network",
-    href: "/wholesale"
-  },
-  {
-    icon: Store,
-    label: "Industrial Solutions",
-    desc: "Power solutions for industries",
-    href: "/wholesale"
-  },
-  {
-    icon: Package,
-    label: "Bulk Battery Inquiry",
-    desc: "Custom energy storage requirements",
-    href: "/wholesale"
-  },
-];
-
-
 const productLinks = [
   {
-    icon: Package,
-    label: "EV Batteries",
-    desc: "E-Rickshaw & Electric Vehicle Batteries",
-    href: "/products/ev-battery",
-    accent: "hsl(205 90% 40%)",
-  },
-  {
-    icon: Package,
-    label: "Solar Batteries",
-    desc: "Renewable energy storage solutions",
-    href: "/products/solar-street-light-battery",
-    accent: "hsl(45 95% 50%)",
-  },
-  {
-    icon: Package,
-    label: "Industrial Batteries",
-    desc: "UPS & Industrial power backup",
+    icon: Battery,
+    label: "Industrial UPS Battery",
+    desc: "Reliable industrial backup power",
     href: "/products/industrial-ups-battery",
-    accent: "hsl(200 80% 45%)",
+    accent: "#0A528F",
   },
   {
-    icon: Package,
-    label: "Telecom Batteries",
-    desc: "Reliable telecom power solutions",
-    href: "/products/telecom-battery",
-    accent: "hsl(180 70% 40%)",
+    icon: Factory,
+    label: "Electric Vehicle Battery",
+    desc: "Advanced lithium EV batteries",
+    href: "/products/electric-vehicle-battery",
+    accent: "#FFB600",
   },
   {
-    icon: Package,
-    label: "Golf Cart Batteries",
-    desc: "High performance mobility batteries",
+    icon: Factory,
+    label: "Engine Cranking Battery",
+    desc: "High starting performance",
+    href: "/products/engine-cranking-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: Truck,
+    label: "Golf Cart & Buggy Battery",
+    desc: "Long-life mobility batteries",
     href: "/products/golf-cart-buggy-battery",
-    accent: "hsl(120 60% 40%)",
+    accent: "#FFB600",
   },
   {
     icon: Package,
-    label: "Energy Storage System",
-    desc: "BESS & smart energy solutions",
+    label: "Marine Battery",
+    desc: "Reliable marine power",
+    href: "/products/marine-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: Cpu,
+    label: "Robotics Battery",
+    desc: "High-performance robotics solutions",
+    href: "/products/robotics-battery",
+    accent: "#FFB600",
+  },
+  {
+    icon: Factory,
+    label: "MHE Battery",
+    desc: "Material handling equipment",
+    href: "/products/mhe-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: Factory,
+    label: "Power Sector Battery",
+    desc: "Power grid applications",
+    href: "/products/power-sector-battery",
+    accent: "#FFB600",
+  },
+  {
+    icon: Construction,
+    label: "Electromagnetic Crane Battery",
+    desc: "Industrial crane batteries",
+    href: "/products/electromagnetic-crane-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: Factory,
+    label: "BESS Battery",
+    desc: "Battery Energy Storage System",
     href: "/products/battery-energy-storage-system-bess",
-    accent: "hsl(220 80% 45%)",
+    accent: "#FFB600",
+  },
+  {
+    icon: RadioTower,
+    label: "Telecom Battery",
+    desc: "Telecommunication backup",
+    href: "/products/telecom-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: Heart,
+    label: "Medical Battery",
+    desc: "Healthcare power solutions",
+    href: "/products/medical-battery",
+    accent: "#FFB600",
+  },
+  {
+    icon: Factory,
+    label: "Inverter Battery",
+    desc: "Residential & commercial backup",
+    href: "/products/inverter-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: Tractor,
+    label: "Agricultural Battery",
+    desc: "Farming & irrigation solutions",
+    href: "/products/agricultural-battery",
+    accent: "#FFB600",
+  },
+  {
+    icon: Leaf,
+    label: "Solar Street Light Battery",
+    desc: "Solar lighting storage",
+    href: "/products/solar-street-light-battery",
+    accent: "#0A528F",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Lead Acid vs Lithium",
+    desc: "Technology comparison",
+    href: "/products/lead-acid-vs-lithium-battery",
+    accent: "#FFB600",
+  },
+  {
+    icon: Factory,
+    label: "Manufacturing Setup & Capacity",
+    desc: "Production facilities",
+    href: "/manufacturing-setup-capacity",
+    accent: "#0A528F",
   },
 ];
 
@@ -157,51 +204,40 @@ export default function Header() {
   const { data: session } = useSession();
 
   const [showLogin, setShowLogin] = useState(false);
+  const pathname = usePathname();
 
-  const [searchText, setSearchText] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [b2bOpen, setB2bOpen] = useState(false);
-  const b2bRef = useRef(null);
+  const headerRef = useRef(null);
   const router = useRouter();
-  const { cartItems = [] } = useSelector((state) => state.cart || {});
-  const { wishlistItems = [] } = useSelector((state) => state.wishlist || {});
-  const [searchHistory, setSearchHistory] = useState([]);
+
   const dispatch = useDispatch();
   const [aboutOpen, setAboutOpen] = useState(false);
   const aboutRef = useRef(null);
   const [himalayanOpen, setHimalayanOpen] = useState(false);
   const himalayanRef = useRef(null);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
 
-  const [homeDecorOpen, setHomeDecorOpen] = useState(false);
-  const homeDecorRef = useRef(null);
 
-  useEffect(() => {
-    const history = JSON.parse(
-      localStorage.getItem("searchHistory") || "[]"
-    );
-
-    setSearchHistory(history);
-  }, []);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handler);
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
+    const threshold = pathname === "/" ? 900 : 30;
 
-  // Close B2B dropdown on outside click
-  useEffect(() => {
-    function handleClick(e) {
-      if (b2bRef.current && !b2bRef.current.contains(e.target)) {
-        setB2bOpen(false);
-      }
-    }
-    if (b2bOpen) document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [b2bOpen]);
+    const handler = () => {
+      setScrolled(window.scrollY > threshold);
+    };
+
+    window.addEventListener("scroll", handler);
+
+    // Page load झाल्यावर current scroll position check करा
+    handler();
+
+    return () => {
+      window.removeEventListener("scroll", handler);
+    };
+  }, [pathname]);
+
+
 
   useEffect(() => {
     function handleClick(e) {
@@ -219,87 +255,36 @@ export default function Header() {
     };
   }, [aboutOpen]);
 
-
-  useEffect(() => {
-    function handleClick(e) {
-
-      if (
-        himalayanRef.current &&
-        !himalayanRef.current.contains(e.target)
-      ) {
-        setHimalayanOpen(false);
-      }
-
-      if (
-        homeDecorRef.current &&
-        !homeDecorRef.current.contains(e.target)
-      ) {
-        setHomeDecorOpen(false);
-      }
-
-    }
-
-    document.addEventListener(
-      "mousedown",
-      handleClick
-    );
-
-    return () =>
-      document.removeEventListener(
-        "mousedown",
-        handleClick
-      );
-
-  }, []);
-
-
   const navLinks = [
     {
       label: "Home",
       href: "/"
     },
-    {
-      label: "Shop",
-      href: "/shop"
-    },
+
 
   ];
 
-  const runSearch = useRef(
-    debounce(async (value) => {
-      if (!value?.trim()) {
-        setSearchResults([]);
-        return;
-      }
-
-      try {
-        const res = await axios.get(
-          "/api/products/searchbyname",
-          {
-            params: {
-              product_name: value,
-            },
-          }
-        );
-
-        setSearchResults(res.data || []);
-      } catch (err) {
-        console.log(err);
-        setSearchResults([]);
-      }
-
-      setSearchLoading(false);
-    }, 500)
-  ).current;
-
   useEffect(() => {
-    if (searchText?.trim()) {
-      setSearchLoading(true);
-      runSearch(searchText);
-    } else {
-      setSearchResults([]);
-    }
-  }, [searchText]);
+    const handleClickOutside = (event) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target)
+      ) {
+        setAboutOpen(false);
+        setHimalayanOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
+
+
 
 
 
@@ -307,35 +292,30 @@ export default function Header() {
 
   return (
     <>
-      
+
       {/* Main Header */}
       <header
-        className="sticky top-0 z-40 transition-all duration-300"
+        className={`${pathname === "/" ? "absolute top-0 left-0 w-full" : "sticky top-0"
+          } z-40 transition-all duration-300`}
+        ref={headerRef}
         style={{
           background: scrolled
-            ? "hsl(210 30% 98% / .95)"
-            : "white",
-
+            ? "white"
+            : "transparent",
+          // background: "transparent",
           borderBottom: scrolled
             ? "1px solid hsl(210 20% 86%)"
             : "1px solid transparent",
-
           boxShadow: scrolled
             ? "0 10px 30px rgb(10 82 143 / 12%)"
-            : "none"
+            : "none",
         }}
       >
-        <div className="relative mx-auto w-[100%] lg:w-[95%] max-w-[1400px] px-4 sm:px-6 py-2">
+        <div className="relative mx-auto w-[100%] lg:w-[90%] max-w-[1400px] px-4 sm:px-6 py-2">
+
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Hamburger (mobile) */}
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="md:hidden p-2 rounded-lg transition-colors hover:bg-black/5"
-              data-testid="button-hamburger"
-              aria-label="Open menu"
-            >
-              <Menu size={20} />
-            </button>
+
 
             {/* Logo */}
             <button
@@ -355,567 +335,294 @@ export default function Header() {
 
             </button>
 
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="md:hidden p-2 rounded-lg transition-colors hover:bg-white"
+              data-testid="button-hamburger"
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+            </button>
+
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-1">
 
 
 
-              {navLinks.map(link => (
+              <nav className="hidden md:flex items-center gap-1">
+
+                {/* Home */}
                 <button
-                  key={link.href}
-                  onClick={() => router.push(link.href)}
-                  className="px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-black/5"
-                  style={{ color: 'hsl(218 55% 12%)', fontFamily: 'var(--font-body)' }}
+                  onClick={() => router.push("/")}
+                  className="px-3 py-2 rounded-lg text-sm transition-colors hover:bg-white  font-bold"
+
                 >
-                  {link.label}
+                  Home
                 </button>
-              ))}
 
-
-
-
-
-              {/* arenq Dropdown */}
-
-              <div ref={himalayanRef} className="relative">
-
-                <button
-                  onClick={() => setHimalayanOpen(!himalayanOpen)}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium hover:bg-black/5"
-                >
-                  Products
-
-                  <ChevronDown
-                    size={12}
-                    style={{
-                      transform: himalayanOpen ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "0.2s"
+                {/* About Dropdown */}
+                <div ref={aboutRef} className="relative">
+                  <button
+                    onClick={() => {
+                      setHimalayanOpen(false);
+                      setAboutOpen((prev) => !prev);
                     }}
-                  />
-
-                </button>
-
-
-                {himalayanOpen && (
-
-                  <div
-                    className="absolute top-full left-0 mt-2 rounded-2xl shadow-2xl overflow-hidden bg-white"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-all hover:bg-white"
                     style={{
-                      width: "340px",
-                      border: "1px solid hsl(35 15% 85%)",
-                      zIndex: 100
+                      color: aboutOpen ? "#0A528F" : "hsl(218 55% 12%)",
+                      fontFamily: "var(--font-body)",
                     }}
                   >
-
-                    <div
-                      className="p-3 border-b"
+                    About
+                    <ChevronDown
+                      size={12}
                       style={{
-                        background: "#0A528F"
+                        transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "transform .2s",
+                      }}
+                    />
+                  </button>
+
+                  {aboutOpen && (
+                    <div
+                      className="absolute top-full right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden"
+                      style={{
+                        width: "340px",
+                        background: "white",
+                        border: "1px solid hsl(35 15% 85%)",
+                        zIndex: 100,
                       }}
                     >
-
-                      <p className="text-xs font-bold uppercase tracking-widest text-white">
-                        ARENQ Solutions
-
-                      </p>
-
-                      <p
-                        className="text-xs mt-0.5"
+                      <div
+                        className="p-3 border-b"
                         style={{
-                          color: "rgba(255,255,255,.7)"
+                          borderColor: "hsl(35 15% 90%)",
+                          background: "#0A528F",
                         }}
                       >
-                        Our Best Products
-                      </p>
-
-                    </div>
-
-
-                    {productLinks.map(item => {
-
-                      const Icon = item.icon;
-
-                      return (
-
-                        <button
-
-                          key={item.label}
-
-                          onClick={() => {
-                            router.push(item.href);
-                            setHimalayanOpen(false);
-                          }}
-
-                          className="w-full flex items-start gap-3 px-4 py-3 hover:bg-black/5 text-left"
-
-                          style={{
-                            borderBottom: "1px solid hsl(35 15% 93%)"
-                          }}
-
+                        <p
+                          className="text-xs font-bold uppercase tracking-widest"
+                          style={{ color: "#fff" }}
                         >
-
-
-                          <div
-                            className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                            style={{
-                              background: `${item.accent}15`,
-                              color: item.accent
-                            }}
-                          >
-
-                            <Icon size={15} />
-
-                          </div>
-
-
-                          <div>
-
-                            <div
-                              className="text-xs font-semibold"
-                              style={{
-                                color: "hsl(218 55% 12%)"
-                              }}
-                            >
-                              {item.label}
-                            </div>
-
-                            <div
-                              className="text-xs"
-                              style={{
-                                color: "hsl(30 12% 55%)"
-                              }}
-                            >
-                              {item.desc}
-                            </div>
-
-                          </div>
-
-
-                        </button>
-
-                      )
-
-                    })}
-
-
-                  </div>
-
-                )}
-
-              </div>
-
-
-
-
-              {/* About Dropdown */}
-              <div ref={aboutRef} className="relative">
-                <button
-                  onClick={() => setAboutOpen(v => !v)}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-black/5"
-                  style={{
-                    color: aboutOpen ? "#0A528F" : "hsl(218 55% 12%)",
-                    fontFamily: "var(--font-body)",
-                  }}
-                >
-                  About
-                  <ChevronDown
-                    size={12}
-                    style={{
-                      transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "transform .2s",
-                    }}
-                  />
-                </button>
-
-                {aboutOpen && (
-                  <div
-                    className="absolute top-full right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden"
-                    style={{
-                      width: "340px",
-                      background: "white",
-                      border: "1px solid hsl(35 15% 85%)",
-                      zIndex: 100,
-                    }}
-                  >
-                    <div
-                      className="p-3 border-b"
-                      style={{
-                        borderColor: "hsl(35 15% 90%)",
-                        background: "#0A528F",
-                      }}
-                    >
-                      <p
-                        className="text-xs font-bold uppercase tracking-widest"
-                        style={{ color: "#fff" }}
-                      >
-                        About Arenq
-                      </p>
-                      <p
-                        className="text-xs mt-0.5"
-                        style={{ color: "rgba(255,255,255,.75)" }}
-                      >
-                        Innovating Energy Storage Solutions
-                      </p>
-                    </div>
-
-                    {aboutLinks.map(item => {
-                      const Icon = item.icon;
-
-                      return (
-                        <button
-                          key={item.label}
-                          onClick={() => {
-                            router.push(item.href);
-                            setAboutOpen(false);
-                          }}
-                          className="w-full flex items-start gap-3 px-4 py-3 hover:bg-black/5 text-left"
-                          style={{
-                            borderBottom: "1px solid hsl(35 15% 93%)",
-                          }}
+                          About Arenq
+                        </p>
+                        <p
+                          className="text-xs mt-0.5"
+                          style={{ color: "rgba(255,255,255,.75)" }}
                         >
-                          <div
-                            className="w-8 h-8 rounded-lg flex items-center justify-center"
-                            style={{
-                              background: `${item.accent}15`,
-                              color: item.accent,
-                            }}
-                          >
-                            <Icon size={15} />
-                          </div>
-
-                          <div>
-                            <div
-                              className="text-xs font-semibold"
-                              style={{ color: "hsl(218 55% 12%)" }}
-                            >
-                              {item.label}
-                            </div>
-
-                            <div
-                              className="text-xs"
-                              style={{ color: "hsl(30 12% 55%)" }}
-                            >
-                              {item.desc}
-                            </div>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-
-
-
-              {/* B2B Dropdown */}
-              <div ref={b2bRef} className="relative">
-                <button
-                  onClick={() => setB2bOpen(v => !v)}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-black/5"
-                  style={{ color: b2bOpen ? '#0A528F' : 'hsl(218 55% 12%)', fontFamily: 'var(--font-body)' }}
-                  aria-label="B2B & Wholesale"
-                  aria-expanded={b2bOpen}
-                >
-                  <Building2 size={15} />
-                  B2B
-                  <ChevronDown size={12} style={{ transform: b2bOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
-                </button>
-
-                {b2bOpen && (
-                  <div
-                    className="absolute top-full right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden"
-                    style={{
-                      width: '340px',
-                      background: 'white',
-                      border: '1px solid hsl(35 15% 85%)',
-                      zIndex: 100,
-                    }}
-                  >
-                    <div className="p-3 border-b" style={{ borderColor: 'hsl(35 15% 90%)', background: '#0A528F' }}>
-                      <p className="text-xs font-bold uppercase tracking-widest" style={{ color: 'hsl(145 20% 72%)' }}>Business Partnerships</p>
-                      <p className="text-xs mt-0.5" style={{ color: 'hsl(145 20% 60%)' }}>Wholesale, distribution & hospitality</p>
-                    </div>
-                    {b2bLinks.map(item => {
-                      const Icon = item.icon;
-                      return (
-                        <button
-                          key={item.label}
-                          onClick={() => { router.push(item.href); setB2bOpen(false); }}
-                          className="w-full flex items-start gap-3 px-4 py-3 transition-colors hover:bg-black/4 text-left"
-                          style={{ borderBottom: '1px solid hsl(35 15% 93%)' }}
-                        >
-                          <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: `${item.accent}15`, color: item.accent }}>
-                            <Icon size={15} />
-                          </div>
-                          <div>
-                            <div className="text-xs font-semibold" style={{ color: 'hsl(218 55% 12%)' }}>{item.label}</div>
-                            <div className="text-xs" style={{ color: 'hsl(30 12% 55%)' }}>{item.desc}</div>
-                          </div>
-                        </button>
-                      );
-                    })}
-                    <div className="p-3" style={{ background: 'hsl(38 25% 95%)' }}>
-                      <button
-                        onClick={() => { router.push('/wholesale'); setB2bOpen(false); }}
-                        className="w-full py-2 rounded-xl text-xs font-semibold transition-all"
-                        style={{ background: '#0A528F', color: 'white' }}
-                      >
-                        View All B2B Programs →
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </nav>
-
-            {/* Right icons */}
-            <div className="flex items-center gap-1">
-              {/* Reward points badge */}
-              {/* <button
-                onClick={() => router.push('/loyalty')}
-                className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:bg-black/5"
-                style={{ color: 'hsl(28 65% 44%)' }}
-                title="Loyalty & Rewards"
-              >
-                <Star size={14} fill="hsl(28 65% 52%)" stroke="hsl(28 65% 52%)" />
-                <span className="hidden lg:inline">Rewards</span>
-              </button> */}
-              <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2 rounded-lg transition-colors hover:bg-black/5"
-                data-testid="button-search"
-                aria-label="Search"
-              >
-                <Search size={18} />
-              </button>
-              <button
-                onClick={() => {
-                  if (session) {
-                    router.push("/myprofile");
-                  } else {
-                    setShowLogin(true);
-                  }
-                }}
-                className="p-2 rounded-lg transition-colors hover:bg-black/5 hidden sm:flex"
-              >
-                <User size={18} />
-              </button>
-              <button
-                onClick={() => router.push('/cart')}
-                className="relative p-2 rounded-lg transition-colors hover:bg-black/5"
-                data-testid="button-cart"
-                aria-label="Cart"
-              >
-                <ShoppingCart size={18} />
-                {cartItems.length > 0 && (
-                  <span
-                    className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center"
-                    style={{
-                      background: "#0A528F",
-                      color: "white",
-                    }}
-                  >
-                    {cartItems.length}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Search bar */}
-          {searchOpen && (
-            <div className="pb-3 px-1">
-              <div className="relative">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'hsl(215 15% 45%)' }} />
-                <input
-                  type="search"
-                  value={searchText}
-                  onChange={(e) =>
-                    setSearchText(e.target.value)
-                  }
-                  placeholder="Search products..."
-                  autoFocus
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm outline-none border transition-colors"
-                  style={{ background: 'hsl(36 28% 96%)', border: '1.5px solid hsl(210 20% 86%)', fontFamily: 'var(--font-body)' }}
-                  onFocus={e => (e.target.style.borderColor = '#0A528F')}
-                  onBlur={e => (e.target.style.borderColor = 'hsl(210 20% 86%)')}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-
-                      const value = searchText.trim();
-
-                      if (!value) return;
-
-                      const history = JSON.parse(
-                        localStorage.getItem("searchHistory") || "[]"
-                      );
-
-                      const updatedHistory = [
-                        value,
-                        ...history.filter(
-                          (item) =>
-                            item.toLowerCase() !== value.toLowerCase()
-                        ),
-                      ].slice(0, 10);
-
-                      localStorage.setItem(
-                        "searchHistory",
-                        JSON.stringify(updatedHistory)
-                      );
-
-                      setSearchHistory(updatedHistory);
-
-                      router.push(
-                        `/search?q=${encodeURIComponent(value)}`
-                      );
-
-                      setSearchOpen(false);
-                      setSearchText("");
-                    }
-
-                    if (e.key === "Escape") {
-                      setSearchOpen(false);
-                    }
-                  }}
-                />
-                {searchText && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 max-h-[500px] overflow-y-auto z-50">
-
-                    {searchLoading ? (
-                      <div className="p-6 text-center text-gray-500">
-                        Searching Products...
+                          Innovating Energy Storage Solutions
+                        </p>
                       </div>
-                    ) : searchResults.length > 0 ? (
 
-                      searchResults.map((item) => {
-
-                        const price = Number(item.price || 0);
-                        const mrp = Number(item.MRP || item.mrp || price);
-
-                        const discount =
-                          mrp > price
-                            ? Math.round(
-                              ((mrp - price) / mrp) * 100
-                            )
-                            : 0;
+                      {aboutLinks.map(item => {
+                        const Icon = item.icon;
 
                         return (
                           <button
-                            key={item._id}
+                            key={item.label}
                             onClick={() => {
-                              router.push(
-                                `/products/${item.slug}`
-                              );
-
-                              setSearchText("");
-                              setSearchOpen(false);
+                              router.push(item.href);
+                              setAboutOpen(false);
                             }}
-                            className="w-full p-4 flex gap-4 text-left hover:bg-gray-50 border-b border-gray-100 transition"
+                            className="w-full flex items-start gap-3 px-4 py-3 hover:bg-white text-left"
+                            style={{
+                              borderBottom: "1px solid hsl(35 15% 93%)",
+                            }}
                           >
-
-                            {/* Product Image */}
-                            <div className="w-20 h-20 rounded-xl overflow-hidden border flex-shrink-0 bg-white">
-                              <img
-                                src={
-                                  item.main_image ||
-                                  item.images?.[0] ||
-                                  "/placeholder.png"
-                                }
-                                alt={item.name}
-                                className="w-full h-full object-cover"
-                              />
+                            <div
+                              className="w-8 h-8 rounded-lg flex items-center justify-center"
+                              style={{
+                                background: `${item.accent}15`,
+                                color: item.accent,
+                              }}
+                            >
+                              <Icon size={15} />
                             </div>
 
-                            {/* Product Details */}
-                            <div className="flex-1 min-w-0">
-
-                              <h4 className="font-semibold text-gray-800 line-clamp-2">
-                                {item.name}
-                              </h4>
-
-                              <div className="flex items-center gap-2 mt-2">
-
-                                <span className="text-lg font-bold text-green-600">
-                                  ₹{price}
-                                </span>
-
-                                {mrp > price && (
-                                  <span className="text-sm text-gray-400 line-through">
-                                    ₹{mrp}
-                                  </span>
-                                )}
-
-                                {discount >= 1 && (
-                                  <span className="bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded-full">
-                                    {discount}% OFF
-                                  </span>
-                                )}
-
+                            <div>
+                              <div
+                                className="text-xs font-semibold"
+                                style={{ color: "hsl(218 55% 12%)" }}
+                              >
+                                {item.label}
                               </div>
 
-                              <div className="mt-1 text-xs text-gray-500">
-                                Click to view product
+                              <div
+                                className="text-xs"
+                                style={{ color: "hsl(30 12% 55%)" }}
+                              >
+                                {item.desc}
                               </div>
-
                             </div>
                           </button>
                         );
-                      })
+                      })}
+                    </div>
+                  )}
+                </div>
 
-                    ) : (
-                      <div className="p-6 text-center text-gray-500">
-                        No products found
-                      </div>
-                    )}
-                  </div>
-                )}
-                {!searchText && searchHistory.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border z-50">
+                <div ref={himalayanRef} className="relative">
 
-                    <div className='flex justify-between'>
+                  <button
+                    onClick={() => {
+                      setAboutOpen(false);
+                      setHimalayanOpen((prev) => !prev);
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold hover:bg-white"
+                  >
+                    Products
 
-                      <div className="p-3 border-b font-semibold">
-                        Recent Searches
-                      </div>
+                    <ChevronDown
+                      size={12}
+                      style={{
+                        transform: himalayanOpen ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "0.2s"
+                      }}
+                    />
 
-                      <button
-                        onClick={() => {
-                          localStorage.removeItem(
-                            "searchHistory"
-                          );
+                  </button>
 
-                          setSearchHistory([]);
+
+                  {himalayanOpen && (
+
+                    <div
+                      className="fixed top-[80px] left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
+                      style={{
+                        width: "min(1400px, calc(100vw - 40px))",
+                        zIndex: 9999,
+                      }}
+                    >
+
+                      <div
+                        className="p-3 border-b"
+                        style={{
+                          background: "#0A528F"
                         }}
-                        className="text-red-500 text-xs pr-4"
                       >
-                        Clear History
-                      </button>
+
+                        <p className="text-xs font-bold uppercase tracking-widest text-white">
+                          ARENQ Solutions
+
+                        </p>
+
+                        <p
+                          className="text-xs mt-0.5"
+                          style={{
+                            color: "rgba(255,255,255,.7)"
+                          }}
+                        >
+                          Our Best Products
+                        </p>
+
+                      </div>
+
+
+                      <div className="grid grid-cols-4 gap-2 p-3">
+                        {productLinks.map((item) => {
+                          const Icon = item.icon;
+
+                          return (
+                            <button
+                              key={item.label}
+                              onClick={() => {
+                                router.push(item.href);
+                                setHimalayanOpen(false);
+                              }}
+                              className="group flex items-start gap-3 rounded-xl p-4 text-left
+             transition-all duration-300 ease-out
+             hover:-translate-y-2
+             hover:bg-gradient-to-br hover:from-white hover:to-[#F8FAFC]
+             hover:shadow-xl"
+                            >
+                              {/* Icon */}
+                              <div
+                                className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0
+               transition-all duration-300
+               group-hover:scale-110
+               group-hover:rotate-6"
+                                style={{
+                                  background: `${item.accent}15`,
+                                  color: item.accent,
+                                }}
+                              >
+                                <Icon size={20} />
+                              </div>
+
+                              {/* Content */}
+                              <div>
+                                <h4
+                                  className="text-sm font-semibold text-[#0A528F]
+                 transition-colors duration-300
+                 group-hover:text-[#FFB600]"
+                                >
+                                  {item.label}
+                                </h4>
+
+                                <p
+                                  className="text-xs text-gray-500 mt-1 leading-5
+                 transition-colors duration-300
+                 group-hover:text-gray-700"
+                                >
+                                  {item.desc}
+                                </p>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+
                     </div>
 
-                    {searchHistory.map((item, index) => (
-                      <button
-                        key={index}
-                        onClick={() => {
-                          setSearchText(item);
+                  )}
 
-                          router.push(
-                            `/search?q=${encodeURIComponent(item)}`
-                          );
-                        }}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-50"
-                      >
-                        🔍 {item}
-                      </button>
-                    ))}
+                </div>
 
 
-                  </div>
-                )}
-              </div>
 
-            </div>
-          )}
+                {/* Gallery */}
+                <button
+                  onClick={() => router.push("/gallery")}
+                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
+                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                >
+                  Gallery
+                </button>
+
+                {/* Blogs */}
+                <button
+                  onClick={() => router.push("/blogs")}
+                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
+                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                >
+                  Blogs
+                </button>
+
+                {/* Contact Us */}
+                <button
+                  onClick={() => router.push("/contact-us")}
+                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
+                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                >
+                  Contact Us
+                </button>
+
+                {/* FAQs */}
+                <button
+                  onClick={() => router.push("/faqs")}
+                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
+                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                >
+                  FAQs
+                </button>
+
+              </nav>
+
+
+            </nav>
+
+
+          </div>
         </div>
       </header>
 
@@ -941,50 +648,93 @@ export default function Header() {
 
 
               </button>
-              <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg hover:bg-black/5" aria-label="Close menu"><X size={20} /></button>
+              <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg hover:bg-white" aria-label="Close menu"><X size={20} /></button>
             </div>
             <nav className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
               {navLinks.map(link => (
                 <button
                   key={link.href}
                   onClick={() => { router.push(link.href); setMobileOpen(false); }}
-                  className="text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors hover:bg-black/5"
+                  className="text-left px-4 py-3 rounded-xl text-sm font-bold transition-colors hover:bg-white"
                   style={{ fontFamily: 'var(--font-body)', color: 'hsl(218 55% 12%)' }}
                 >
                   {link.label}
                 </button>
               ))}
 
-              {/* B2B section in mobile */}
-              <div className="mt-2 pt-2 border-t" style={{ borderColor: 'hsl(210 20% 86%)' }}>
-                <p className="text-xs font-bold uppercase tracking-widest px-4 py-2" style={{ color: 'hsl(145 35% 30%)' }}>Business</p>
-                {b2bLinks.map(item => {
-                  const Icon = item.icon;
-                  return (
-                    <button
-                      key={item.label}
-                      onClick={() => { router.push(item.href); setMobileOpen(false); }}
-                      className="text-left w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-colors hover:bg-black/5"
-                    >
-                      <Icon size={14} style={{ color: item.accent }} />
-                      <div>
-                        <div className="text-xs font-medium" style={{ color: 'hsl(218 55% 12%)' }}>{item.label}</div>
-                        <div className="text-xs" style={{ color: 'hsl(30 12% 55%)' }}>{item.desc}</div>
-                      </div>
-                    </button>
-                  );
-                })}
+              {/* About */}
+              <div>
+                <button
+                  onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold hover:bg-white"
+                >
+                  <span>About</span>
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform ${mobileAboutOpen ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+
+                {mobileAboutOpen && (
+                  <div className="ml-4 mt-1 flex flex-col">
+                    {aboutLinks.map((item) => (
+                      <button
+                        key={item.label}
+                        onClick={() => {
+                          router.push(item.href);
+                          setMobileOpen(false);
+                        }}
+                        className="text-left px-4 py-2 text-sm hover:bg-white rounded-lg"
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Products */}
+              <div>
+                <button
+                  onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold hover:bg-white"
+                >
+                  <span>Products</span>
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform ${mobileProductsOpen ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+
+                {mobileProductsOpen && (
+                  <div className="ml-4 mt-1 flex flex-col">
+                    {productLinks.map((item) => (
+                      <button
+                        key={item.label}
+                        onClick={() => {
+                          router.push(item.href);
+                          setMobileOpen(false);
+                        }}
+                        className="text-left px-4 py-2 text-sm hover:bg-white rounded-lg"
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="mt-2 pt-2 border-t" style={{ borderColor: 'hsl(210 20% 86%)' }}>
                 {[
-                  { label: 'About Us', href: '/about-us' },
-                  { label: 'Our Story', href: '/our-story' },
+
+
                   { label: 'Blog', href: '/blog' },
-                  { label: 'Media & Press', href: '/media-press' },
+
                   { label: 'Contact Us', href: '/contact-us' },
                 ].map(({ label, href }) => (
-                  <button key={label} onClick={() => { router.push(href); setMobileOpen(false); }} className="text-left w-full px-4 py-2.5 rounded-xl text-sm transition-colors hover:bg-black/5" style={{ fontFamily: 'var(--font-body)' }}>{label}</button>
+                  <button key={label} onClick={() => { router.push(href); setMobileOpen(false); }} className="text-left w-full px-4 py-2.5 rounded-xl text-sm transition-colors hover:bg-white" style={{ fontFamily: 'var(--font-body)' }}>{label}</button>
                 ))}
               </div>
             </nav>

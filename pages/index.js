@@ -166,11 +166,10 @@ export default function Home() {
           "linear-gradient(180deg,#f8fbff,#eef5f8)"
       }} className="">
         <HomePage />
-        {/* <Slider /> */}
-        {/* <Heading /> */}
+      
         <CategorySlider />
-        <FreshStock />
         <About />
+        <FreshStock />
         <HeroPowerAnimation />
         <Sourcing />
         <WhyChooseUs />

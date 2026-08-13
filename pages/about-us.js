@@ -1,736 +1,489 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+    Home,
+    ChevronRight,
+    Lightbulb,
+    Target,
+    Heart,
+    Zap,
+    ShieldCheck,
+    Users,
+    Handshake,
+    Sparkles,
+} from "lucide-react";
 
-const timeline = [
-  {
-    year: "2021",
-    event: "Company Established",
-    desc:
-      "SUNLIT Power Pvt Ltd established ARENQ with a vision to deliver advanced energy storage and lithium battery solutions."
-  },
-  {
-    year: "2022",
-    event: "EV Innovation",
-    desc:
-      "Developed advanced powertrain solutions for electric vehicles and expanded EV battery technology."
-  },
-  {
-    year: "2023",
-    event: "Manufacturing Expansion",
-    desc:
-      "Started expansion towards advanced lithium battery manufacturing and industrial solutions."
-  },
-  {
-    year: "2024",
-    event: "OEM Partnerships",
-    desc:
-      "Partnered with leading companies for battery solutions and energy storage applications."
-  },
-  {
-    year: "2025",
-    event: "Future Growth",
-    desc:
-      "Expanding clean energy solutions with advanced battery technologies across industries."
-  },
+const journey = [
+    {
+        year: "2021",
+        title: "SUNLIT Established at Shahada (Nandurbar)",
+        image: "/images/about/factory.webp",
+    },
+    {
+        year: "2022",
+        title: "Started Our Corporate Office In Pune",
+        image: "/images/about/Old-pune-office.webp",
+    },
+    {
+        year: "2022",
+        title: "Tie up with LUCAS TVS & Developed Power Train For EV",
+        image: "/images/about/Lucas-tvs-03.webp",
+    },
+    {
+        year: "2022",
+        title: "Association with KAL for Batteries and Vehicle",
+        image: "/images/about/Kal-04.webp",
+    },
+    {
+        year: "2023",
+        title: "Joined Indigo for Batteries and Developed IOT",
+        image: "/images/about/indigo-02.webp",
+    },
+    {
+        year: "2023",
+        title: "New Plant in Khed City Pune",
+        image: "/images/about/2023-khed-plant.gif",
+    },
+    {
+        year: "2024",
+        title: "Expansion Arenq Head Office in Pune",
+        image: "/images/about/2024-head-office.webp",
+    },
+    {
+        year: "2024",
+        title: "Cummins become a Marketing Partner",
+        image: "/images/about/cummins-06-1.webp",
+    },
+    {
+        year: "2024",
+        title: "Started OEM Business with UNIK",
+        image: "/images/about/unik-07.webp",
+    },
+    {
+        year: "2025",
+        title: "Signed Agreement with Hyasa E mobility for making of 70L vehicles",
+        image: "/images/about/2025-Hayasa.webp",
+    },
+    {
+        year: "2025",
+        title: "Distribution network started with NNP Power India LLP",
+        image: "/images/about/NNP.webp",
+    },
+    {
+        year: "2025",
+        title: "Second Plant Construction Started",
+        image: "/images/about/165.webp",
+    },
 ];
 
-const impactStats = [
-  {
-    value: "150+",
-    label: "Domestic Clients",
-    desc: "Trusted partners"
-  },
-  {
-    value: "125+",
-    label: "Happy Customers",
-    desc: "Energy solutions delivered"
-  },
-  {
-    value: "150+",
-    label: "Projects Completed",
-    desc: "Across industries"
-  },
-  {
-    value: "35000+",
-    label: "Products Delivered",
-    desc: "Reliable batteries supplied"
-  },
+const achievements2024 = [
+    "Partnering with MARU for Hybrid System",
+    "Start supplying to MPEB",
+    "OEM business started with AVIO",
+    "Started sales of E cart in Kerala",
+    "State approvals — Rajasthan, MH, MP, Chhattisgarh, Haryana — taken for KAL E-vehicles",
+    "New distributor appointed in Churu, Rajasthan for E-rickshaw business",
 ];
 
-const partners = [
-  "EV Industry",
-  "Solar Energy",
-  "Industrial Sector",
-  "Telecom Sector",
-  "OEM Partners",
+const achievements2025 = [
+    "Achievement of cracking Tata Power",
+    "Signed Agreement with UDAN BMS Manufacturer for High-voltage systems",
 ];
 
-const certifications = [
-  {
-    icon: "🔋",
-    name: "Advanced Lithium Technology",
-    desc: "High performance LiFePO4 battery solutions."
-  },
-
-  {
-    icon: "⚡",
-    name: "Energy Innovation",
-    desc: "Smart power solutions for EV and industries."
-  },
-
-  {
-    icon: "🌱",
-    name: "Clean Energy Future",
-    desc: "Supporting renewable and sustainable energy."
-  },
-
-  {
-    icon: "🏭",
-    name: "Manufacturing Excellence",
-    desc: "Reliable battery manufacturing standards."
-  },
-
-  {
-    icon: "🛡️",
-    name: "Quality & Safety",
-    desc: "Safe and efficient battery systems."
-  },
-
-  {
-    icon: "🌍",
-    name: "Forward To Future",
-    desc: "Building tomorrow's energy ecosystem."
-  },
+const pillars = [
+    {
+        icon: Lightbulb,
+        title: "Vision",
+        text: "With the most advanced R&D facility, we look forward to coming up with innovative solutions to serve the world. Our young, passionate product development team — qualified from India's leading institutes — helps us deliver high-quality products for the global market, while our marketing team takes ARENQ to customers across the globe.",
+    },
+    {
+        icon: Target,
+        title: "Mission",
+        text: "To become India's No.1 battery manufacturer and the most trusted exporter of energy storage solutions across the globe. Through continuous innovation, a skilled team, and a strong commitment to quality, we aim to power every industry — from mobility and infrastructure to homes and businesses.",
+    },
+    {
+        icon: Heart,
+        title: "Values",
+        text: "Our values define who we are and guide everything we do — from product innovation to customer service. Every team member upholds the trust our clients place in us. We don't just create products — we build long-term partnerships based on reliability and shared progress.",
+    },
 ];
 
-export default function AboutUs() {
-  return (
-    <main>
-      {/* Page Hero */}
-      <section
-        style={{
-          background: 'linear-gradient(160deg, hsl(38 40% 95%) 0%, hsl(36 35% 92%) 50%, hsl(145 18% 91%) 100%)',
-          padding: '100px 24px 80px',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(122, 48, 32, 0.1)',
-              color: '#7A3020',
-              padding: '6px 14px',
-              borderRadius: '100px',
-              fontSize: '12px',
-              fontWeight: '600',
-              letterSpacing: '0.04em',
-              textTransform: 'uppercase',
-              marginBottom: '24px',
-            }}
-          >
-            ⚡ Advanced Energy Solutions • Forward To Future
-          </div>
-          <h1
-            style={{
-              fontSize: 'clamp(36px, 5vw, 60px)',
-              fontWeight: '800',
-              color: '#1A110A',
-              letterSpacing: '-0.02em',
-              lineHeight: '1.1',
-              marginBottom: '20px',
-            }}
-          >
-            About <span style={{ color: '#7A3020' }}>ARENQ</span>
-          </h1>
-          <p
-            style={{
-              fontSize: '18px',
-              color: '#4A3728',
-              lineHeight: '1.7',
-              maxWidth: '600px',
-              margin: '0 auto',
-            }}
-          >
-            ARENQ is a trusted energy storage brand delivering advanced lithium batteries,
-            EV battery solutions and sustainable power technologies for industries worldwide.
-          </p>
-        </div>
-      </section>
+const coreValues = [
+    {
+        num: "01",
+        icon: Zap,
+        title: "Innovation Driven",
+        text: "We lead with R&D and invest in technologies that shape the future of energy storage.",
+    },
+    {
+        num: "02",
+        icon: ShieldCheck,
+        title: "Quality First",
+        text: "Every battery is built to meet the highest standards of safety, durability, and performance.",
+    },
+    {
+        num: "03",
+        icon: Users,
+        title: "Customer-Centric Approach",
+        text: "We design flexible, reliable solutions that meet real-world needs and exceed expectations.",
+    },
+    {
+        num: "04",
+        icon: Handshake,
+        title: "Integrity & Trust",
+        text: "We build strong, transparent relationships with our clients, partners, and team.",
+    },
+    {
+        num: "05",
+        icon: Sparkles,
+        title: "Team Empowerment",
+        text: "We grow together by nurturing talent, encouraging ownership, and working with passion.",
+    },
+];
 
-      {/* Company Story */}
-      <section style={{ padding: '80px 24px', background: '#fff' }}>
-        <div
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '80px',
-            alignItems: 'center',
-          }}
-          className="story-grid"
-        >
-          <div>
-            <div
-              style={{
-                fontSize: '11px',
-                fontWeight: '700',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: '#7A3020',
-                marginBottom: '16px',
-              }}
-            >
-              OUR STORY
-            </div>
-            <h2
-              style={{
-                fontSize: 'clamp(28px, 3vw, 40px)',
-                fontWeight: '800',
-                color: '#1A110A',
-                letterSpacing: '-0.02em',
-                marginBottom: '24px',
-              }}
-            >
-              Powering The Future With Energy Innovation
-            </h2>
-            <div style={{ fontSize: '16px', color: '#4A3728', lineHeight: '1.8', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <p>
-                At ARENQ, we believe in transforming the future of energy storage.
-              </p>
+const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    show: (i = 0) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, delay: i * 0.08, ease: "easeOut" },
+    }),
+};
 
-              <p>
-                Our advanced lithium and EV battery solutions are designed to power everything
-                from electric vehicles and industrial systems to renewable energy applications.
-              </p>
+export default function About() {
+    return (
+        <main className="bg-white overflow-x-hidden">
+            {/* Hero + Breadcrumb */}
+            <section className="relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0A528F] via-[#0A528F] to-[#083f6e]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,175,0,0.25),transparent_50%)]" />
 
-              <p>
-                With innovation, quality and reliability at our core, ARENQ is creating cleaner
-                and smarter energy solutions for tomorrow.
-              </p>
-            </div>
-          </div>
-          <div style={{ position: 'relative' }}>
-            <div
-              style={{
-                borderRadius: '20px',
-                overflow: 'hidden',
-                boxShadow: '0 32px 80px rgba(122,48,32,0.18)',
-              }}
-            >
-              <img
-                src="/images/aboutus/person.webp"
-                alt="ARENQ lithium battery and energy solutions"
-                style={{ width: '100%', height: '420px', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '-20px',
-                left: '-20px',
-                background: '#7A3020',
-                color: '#fff',
-                padding: '20px 24px',
-                borderRadius: '12px',
-                boxShadow: '0 8px 32px rgba(122,48,32,0.3)',
-              }}
-            >
-              <div style={{ fontWeight: '800', fontSize: '28px' }}>
-                35000+
-              </div>
+                <motion.div
+                    className="absolute -top-32 -left-32 h-72 w-72 rounded-full bg-white/10 blur-3xl"
+                    animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                    className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#FFAF00]/20 blur-3xl"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
+                    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                />
 
-              <div style={{ fontSize: '13px', opacity: 0.85 }}>
-                Batteries Delivered
-              </div>
-            </div>
-          </div>
-        </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .story-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          }
-        `}</style>
-      </section>
-
-      {/* Vision & Mission */}
-      <section style={{ padding: '80px 24px', background: '#F5F0E8' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: '800', color: '#1A110A', letterSpacing: '-0.02em' }}>
-              Vision & Mission
-            </h2>
-          </div>
-          <div
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px' }}
-            className="vm-grid"
-          >
-            <div
-              style={{
-                background: '#7A3020',
-                color: '#fff',
-                padding: '40px',
-                borderRadius: '20px',
-              }}
-            >
-              <div style={{ fontSize: '32px', marginBottom: '16px' }}>🔭</div>
-              <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '16px' }}>Our Vision</h3>
-              <p style={{ fontSize: '16px', lineHeight: '1.7', opacity: 0.9 }}>
-                To become a global leader in advanced energy storage technology by delivering
-                safe, reliable and sustainable lithium battery solutions.
-              </p>
-            </div>
-            <div
-              style={{
-                background: '#1F4A2A',
-                color: '#fff',
-                padding: '40px',
-                borderRadius: '20px',
-              }}
-            >
-              <div style={{ fontSize: '32px', marginBottom: '16px' }}>🎯</div>
-              <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '16px' }}>Our Mission</h3>
-              <ul style={{ fontSize: '16px', lineHeight: '1.8', opacity: 0.9 }}>
-                <li>Develop advanced lithium battery technology.</li>
-                <li>Deliver EV and industrial energy solutions.</li>
-                <li>Support renewable energy transformation.</li>
-                <li>Create reliable and sustainable power systems.</li>
-                <li>Build a cleaner energy future.</li>
-              </ul>
-            </div>
-          </div>
-          <style>{`
-            @media (max-width: 600px) {
-              .vm-grid { grid-template-columns: 1fr !important; }
-            }
-          `}</style>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section style={{ padding: '80px 24px', background: '#fff' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div
-              style={{
-                fontSize: '11px', fontWeight: '700', letterSpacing: '0.12em',
-                textTransform: 'uppercase', color: '#7A3020', marginBottom: '12px',
-              }}
-            >
-              OUR JOURNEY
-            </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: '800', color: '#1A110A', letterSpacing: '-0.02em' }}>
-              How We Got Here
-            </h2>
-          </div>
-
-          <div style={{ position: 'relative' }}>
-            {/* Vertical line */}
-            <div
-              style={{
-                position: 'absolute',
-                left: '60px',
-                top: 0,
-                bottom: 0,
-                width: '2px',
-                background: 'rgba(122,48,32,0.15)',
-              }}
-            />
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-              {timeline.map((item, i) => (
-                <div key={item.year} style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      flexShrink: 0,
-                      width: '80px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '50%',
-                        background: '#7A3020',
-                        color: '#fff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontWeight: '700',
-                        fontSize: '11px',
-                        zIndex: 1,
-                        flexShrink: 0,
-                      }}
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+                    <motion.div
+                        initial="hidden"
+                        animate="show"
+                        variants={fadeUp}
+                        className="flex items-center gap-2 text-white/80 text-sm"
                     >
-                      {item.year.slice(2)}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '18px',
-                        fontWeight: '800',
-                        color: '#7A3020',
-                        marginTop: '4px',
-                      }}
+                        <Home size={16} />
+                        <span>Home</span>
+                        <ChevronRight size={16} />
+                        <span className="text-[#FFAF00] font-semibold">About Us</span>
+                    </motion.div>
+
+                    <motion.h1
+                        initial="hidden"
+                        animate="show"
+                        custom={1}
+                        variants={fadeUp}
+                        className="mt-6 max-w-3xl text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight"
                     >
-                      {item.year}
+                        We Are The Future Of{" "}
+                        <span className="text-[#FFAF00]">
+                            Electricity Storage Solutions
+                        </span>
+                    </motion.h1>
+                </div>
+            </section>
+
+            {/* Who We Are */}
+            <section className="py-16 sm:py-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        className="relative aspect-[3/2] rounded-3xl overflow-hidden shadow-2xl"
+                    >
+                        <img
+                            src="\images\about\person-using-ar-technology-perform-their-occupation-scaled.webp"
+                            alt="Who we are at ARENQ"
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover"
+                        />
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                    >
+                        <span className="text-[#FFAF00] font-semibold uppercase tracking-[3px]">
+                            Our Story
+                        </span>
+                        <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#0A528F]">
+                            Who We Are
+                        </h2>
+                        <p className="mt-5 text-gray-600 leading-8">
+                            ARENQ is a trusted brand for all your energy storage
+                            requirements. We bring 20 years of industry experience and
+                            innovative technology to the table. ARENQ is your go-to
+                            partner for all energy backup solutions, catering to
+                            multiple industries including Agriculture, Defence,
+                            Petrochemical and Refineries.
+                        </p>
+                        <p className="mt-4 text-gray-600 leading-8">
+                            We manufacture and distribute the most efficient storage
+                            batteries for all industries — your trusted brand for even
+                            the most basic and the most sophisticated energy storage
+                            solutions.
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Our Journey Timeline */}
+            <section className="py-16 sm:py-24 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center max-w-2xl mx-auto"
+                    >
+                        <span className="text-[#FFAF00] font-semibold uppercase tracking-[3px]">
+                            Milestones
+                        </span>
+                        <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#0A528F]">
+                            Our Journey
+                        </h2>
+                    </motion.div>
+
+                    <div className="relative mt-16">
+                        {/* Vertical line */}
+                        <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-[#0A528F]/15 sm:-translate-x-1/2" />
+
+                        <div className="space-y-10 sm:space-y-14">
+                            {journey.map((item, i) => {
+                                const isEven = i % 2 === 0;
+                                return (
+                                    <motion.div
+                                        key={item.title}
+                                        initial={{
+                                            opacity: 0,
+                                            x: isEven ? -40 : 40,
+                                        }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{ duration: 0.6, ease: "easeOut" }}
+                                        className={`relative flex flex-col sm:flex-row items-start gap-5 pl-12 sm:pl-0 ${
+                                            isEven
+                                                ? "sm:flex-row"
+                                                : "sm:flex-row-reverse"
+                                        }`}
+                                    >
+                                        {/* Dot */}
+                                        <span className="absolute left-4 sm:left-1/2 top-1 h-3 w-3 -translate-x-1/2 rounded-full bg-[#FFAF00] ring-4 ring-white" />
+
+                                        {/* Card */}
+                                        <div className="sm:w-1/2 sm:px-8 w-full">
+                                            <div
+                                                className={`rounded-2xl bg-white shadow-lg overflow-hidden border border-gray-100 ${
+                                                    isEven
+                                                        ? "sm:ml-auto sm:mr-0"
+                                                        : "sm:mr-auto sm:ml-0"
+                                                }`}
+                                                style={{ maxWidth: "420px" }}
+                                            >
+                                                <div className="relative w-full aspect-video">
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        fill
+                                                        sizes="(max-width: 640px) 100vw, 420px"
+                                                        className="object-cover"
+                                                        unoptimized={item.image.endsWith(".gif")}
+                                                    />
+                                                </div>
+                                                <div className="p-4">
+                                                    <span className="inline-block bg-[#0A528F] text-white text-xs font-bold px-3 py-1 rounded-full">
+                                                        {item.year}
+                                                    </span>
+                                                    <p className="mt-3 text-gray-700 font-medium leading-6">
+                                                        {item.title}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Spacer for the other half on desktop */}
+                                        <div className="hidden sm:block sm:w-1/2" />
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
                     </div>
-                  </div>
-                  <div style={{ paddingTop: '8px', flex: 1 }}>
-                    <div style={{ fontWeight: '700', fontSize: '18px', color: '#1A110A', marginBottom: '6px' }}>
-                      {item.event}
+                </div>
+            </section>
+
+            {/* Similar Achievements */}
+            <section className="py-16 sm:py-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center max-w-2xl mx-auto"
+                    >
+                        <span className="text-[#FFAF00] font-semibold uppercase tracking-[3px]">
+                            Along The Way
+                        </span>
+                        <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#0A528F]">
+                            Similar Achievements in Our Journey
+                        </h2>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-2 gap-8 mt-14">
+                        {/* 2024 */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6 }}
+                            className="rounded-3xl border border-gray-100 shadow-lg p-8"
+                        >
+                            <span className="text-5xl font-bold text-[#0A528F]">
+                                2024
+                            </span>
+                            <ul className="mt-6 space-y-4">
+                                {achievements2024.map((a, i) => (
+                                    <motion.li
+                                        key={a}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{ duration: 0.4, delay: i * 0.08 }}
+                                        className="flex items-start gap-3 text-gray-600 leading-6"
+                                    >
+                                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#FFAF00] flex-shrink-0" />
+                                        {a}
+                                    </motion.li>
+                                ))}
+                            </ul>
+                        </motion.div>
+
+                        {/* 2025 */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="rounded-3xl border border-gray-100 shadow-lg p-8"
+                        >
+                            <span className="text-5xl font-bold text-[#0A528F]">
+                                2025
+                            </span>
+                            <ul className="mt-6 space-y-4">
+                                {achievements2025.map((a, i) => (
+                                    <motion.li
+                                        key={a}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{ duration: 0.4, delay: i * 0.08 }}
+                                        className="flex items-start gap-3 text-gray-600 leading-6"
+                                    >
+                                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#FFAF00] flex-shrink-0" />
+                                        {a}
+                                    </motion.li>
+                                ))}
+                            </ul>
+                        </motion.div>
                     </div>
-                    <div style={{ fontSize: '15px', color: '#6B5A4E', lineHeight: '1.7' }}>
-                      {item.desc}
+                </div>
+            </section>
+
+            {/* Vision / Mission / Values */}
+            <section className="py-16 sm:py-24 bg-[#0A528F]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {pillars.map((p, i) => (
+                            <motion.div
+                                key={p.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{ duration: 0.5, delay: i * 0.12 }}
+                                whileHover={{ y: -6 }}
+                                className="rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 p-8"
+                            >
+                                <div className="h-14 w-14 rounded-2xl bg-[#FFAF00]/20 flex items-center justify-center">
+                                    <p.icon className="text-[#FFAF00]" size={26} />
+                                </div>
+                                <h3 className="mt-5 text-2xl font-bold text-white">
+                                    {p.title}
+                                </h3>
+                                <p className="mt-3 text-white/75 leading-7">{p.text}</p>
+                            </motion.div>
+                        ))}
                     </div>
-                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* Impact Stats */}
-      <section style={{ padding: '80px 24px', background: 'hsl(145 20% 14%)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div
-              style={{
-                fontSize: '11px', fontWeight: '700', letterSpacing: '0.12em',
-                textTransform: 'uppercase', color: '#C96A28', marginBottom: '12px',
-              }}
-            >
-              ARENQ IMPACT
-            </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: '800', color: '#F5F0E8', letterSpacing: '-0.02em' }}>
-              Numbers That Matter
-            </h2>
-          </div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '24px',
-            }}
-            className="impact-grid"
-          >
-            {impactStats.map((stat) => (
-              <div key={stat.label} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '48px', fontWeight: '800', color: '#C96A28', lineHeight: '1', marginBottom: '8px' }}>
-                  {stat.value}
+            {/* Core Values */}
+            <section className="py-16 sm:py-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center max-w-2xl mx-auto"
+                    >
+                        <span className="text-[#FFAF00] font-semibold uppercase tracking-[3px]">
+                            What Drives Us
+                        </span>
+                        <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#0A528F]">
+                            Our Core Values
+                        </h2>
+                    </motion.div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-14">
+                        {coreValues.map((v, i) => (
+                            <motion.div
+                                key={v.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{ duration: 0.5, delay: i * 0.1 }}
+                                whileHover={{ y: -6 }}
+                                className="rounded-3xl border border-gray-100 shadow-lg p-6 relative overflow-hidden"
+                            >
+                                <span className="absolute top-3 right-4 text-4xl font-extrabold text-gray-100">
+                                    {v.num}
+                                </span>
+                                <div className="relative h-12 w-12 rounded-xl bg-[#0A528F]/10 flex items-center justify-center">
+                                    <v.icon className="text-[#0A528F]" size={22} />
+                                </div>
+                                <h3 className="relative mt-4 text-lg font-bold text-[#0A528F]">
+                                    {v.title}
+                                </h3>
+                                <p className="relative mt-2 text-gray-500 text-sm leading-6">
+                                    {v.text}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
-                <div style={{ fontWeight: '700', fontSize: '16px', color: '#F5F0E8', marginBottom: '4px' }}>
-                  {stat.label}
-                </div>
-                <div style={{ fontSize: '13px', color: 'rgba(245,240,232,0.5)' }}>
-                  {stat.desc}
-                </div>
-              </div>
-            ))}
-          </div>
-          <style>{`
-            @media (max-width: 600px) {
-              .impact-grid { grid-template-columns: repeat(2,1fr) !important; }
-            }
-          `}</style>
-        </div>
-      </section>
-
-      {/* Team / Founder */}
-      <section style={{ padding: '80px 24px', background: '#fff' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div
-              style={{
-                fontSize: '11px', fontWeight: '700', letterSpacing: '0.12em',
-                textTransform: 'uppercase', color: '#7A3020', marginBottom: '12px',
-              }}
-            >
-              THE PEOPLE
-            </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: '800', color: '#1A110A', letterSpacing: '-0.02em' }}>
-              Who Makes ARENQ
-            </h2>
-          </div>
-
-          {/* Founder & Chairman */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '200px 1fr',
-              gap: '40px',
-              alignItems: 'center',
-              background: '#F5F0E8',
-              borderRadius: '20px',
-              padding: '40px',
-              marginBottom: '40px',
-            }}
-            className="founder-grid"
-          >
-            <div>
-              <div
-                style={{
-                  width: '160px',
-                  height: '160px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #7A3020 0%, #C96A28 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '56px',
-                  fontWeight: '700',
-                  margin: '0 auto',
-                }}
-              >
-                SN
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '24px', fontWeight: '800', color: '#1A110A', marginBottom: '4px' }}>
-                Shyam Manohar Nayak
-
-              </h3>
-              <div style={{ fontSize: '14px', color: '#7A3020', fontWeight: '600', marginBottom: '16px', letterSpacing: '0.04em' }}>
-                Founder & Chairman
-              </div>
-              <p style={{ fontSize: '16px', color: '#4A3728', lineHeight: '1.7' }}>
-                Shyam Manohar Nayak, a visionary entrepreneur and industry pioneer, has been instrumental in transforming Maharashtra’s electrical landscape. With a deep-rooted passion for sustainable energy and innovation, he laid the foundation for Sunlit Power, a company committed to delivering next-generation energy solutions that empower businesses and communities alike.
-
-
-              </p>
-            </div>
-          </div>
-
-          {/* Managing Director */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '200px 1fr',
-              gap: '40px',
-              alignItems: 'center',
-              background: '#F5F0E8',
-              borderRadius: '20px',
-              padding: '40px',
-              marginBottom: '40px',
-            }}
-            className="founder-grid"
-          >
-            <div>
-              <div
-                style={{
-                  width: '160px',
-                  height: '160px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #7A3020 0%, #C96A28 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '56px',
-                  fontWeight: '700',
-                  margin: '0 auto',
-                }}
-              >
-                JP
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '24px', fontWeight: '800', color: '#1A110A', marginBottom: '4px' }}>
-                Jitendra Patil
-              </h3>
-              <div style={{ fontSize: '14px', color: '#7A3020', fontWeight: '600', marginBottom: '16px', letterSpacing: '0.04em' }}>
-                Managing Director
-              </div>
-              <p style={{ fontSize: '16px', color: '#4A3728', lineHeight: '1.7' }}>
-                Behind ARENQ is a team of engineers, innovators and energy experts working
-                towards advanced battery technologies and sustainable power solutions.
-              </p>
-            </div>
-          </div>
-
-          {/*  Director */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '200px 1fr',
-              gap: '40px',
-              alignItems: 'center',
-              background: '#F5F0E8',
-              borderRadius: '20px',
-              padding: '40px',
-              marginBottom: '40px',
-            }}
-            className="founder-grid"
-          >
-            <div>
-              <div
-                style={{
-                  width: '160px',
-                  height: '160px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #7A3020 0%, #C96A28 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '56px',
-                  fontWeight: '700',
-                  margin: '0 auto',
-                }}
-              >
-                AN
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '24px', fontWeight: '800', color: '#1A110A', marginBottom: '4px' }}>
-                Akash Kumar Nayak
-              </h3>
-              <div style={{ fontSize: '14px', color: '#7A3020', fontWeight: '600', marginBottom: '16px', letterSpacing: '0.04em' }}>
-                Director
-              </div>
-              <p style={{ fontSize: '16px', color: '#4A3728', lineHeight: '1.7' }}>
-                ARENQ is a team of engineers, innovators and energy experts working
-                towards advanced battery technologies and sustainable power solutions.
-              </p>
-            </div>
-          </div>
-
-
-
-          {/* Founder Quote */}
-          <blockquote
-            style={{
-              borderLeft: '4px solid #7A3020',
-              paddingLeft: '32px',
-              margin: '56px 0 0',
-              position: 'relative',
-            }}
-          >
-            <div style={{ fontSize: '80px', color: 'rgba(122,48,32,0.15)', lineHeight: '0.5', marginBottom: '16px' }}>"</div>
-            <p
-              style={{
-                fontSize: '22px',
-                fontStyle: 'italic',
-                color: '#1A110A',
-                lineHeight: '1.6',
-                marginBottom: '20px',
-              }}
-            >
-              Innovation and sustainable energy are the foundation of tomorrow.
-              At ARENQ, we are committed to building advanced power solutions
-              that create a cleaner and smarter future.
-            </p>
-            <footer style={{ fontSize: '15px', color: '#7A3020', fontWeight: '700' }}>
-              — Shyam Manohar Nayak
-              , Founder & Chairman
-            </footer>
-          </blockquote>
-          <style>{`
-            @media (max-width: 600px) {
-              .founder-grid { grid-template-columns: 1fr !important; text-align: center; }
-            }
-          `}</style>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section style={{ padding: '64px 24px', background: '#F5F0E8' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '28px', fontWeight: '800', color: '#1A110A', marginBottom: '40px' }}>
-            Certifications & Standards
-          </h2>
-          <div
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}
-            className="cert-grid"
-          >
-            {certifications.map((cert) => (
-              <div
-                key={cert.name}
-                style={{
-                  background: '#fff',
-                  borderRadius: '16px',
-                  padding: '32px 24px',
-                  textAlign: 'center',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-                }}
-              >
-                <div style={{ fontSize: '36px', marginBottom: '16px' }}>{cert.icon}</div>
-                <div style={{ fontWeight: '700', fontSize: '16px', color: '#1A110A', marginBottom: '8px' }}>
-                  {cert.name}
-                </div>
-                <div style={{ fontSize: '14px', color: '#6B5A4E', lineHeight: '1.6' }}>
-                  {cert.desc}
-                </div>
-              </div>
-            ))}
-          </div>
-          <style>{`
-            @media (max-width: 600px) {
-              .cert-grid { grid-template-columns: 1fr !important; }
-            }
-          `}</style>
-        </div>
-      </section>
-
-
-
-      {/* CTA */}
-      <section style={{ padding: '64px 24px', background: '#F5F0E8', textAlign: 'center' }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#1A110A', marginBottom: '16px' }}>
-            Powering A Sustainable Tomorrow
-          </h2>
-          <p style={{ fontSize: '16px', color: '#4A3728', lineHeight: '1.7', marginBottom: '32px' }}>
-            Choose ARENQ for advanced lithium batteries, EV power solutions,
-            solar applications and reliable energy storage technologies.
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="/category/all"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: '#7A3020',
-                color: '#fff',
-                padding: '16px 32px',
-                borderRadius: '8px',
-                fontWeight: '700',
-                fontSize: '16px',
-                textDecoration: 'none',
-              }}
-            >
-              Explore Products →
-            </Link>
-            <Link
-              href="/our-story"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: 'transparent',
-                color: '#7A3020',
-                padding: '16px 32px',
-                borderRadius: '8px',
-                fontWeight: '700',
-                fontSize: '16px',
-                textDecoration: 'none',
-                border: '2px solid #7A3020',
-              }}
-            >
-              Read Our Story
-            </Link>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+            </section>
+        </main>
+    );
 }

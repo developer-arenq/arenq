@@ -296,30 +296,10 @@ const Product = ({ product }) => {
               {title}
             </h3>
 
-            {/* Price */}
-            {/* <div className="
- flex 
- items-baseline 
- gap-2
- h-[35px]
- min-h-[35px]
-">              <span className="font-bold" style={{ fontSize: 'var(--text-base)', color: 'hsl(12 55% 38%)' }}>₹{price}</span>
-              <span className="line-through text-xs" style={{ color: 'hsl(30 12% 60%)' }}>₹{MRP}</span>
-              {discount > 0 && (
-                <span className="text-xs font-semibold" style={{ color: 'hsl(145 35% 30%)' }}>Save ₹{MRP - price}</span>
-              )}
-            </div> */}
 
-            {/* Rating */}
-            {/* <div className="flex items-center mt-1">
-              {renderCompactStars(rating)}
-              <span className="text-[9px] sm:text-sm text-gray-500 ml-1 font-semibold">
-                ({rating || 0})
-              </span>
-            </div> */}
           </div>
 
-          <button
+          {/* <button
             disabled={out_of_stock}
             onClick={(e) => {
               e.preventDefault();
@@ -342,7 +322,7 @@ const Product = ({ product }) => {
           >
 
             {out_of_stock ? "Out of Stock" : "Add to Cart"}
-          </button>
+          </button> */}
 
         </div>
       </Link>
