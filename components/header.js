@@ -221,7 +221,7 @@ export default function Header() {
 
 
   useEffect(() => {
-    const threshold = pathname === "/" ? 900 : 30;
+    const threshold = pathname === "/" ? 750 : 30;
 
     const handler = () => {
       setScrolled(window.scrollY > threshold);
@@ -295,20 +295,22 @@ export default function Header() {
 
       {/* Main Header */}
       <header
-        className={`${pathname === "/" ? "absolute top-0 left-0 w-full" : "sticky top-0"
-          } z-40 transition-all duration-300`}
+        className="fixed top-0 left-0 w-full z-40 transition-all duration-300"
         ref={headerRef}
         style={{
-          background: scrolled
-            ? "white"
-            : "transparent",
-          // background: "transparent",
-          borderBottom: scrolled
-            ? "1px solid hsl(210 20% 86%)"
-            : "1px solid transparent",
-          boxShadow: scrolled
-            ? "0 10px 30px rgb(10 82 143 / 12%)"
-            : "none",
+          background: pathname === "/"
+            ? (scrolled ? "white" : "transparent")
+            : "white",
+
+          borderBottom:
+            pathname === "/" && !scrolled
+              ? "1px solid transparent"
+              : "1px solid hsl(210 20% 86%)",
+
+          boxShadow:
+            pathname === "/" && !scrolled
+              ? "none"
+              : "0 10px 30px rgb(10 82 143 / 12%)",
         }}
       >
         <div className="relative mx-auto w-[100%] lg:w-[90%] max-w-[1400px] px-4 sm:px-6 py-2">
