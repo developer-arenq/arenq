@@ -241,21 +241,21 @@ export default function Footer() {
               className="mb-3"
             >
               <button
-              onClick={() => router.push('/')}
-              className="flex items-center  flex-shrink-0"
-              data-testid="link-logo"
-            >
+                onClick={() => router.push('/')}
+                className="flex items-center  flex-shrink-0"
+                data-testid="link-logo"
+              >
 
-              <Image
-                src="https://arenq.co.in/wp-content/uploads/2025/06/Arenq-logo-animation.2.gif"
-                width={170}
-                height={70}
-                alt="Logo"
-                priority
-              />
+                <Image
+                  src="https://arenq.co.in/wp-content/uploads/2025/06/Arenq-logo-animation.2.gif"
+                  width={170}
+                  height={70}
+                  alt="Logo"
+                  priority
+                />
 
-             
-            </button>
+
+              </button>
             </div>
 
             <p className="text-sm opacity-70 mb-4 leading-relaxed">
@@ -312,17 +312,20 @@ export default function Footer() {
 
             <ul className="flex flex-col gap-2">
               {[
-                ['Industrial UPS Battery', '/search?q=industrial-ups-battery'],
-                ['Electric Vehicle Battery', '/search?q=ev-battery'],
-                ['Engine Cranking Battery', '/search?q=engine-cranking-battery'],
-                ['MHE Battery', '/search?q=mhe-battery'],
-                ['Power Sector Battery', '/search?q=power-sector-battery'],
-                ['Electromagnetic Crane Battery', '/search?q=electromagnetic-crane-battery'],
-                ['BESS Battery', '/search?q=bess-battery'],
-                ['Telecom Battery', '/search?q=telecom-battery'],
-                ['Inverter Battery', '/search?q=inverter-battery'],
-                ['Agricultural Battery', '/search?q=agricultural-battery'],
-                ['Solar Street Light Battery', '/search?q=solar-street-light-battery'],
+                ["Industrial UPS Battery", "/products/industrial-ups-battery"],
+                ["Electric Vehicle Battery", "/products/electric-vehicle-battery"],
+                ["Engine Cranking Battery", "/products/engine-cranking-battery"],
+                ["Golf Cart & Buggy Battery", "/products/golf-cart-buggy-battery"],
+                ["Marine Battery", "/products/marine-battery"],
+                ["Robotics Battery", "/products/robotics-battery"],
+                ["MHE Battery", "/products/mhe-battery"],
+                ["Power Sector Battery", "/products/power-sector-battery"],
+                ["Electromagnetic Crane Battery", "/products/electromagnetic-crane-battery"],
+                ["BESS Battery", "/products/battery-energy-storage-system-bess"],
+                ["Telecom Battery", "/products/telecom-battery"],
+                ["Inverter Battery", "/products/inverter-battery"],
+                ["Agricultural Battery", "/products/agricultural-battery"],
+                ["Solar Street Light Battery", "/products/solar-street-light-battery"],
               ].map(([label, href]) => (
                 <li key={label}>
                   <Link

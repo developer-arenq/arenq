@@ -470,7 +470,7 @@ export default function IndustrialUpsBattery() {
                         href="/contact-us/"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.97 }}
-                        className="mt-8 inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white shadow-lg"
+                        className="mt-8 inline-flex items-center gap-2 px-8 py-2 rounded-full font-semibold text-white shadow-lg"
                         style={{
                             backgroundImage:
                                 "linear-gradient(to right, #104B8C 0%, #0370DF 51%, #FFAF00 100%)",

@@ -192,7 +192,7 @@ const productLinks = [
     icon: Factory,
     label: "Manufacturing Setup & Capacity",
     desc: "Production facilities",
-    href: "/manufacturing-setup-capacity",
+    href: "/products/manufacturing-setup-capacity",
     accent: "#0A528F",
   },
 ];
@@ -591,7 +591,7 @@ export default function Header() {
 
                 {/* Blogs */}
                 <button
-                  onClick={() => router.push("/blogs")}
+                  onClick={() => router.push("/blog")}
                   className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
                   style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
                 >

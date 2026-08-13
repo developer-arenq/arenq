@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -58,7 +59,7 @@ const galleryData = [
         description:
             "Compact, high-cycle-life battery designed for golf carts and utility electric vehicles.",
     },
-      {
+    {
         id: 9,
         category: "Products",
         image: "https://arenq.co.in/wp-content/uploads/2025/06/Expo-1.jpeg",
@@ -107,7 +108,7 @@ const stats = [
     { icon: ImageIcon, value: "500+", label: "Project Images", color: "text-[#0A528F]" },
     { icon: Building2, value: "75+", label: "Industrial Projects", color: "text-[#FFB600]" },
     { icon: Camera, value: "25+", label: "Events Covered", color: "text-[#0A528F]" },
-    { icon: Award, value: "10+", label: "Years of Excellence", color: "text-[#FFB600]" },
+    { icon: Award, value: "20+", label: "Years of Excellence", color: "text-[#FFB600]" },
 ];
 
 const highlights = [
@@ -140,7 +141,7 @@ const fadeUp = {
 export default function Gallery() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [heroIndex, setHeroIndex] = useState(0);
-
+    const router = useRouter();
     // Auto-rotate the featured hero image
     useEffect(() => {
         const interval = setInterval(() => {
@@ -528,13 +529,16 @@ export default function Gallery() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.97 }}
+                            onClick={() => router.push("/contact-us")}
                             className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#FFB600] font-semibold text-black"
                         >
                             Contact Us
                         </motion.button>
+
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.97 }}
+                            onClick={() => router.push("/search")}
                             className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-full border-2 border-white text-white hover:bg-white hover:text-[#0A528F] transition-colors duration-300"
                         >
                             Explore Products
