@@ -218,7 +218,8 @@ export default function Header() {
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
 
-
+  const [isScrolled, setIsScrolled] = useState(false);
+const [isNavHovered, setIsNavHovered] = useState(false);
 
   useEffect(() => {
     const threshold = pathname === "/" ? 750 : 30;
@@ -237,7 +238,14 @@ export default function Header() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     function handleClick(e) {
@@ -295,23 +303,11 @@ export default function Header() {
 
       {/* Main Header r*/}
       <header
-        className="fixed top-0 left-0 w-full z-40 transition-all duration-300"
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 hover:backdrop-blur-xl ${isScrolled
+          ? "bg-white/10 backdrop-blur-xl border-b border-white/10"
+          : "bg-transparent"
+          }`}
         ref={headerRef}
-        style={{
-          background: pathname === "/"
-            ? (scrolled ? "white" : "transparent")
-            : "white",
-
-          borderBottom:
-            pathname === "/" && !scrolled
-              ? "1px solid transparent"
-              : "1px solid hsl(210 20% 86%)",
-
-          boxShadow:
-            pathname === "/" && !scrolled
-              ? "none"
-              : "0 10px 30px rgb(10 82 143 / 12%)",
-        }}
       >
         <div className="relative mx-auto w-[100%] lg:w-[90%] max-w-[1400px] px-4 sm:px-6 py-2">
 
@@ -356,7 +352,7 @@ export default function Header() {
                 {/* Home */}
                 <button
                   onClick={() => router.push("/")}
-                  className="px-3 py-2 rounded-lg text-sm transition-colors hover:bg-white  font-bold"
+                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
 
                 >
                   Home
@@ -369,11 +365,8 @@ export default function Header() {
                       setHimalayanOpen(false);
                       setAboutOpen((prev) => !prev);
                     }}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-all hover:bg-white"
-                    style={{
-                      color: aboutOpen ? "#0A528F" : "hsl(218 55% 12%)",
-                      fontFamily: "var(--font-body)",
-                    }}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+
                   >
                     About
                     <ChevronDown
@@ -426,7 +419,7 @@ export default function Header() {
                               router.push(item.href);
                               setAboutOpen(false);
                             }}
-                            className="w-full flex items-start gap-3 px-4 py-3 hover:bg-white text-left"
+                            className="w-full flex items-start gap-3 px-4 py-3  text-left"
                             style={{
                               borderBottom: "1px solid hsl(35 15% 93%)",
                             }}
@@ -470,8 +463,7 @@ export default function Header() {
                       setAboutOpen(false);
                       setHimalayanOpen((prev) => !prev);
                     }}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold hover:bg-white"
-                  >
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"                  >
                     Products
 
                     <ChevronDown
@@ -581,12 +573,12 @@ export default function Header() {
                 </div>
 
 
-
-                {/* Gallery */}
                 <button
                   onClick={() => router.push("/gallery")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
-                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                  }}
                 >
                   Gallery
                 </button>
@@ -594,8 +586,10 @@ export default function Header() {
                 {/* Blogs */}
                 <button
                   onClick={() => router.push("/blog")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
-                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                  }}
                 >
                   Blogs
                 </button>
@@ -603,8 +597,10 @@ export default function Header() {
                 {/* Contact Us */}
                 <button
                   onClick={() => router.push("/contact-us")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
-                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                  }}
                 >
                   Contact Us
                 </button>
@@ -612,8 +608,10 @@ export default function Header() {
                 {/* FAQs */}
                 <button
                   onClick={() => router.push("/faqs")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold transition-colors hover:bg-white"
-                  style={{ color: "hsl(218 55% 12%)", fontFamily: "var(--font-body)" }}
+                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+                  style={{
+                    fontFamily: "var(--font-body)",
+                  }}
                 >
                   FAQs
                 </button>

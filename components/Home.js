@@ -146,14 +146,14 @@ const mobilePoints = [
     left: "52%",
     href: "/products/electromagnetic-crane-battery",
   },
-{
+  {
     id: 10,
     name: "MHE Battery",
     top: "80  %",
     left: "35%",
     href: "/products/mhe-battery",
   },
-   {
+  {
     id: 11,
     name: "Company Profile",
     top: "30%",
@@ -236,7 +236,25 @@ export default function HomePage() {
           HERO / HOTSPOT SECTION
       ========================================= */}
       <section className="relative w-full">
-        <Image
+        {/* <video
+          key={isMobile ? "mobile" : "desktop"}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="block w-full h-auto object-cover select-none"
+        >
+          <source
+            src={
+              isMobile
+                ? "/video/home/mobile.mp4"
+                : "/video/home/desktop.mp4"
+            }
+            type="video/mp4"
+          />
+        </video> */}
+         <Image
           src={
             isMobile
               ? "/images/home/mobile.png"
@@ -281,10 +299,10 @@ export default function HomePage() {
 
               <span
                 className={`hotspot-tooltip ${isMobile
-                    ? active
-                      ? "opacity-100"
-                      : "opacity-0"
-                    : ""
+                  ? active
+                    ? "opacity-100"
+                    : "opacity-0"
+                  : ""
                   }`}
               >
                 {item.name}

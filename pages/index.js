@@ -71,7 +71,7 @@ export default function Home() {
       <Head>
         {/* 🔥 PRIMARY SEO */}
         <title>
-          Arenq | Advanced Energy Storage Solutions & Lithium Battery Manufacturer
+          ARENQ
         </title>
 
         <meta
