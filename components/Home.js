@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 
 const desktopPoints = [
-  {
-    id: 1,
-    name: "Agriculture Battery",
-    top: "74%",
-    left: "89%",
-    href: "/products/agricultural-battery",
-  },
+  // {
+  //   id: 1,
+  //   name: "Agriculture Battery",
+  //   top: "74%",
+  //   left: "89%",
+  //   href: "/products/agricultural-battery",
+  // },
   {
     id: 2,
     name: "EV Battery",
@@ -35,21 +35,21 @@ const desktopPoints = [
     id: 5,
     name: "Telecom Battery",
     top: "11%",
-    left: "27%",
+    left: "29%",
     href: "/products/telecom-battery",
   },
-  {
-    id: 6,
-    name: "LiFePO4 & LTO Battery",
-    top: "32%",
-    left: "91%",
-    href: "/products/lifepo4-lto-battery",
-  },
+  // {
+  //   id: 6,
+  //   name: "LiFePO4 & LTO Battery",
+  //   top: "32%",
+  //   left: "91%",
+  //   href: "/products/lifepo4-lto-battery",
+  // },
   {
     id: 7,
     name: "Solar Street Light Battery",
-    top: "49%",
-    left: "50%",
+    top: "40%",
+    left: "29%",
     href: "/products/solar-street-light-battery",
   },
   {
@@ -59,13 +59,13 @@ const desktopPoints = [
     left: "65%",
     href: "/products/battery-energy-storage-system-bess",
   },
-  {
-    id: 9,
-    name: "Electromagnetic Crane Battery",
-    top: "75%",
-    left: "52%",
-    href: "/products/electromagnetic-crane-battery",
-  },
+  // {
+  //   id: 9,
+  //   name: "Electromagnetic Crane Battery",
+  //   top: "75%",
+  //   left: "52%",
+  //   href: "/products/electromagnetic-crane-battery",
+  // },
   {
     id: 10,
     name: "MHE Battery",
@@ -83,13 +83,13 @@ const desktopPoints = [
 ];
 
 const mobilePoints = [
-  {
-    id: 1,
-    name: "Agriculture Battery",
-    top: "76%",
-    left: "83%",
-    href: "/products/agricultural-battery",
-  },
+  // {
+  //   id: 1,
+  //   name: "Agriculture Battery",
+  //   top: "76%",
+  //   left: "83%",
+  //   href: "/products/agricultural-battery",
+  // },
   {
     id: 2,
     name: "EV Battery",
@@ -135,17 +135,17 @@ const mobilePoints = [
   {
     id: 8,
     name: "BESS",
-    top: "45%",
+    top: "40%",
     left: "73%",
     href: "/products/battery-energy-storage-system-bess",
   },
-  {
-    id: 9,
-    name: "Electromagnetic Crane Battery",
-    top: "60%",
-    left: "52%",
-    href: "/products/electromagnetic-crane-battery",
-  },
+  // {
+  //   id: 9,
+  //   name: "Electromagnetic Crane Battery",
+  //   top: "60%",
+  //   left: "52%",
+  //   href: "/products/electromagnetic-crane-battery",
+  // },
   {
     id: 10,
     name: "MHE Battery",

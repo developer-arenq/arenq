@@ -304,9 +304,12 @@ export default function Header() {
 
       {/* Main Header r*/}
       <header
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${isScrolled
-          ? "bg-white border-b border-gray-200 shadow-sm"
-          : "bg-transparent"
+        onMouseEnter={() => setIsNavHovered(true)}
+        onMouseLeave={() => setIsNavHovered(false)}
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 
+          ${isScrolled || isNavHovered
+            ? "bg-white border-b border-gray-200 shadow-sm"
+            : "bg-transparent"
           }`}
         ref={headerRef}
       >
@@ -353,9 +356,10 @@ export default function Header() {
                 {/* Home */}
                 <button
                   onClick={() => router.push("/")}
-                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
-                    ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
-                    : "text-white hover:text-white"
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+  ${isScrolled || isNavHovered
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
                     }`}
                 >
                   Home
@@ -368,9 +372,10 @@ export default function Header() {
                       setHimalayanOpen(false);
                       setAboutOpen((prev) => !prev);
                     }}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
-                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
-                      : "text-white hover:text-white"
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+  ${isScrolled || isNavHovered
+                        ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                        : "text-white hover:text-white"
                       }`}
                   >
                     About
@@ -468,9 +473,10 @@ export default function Header() {
                       setAboutOpen(false);
                       setHimalayanOpen((prev) => !prev);
                     }}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
-                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
-                      : "text-white hover:text-white"
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+  ${isScrolled || isNavHovered
+                        ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                        : "text-white hover:text-white"
                       }`}
                   >
                     Products
@@ -584,9 +590,10 @@ export default function Header() {
 
                 <button
                   onClick={() => router.push("/gallery")}
-                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
-                    ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
-                    : "text-white hover:text-white"
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 hover:bg-white 
+                    ${isScrolled || isNavHovered
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
                     }`}
                   style={{
                     fontFamily: "var(--font-body)",
@@ -599,7 +606,8 @@ export default function Header() {
                 <button
                   onClick={() => router.push("/blog")}
 
-                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+                   ${isScrolled || isNavHovered
                       ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
                       : "text-white hover:text-white"
                     }`}
@@ -610,7 +618,8 @@ export default function Header() {
                 {/* Contact Us */}
                 <button
                   onClick={() => router.push("/contact-us")}
-                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+                   ${isScrolled || isNavHovered
                       ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
                       : "text-white hover:text-white"
                     }`}
@@ -621,7 +630,8 @@ export default function Header() {
                 {/* FAQs */}
                 <button
                   onClick={() => router.push("/faqs")}
-                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
+                    ${isScrolled || isNavHovered
                       ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
                       : "text-white hover:text-white"
                     }`}
