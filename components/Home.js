@@ -29,7 +29,7 @@ const desktopPoints = [
     name: "Home Inverter Battery",
     top: "50%",
     left: "87%",
-    href: "/products/home-inverter-battery",
+    href: "/products/inverter-battery",
   },
   {
     id: 5,
@@ -109,7 +109,7 @@ const mobilePoints = [
     name: "Home Inverter Battery",
     top: "60%",
     left: "79%",
-    href: "/products/home-inverter-battery",
+    href: "/products/inverter-battery",
   },
   {
     id: 5,
