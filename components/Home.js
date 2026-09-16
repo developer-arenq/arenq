@@ -13,7 +13,7 @@ const desktopPoints = [
   {
     id: 2,
     name: "EV Battery",
-    top: "62%",
+    top: "61%",
     left: "35%",
     href: "/products/ev-battery",
   },
@@ -27,8 +27,8 @@ const desktopPoints = [
   {
     id: 4,
     name: "Home Inverter Battery",
-    top: "88%",
-    left: "83%",
+    top: "50%",
+    left: "87%",
     href: "/products/home-inverter-battery",
   },
   {
@@ -48,8 +48,8 @@ const desktopPoints = [
   {
     id: 7,
     name: "Solar Street Light Battery",
-    top: "48%",
-    left: "48%",
+    top: "49%",
+    left: "50%",
     href: "/products/solar-street-light-battery",
   },
   {
@@ -62,7 +62,7 @@ const desktopPoints = [
   {
     id: 9,
     name: "Electromagnetic Crane Battery",
-    top: "77%",
+    top: "75%",
     left: "52%",
     href: "/products/electromagnetic-crane-battery",
   },
@@ -77,7 +77,7 @@ const desktopPoints = [
     id: 11,
     name: "Company Profile",
     top: "25%",
-    left: "46%",
+    left: "44%",
     href: "/company-profile",
   },
 ];
@@ -86,14 +86,14 @@ const mobilePoints = [
   {
     id: 1,
     name: "Agriculture Battery",
-    top: "70%",
+    top: "76%",
     left: "83%",
     href: "/products/agricultural-battery",
   },
   {
     id: 2,
     name: "EV Battery",
-    top: "55%",
+    top: "48%",
     left: "23%",
     href: "/products/ev-battery",
   },
@@ -107,7 +107,7 @@ const mobilePoints = [
   {
     id: 4,
     name: "Home Inverter Battery",
-    top: "86%",
+    top: "60%",
     left: "79%",
     href: "/products/home-inverter-battery",
   },
@@ -115,21 +115,21 @@ const mobilePoints = [
     id: 5,
     name: "Telecom Battery",
     top: "19%",
-    left: "14%",
+    left: "25%",
     href: "/products/telecom-battery",
   },
-  {
-    id: 6,
-    name: "LiFePO4 Battery",
-    top: "38%",
-    left: "88%",
-    href: "/products/lifepo4-lto-battery",
-  },
+  // {
+  //   id: 6,
+  //   name: "LiFePO4 Battery",
+  //   top: "38%",
+  //   left: "88%",
+  //   href: "/products/lifepo4-lto-battery",
+  // },
   {
     id: 7,
     name: "Solar Street Light Battery",
-    top: "52%",
-    left: "40%",
+    top: "43%",
+    left: "47%",
     href: "/products/solar-street-light-battery",
   },
   {
@@ -142,14 +142,14 @@ const mobilePoints = [
   {
     id: 9,
     name: "Electromagnetic Crane Battery",
-    top: "69%",
+    top: "60%",
     left: "52%",
     href: "/products/electromagnetic-crane-battery",
   },
   {
     id: 10,
     name: "MHE Battery",
-    top: "80  %",
+    top: "70%",
     left: "35%",
     href: "/products/mhe-battery",
   },
@@ -166,6 +166,22 @@ const AUTO_INTERVAL = 3000;
 
 export default function HomePage() {
   const router = useRouter();
+
+  /* ----------------------------------
+     Detect Initial Day / Night
+     
+     7:00 AM - 6:59 PM = DAY
+     7:00 PM - 6:59 AM = NIGHT
+  ---------------------------------- */
+  const [isNight, setIsNight] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    const hour = new Date().getHours();
+
+    return hour >= 19 || hour < 7;
+  });
 
   const [isMobile, setIsMobile] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -189,11 +205,63 @@ export default function HomePage() {
   }, []);
 
   /* ----------------------------------
+     Detect Day / Night
+     
+     7:00 AM - 6:59 PM = DAY
+     7:00 PM - 6:59 AM = NIGHT
+     
+     Check every 10 seconds
+  ---------------------------------- */
+  useEffect(() => {
+    const updateDayNight = () => {
+      const now = new Date();
+      const hour = now.getHours();
+
+      const night = hour >= 19 || hour < 7;
+
+      setIsNight(night);
+    };
+
+    // Check immediately
+    updateDayNight();
+
+    // Check every 10 seconds
+    const timer = setInterval(updateDayNight, 10000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  /* ----------------------------------
      Select Points
   ---------------------------------- */
   const points = useMemo(() => {
     return isMobile ? mobilePoints : desktopPoints;
   }, [isMobile]);
+
+  /* ----------------------------------
+     Select Day / Night Image
+     
+     Desktop:
+       Day   = dd.png
+       Night = dn.png
+
+     Mobile:
+       Day   = md.png
+       Night = mn.png
+  ---------------------------------- */
+  const homeImage = useMemo(() => {
+    if (isMobile) {
+      return isNight
+        ? "/images/home/mn.png"
+        : "/images/home/md.png";
+    }
+
+    return isNight
+      ? "/images/home/dn.png"
+      : "/images/home/dd.png";
+  }, [isMobile, isNight]);
 
   /* ----------------------------------
      Reset Active Point When Device
@@ -236,30 +304,13 @@ export default function HomePage() {
           HERO / HOTSPOT SECTION
       ========================================= */}
       <section className="relative w-full">
-        {/* <video
-          key={isMobile ? "mobile" : "desktop"}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="block w-full h-auto object-cover select-none"
-        >
-          <source
-            src={
-              isMobile
-                ? "/video/home/mobile.mp4"
-                : "/video/home/desktop.mp4"
-            }
-            type="video/mp4"
-          />
-        </video> */}
-         <Image
-          src={
-            isMobile
-              ? "/images/home/mobile.png"
-              : "/images/home/home.png"
-          }
+
+        {/* =========================================
+            DAY / NIGHT HOME IMAGE
+        ========================================= */}
+        <Image
+          key={homeImage}
+          src={homeImage}
           alt="ARENQ Energy Storage Solutions"
           width={isMobile ? 1080 : 2048}
           height={isMobile ? 1920 : 950}
@@ -268,6 +319,9 @@ export default function HomePage() {
           className="block w-full h-auto object-contain select-none"
         />
 
+        {/* =========================================
+            HOTSPOTS
+        ========================================= */}
         {points.map((item) => {
           const active = activeId === item.id;
 
@@ -292,18 +346,20 @@ export default function HomePage() {
                 top: item.top,
                 left: item.left,
               }}
-              className={`group absolute -translate-x-1/2 -translate-y-1/2 z-30 ${active ? "hotspot-active" : ""
-                }`}
+              className={`group absolute -translate-x-1/2 -translate-y-1/2 z-30 ${
+                active ? "hotspot-active" : ""
+              }`}
             >
               <span className="hotspot-dot" />
 
               <span
-                className={`hotspot-tooltip ${isMobile
-                  ? active
-                    ? "opacity-100"
-                    : "opacity-0"
-                  : ""
-                  }`}
+                className={`hotspot-tooltip ${
+                  isMobile
+                    ? active
+                      ? "opacity-100"
+                      : "opacity-0"
+                    : ""
+                }`}
               >
                 {item.name}
               </span>
@@ -311,8 +367,11 @@ export default function HomePage() {
           );
         })}
 
-        {/* Announcement Bar */}
-        <div className="relative overflow-hidden py-2 shadow-md"
+        {/* =========================================
+            ANNOUNCEMENT BAR
+        ========================================= */}
+        <div
+          className="relative overflow-hidden py-2 shadow-md"
           style={{
             background:
               "linear-gradient(90deg, #0A528F 0%, #0D6BB8 50%, #FFB600 100%)",
@@ -330,7 +389,6 @@ export default function HomePage() {
                 "🔧 Custom Battery Solutions For Every Industry",
                 "🌍 ARENQ — Forward To Future",
 
-                // Duplicate for seamless ticker
                 "🔋 Advanced Lithium Battery Solutions",
                 "⚡ Powering EV, Solar & Industrial Applications",
                 "🌱 Clean Energy • Reliable Storage • Sustainable Future",
@@ -349,7 +407,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
     </>
   );
 }

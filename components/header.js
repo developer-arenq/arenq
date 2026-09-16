@@ -219,11 +219,12 @@ export default function Header() {
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
 
   const [isScrolled, setIsScrolled] = useState(false);
-const [isNavHovered, setIsNavHovered] = useState(false);
+  const [isNavHovered, setIsNavHovered] = useState(false);
 
   useEffect(() => {
-    const threshold = pathname === "/" ? 750 : 30;
-
+    // const threshold = pathname === "/" ? 750 : 30;
+    const threshold = pathname === "/" ? window.innerHeight : 0;
+    setIsScrolled(window.scrollY >= threshold);
     const handler = () => {
       setScrolled(window.scrollY > threshold);
     };
@@ -303,8 +304,8 @@ const [isNavHovered, setIsNavHovered] = useState(false);
 
       {/* Main Header r*/}
       <header
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 hover:backdrop-blur-xl ${isScrolled
-          ? "bg-white/10 backdrop-blur-xl border-b border-white/10"
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${isScrolled
+          ? "bg-white border-b border-gray-200 shadow-sm"
           : "bg-transparent"
           }`}
         ref={headerRef}
@@ -352,8 +353,10 @@ const [isNavHovered, setIsNavHovered] = useState(false);
                 {/* Home */}
                 <button
                   onClick={() => router.push("/")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
-
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                    ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                    : "text-white hover:text-white"
+                    }`}
                 >
                   Home
                 </button>
@@ -365,8 +368,10 @@ const [isNavHovered, setIsNavHovered] = useState(false);
                       setHimalayanOpen(false);
                       setAboutOpen((prev) => !prev);
                     }}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
-
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
+                      }`}
                   >
                     About
                     <ChevronDown
@@ -463,7 +468,11 @@ const [isNavHovered, setIsNavHovered] = useState(false);
                       setAboutOpen(false);
                       setHimalayanOpen((prev) => !prev);
                     }}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"                  >
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
+                      }`}
+                  >
                     Products
 
                     <ChevronDown
@@ -575,7 +584,10 @@ const [isNavHovered, setIsNavHovered] = useState(false);
 
                 <button
                   onClick={() => router.push("/gallery")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                    ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                    : "text-white hover:text-white"
+                    }`}
                   style={{
                     fontFamily: "var(--font-body)",
                   }}
@@ -586,10 +598,11 @@ const [isNavHovered, setIsNavHovered] = useState(false);
                 {/* Blogs */}
                 <button
                   onClick={() => router.push("/blog")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                  }}
+
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
+                    }`}
                 >
                   Blogs
                 </button>
@@ -597,10 +610,10 @@ const [isNavHovered, setIsNavHovered] = useState(false);
                 {/* Contact Us */}
                 <button
                   onClick={() => router.push("/contact-us")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                  }}
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
+                    }`}
                 >
                   Contact Us
                 </button>
@@ -608,7 +621,10 @@ const [isNavHovered, setIsNavHovered] = useState(false);
                 {/* FAQs */}
                 <button
                   onClick={() => router.push("/faqs")}
-                  className="px-3 py-2 rounded-lg text-sm font-bold text-[hsl(218_55%_12%)] hover:text-white transition-colors duration-200"
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 ${isScrolled
+                      ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
+                      : "text-white hover:text-white"
+                    }`}
                   style={{
                     fontFamily: "var(--font-body)",
                   }}

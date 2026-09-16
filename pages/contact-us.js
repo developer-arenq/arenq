@@ -546,7 +546,7 @@ export default function ContactPage() {
         </div>
 
         {/* FAQ Section */}
-        <section className="max-w-3xl mx-auto mb-16">
+        {/* <section className="max-w-3xl mx-auto mb-16">
           <div className="text-center mb-8">
             <p className="font-body text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: 'hsl(145 35% 28%)' }}>
               Common Questions
@@ -596,7 +596,7 @@ export default function ContactPage() {
               </a>
             </p>
           </div>
-        </section>
+        </section> */}
       </div>
     </div>
   );
