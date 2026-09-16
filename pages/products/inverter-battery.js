@@ -21,6 +21,8 @@ import {
 } from "lucide-react";
 
 const heroSlides = [
+  "https://arenq.s3.ap-south-1.amazonaws.com/1kva.png",
+  "https://arenq.s3.ap-south-1.amazonaws.com/2kva.png",
   "/images/products/invert-1.webp",
   "/images/products/Invert-2.webp",
   "/images/products/New-Project-50.webp",
