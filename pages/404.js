@@ -168,7 +168,7 @@ export default function Custom404() {
           </Link>
 
           <Link
-            href="/products"
+            href="/shop"
             className="px-8 py-4 rounded-xl font-semibold transition-all hover:opacity-90 flex items-center justify-center gap-2"
             style={{
               backgroundColor: "#C96A28",
