@@ -59,23 +59,29 @@ const coreLeadership = [
         bio: "A results-driven Operations Leader with hands-on expertise in Lead Acid Battery, Lithium Battery, and EV Manufacturing. An Electrical Engineer overseeing end-to-end plant functions, driving quality, productivity, and safety through lean practices like QCC, Kaizen, 5S, and JIT — with 22 years of experience.",
     },
     {
-        name: "Amol Chaudhary",
-        role: "Production Manager",
-        image: "/images/Visionaries/team-03.webp",
-        bio: "Amol Chaudhary, the Production Manager at Sunlit Power, embodies the power of blending technical expertise with strong leadership. An electrical and electronics engineer with 14 years of experience, he brings invaluable knowledge and hands-on skills to the forefront of Sunlit's manufacturing operations.",
+        name: "Naresh Arora",
+        role: "Marketing Director",
+        image: "/images/Visionaries/team-02.webp",
+        bio: "A results-driven Operations Leader and Electrical Engineer with 22 years of experience across Lead Acid Battery, Lithium Battery, and EV Manufacturing. Experienced in overseeing end-to-end plant operations, driving quality, productivity, and safety through lean manufacturing practices including QCC, Kaizen, 5S, and JIT."
     },
-    {
-        name: "Manoj Sundaram",
-        role: "Vice President of Sales & Marketing",
-        image: "/images/Visionaries/tean-05.webp",
-        bio: "Manoj Sundaram, Vice President of Sales and Marketing at Sunlit Power, embodies the power of blending global experience, technical expertise, and visionary leadership. With 20 years at leading multinationals like Enertec, Alfa, and Outback, he has honed his skills across diverse geographical markets and complex industry landscapes.",
-    },
-    {
-        name: "Pankaj Bagadi",
-        role: "Digital Marketing Manager",
-        image: "/images/Visionaries/team-08.webp",
-        bio: "Pankaj Bagadi is a seasoned Digital Marketing Expert known for driving brand visibility and online growth. His creative vision and technical know-how help build powerful digital experiences that reflect Sunlit's commitment to innovation and sustainability.",
-    },
+    // {
+    //     name: "Amol Chaudhary",
+    //     role: "Production Manager",
+    //     image: "/images/Visionaries/team-03.webp",
+    //     bio: "Amol Chaudhary, the Production Manager at Sunlit Power, embodies the power of blending technical expertise with strong leadership. An electrical and electronics engineer with 14 years of experience, he brings invaluable knowledge and hands-on skills to the forefront of Sunlit's manufacturing operations.",
+    // },
+    // {
+    //     name: "Manoj Sundaram",
+    //     role: "Vice President of Sales & Marketing",
+    //     image: "/images/Visionaries/tean-05.webp",
+    //     bio: "Manoj Sundaram, Vice President of Sales and Marketing at Sunlit Power, embodies the power of blending global experience, technical expertise, and visionary leadership. With 20 years at leading multinationals like Enertec, Alfa, and Outback, he has honed his skills across diverse geographical markets and complex industry landscapes.",
+    // },
+    // {
+    //     name: "Pankaj Bagadi",
+    //     role: "Digital Marketing Manager",
+    //     image: "/images/Visionaries/team-08.webp",
+    //     bio: "Pankaj Bagadi is a seasoned Digital Marketing Expert known for driving brand visibility and online growth. His creative vision and technical know-how help build powerful digital experiences that reflect Sunlit's commitment to innovation and sustainability.",
+    // },
 ];
 
 const fadeUp = {

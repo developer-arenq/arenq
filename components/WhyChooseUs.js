@@ -178,10 +178,10 @@ export default function WhyChooseUs() {
           >
 
             {[
-              ["150+", "Domestic Clients"],
-              ["125+", "Happy Customers"],
-              ["150+", "Projects Completed"],
-              ["35000+", "Products Delivered"],
+              ["1000+", "Domestic Clients"],
+              ["1 Lac+", "Happy Customers"],
+              ["500+", "Projects Completed"],
+              ["1 Lac+", "Products Delivered"],
             ].map(([n, l]) => (
 
               <div key={l}>
