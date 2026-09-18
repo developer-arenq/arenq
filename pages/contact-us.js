@@ -249,13 +249,7 @@ export default function ContactPage() {
                 <p className="font-body text-sm mt-2" style={{ color: 'hsl(30 12% 55%)' }}>
                   Explore ARENQ advanced energy solutions.
                 </p>
-                <Link
-                  href="/category/all"
-                  className="mt-6 px-6 py-3 rounded-xl text-white font-semibold font-body text-sm"
-                  style={{ background: 'hsl(12 55% 38%)' }}
-                >
-                  Explore Products
-                </Link>
+            
               </div>
             ) : (
               <>
