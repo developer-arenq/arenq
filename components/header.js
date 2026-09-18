@@ -339,7 +339,7 @@ export default function Header() {
 
             <button
               onClick={() => setMobileOpen(true)}
-              className="md:hidden p-2 rounded-lg transition-colors hover:bg-white"
+              className="md:hidden p-2 rounded-lg transition-colors bg-white"
               data-testid="button-hamburger"
               aria-label="Open menu"
             >
@@ -752,7 +752,7 @@ export default function Header() {
                 )}
               </div>
 
-              <div className="mt-2 pt-2 border-t" style={{ borderColor: 'hsl(210 20% 86%)' }}>
+              <div className="mt-2 pt-2 font-bold border-t" style={{ borderColor: 'hsl(210 20% 86%)' }}>
                 {[
 
 

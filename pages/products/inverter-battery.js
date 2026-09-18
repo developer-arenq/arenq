@@ -25,7 +25,7 @@ const heroSlides = [
   "https://arenq.s3.ap-south-1.amazonaws.com/2kva.png",
   "/images/products/invert-1.webp",
   "/images/products/Invert-2.webp",
-  "/images/products/New-Project-50.webp",
+  // "/images/products/New-Project-50.webp",
 ];
 
 const features = [
