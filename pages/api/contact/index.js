@@ -17,14 +17,16 @@ const Contact = async (req, res) => {
      */
     const cleanPhone = phone.replace(/\D/g, "");
 
-    // last 10 digits = local number (works well for most cases incl. India)
     const localNumber = cleanPhone.slice(-10);
     const countryCode = "+" + cleanPhone.slice(0, cleanPhone.length - 10);
 
     const fullPhone = `${countryCode} ${localNumber}`;
 
+    // Zoho SMTP
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: "smtp.zoho.in",
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.MAIL,
         pass: process.env.MAIL_SECRET,
@@ -34,15 +36,20 @@ const Contact = async (req, res) => {
     await transporter.verify();
 
     const mailOptions = {
-      from: process.env.MAIL,
+      from: `"Arenq Website" <${process.env.MAIL}>`,
       to: process.env.MAIL,
+      replyTo: email,
       subject: `New Contact Request: ${subject}`,
+
       html: `
 <!DOCTYPE html>
 <html>
 <body style="font-family:Arial;background:#f4f6f8;padding:20px">
   <div style="max-width:600px;margin:auto;background:#ffffff;padding:24px;border-radius:8px">
-    <h2 style="color:#2f855a;text-align:center">New Contact Request</h2>
+
+    <h2 style="color:#2f855a;text-align:center">
+      New Contact Request
+    </h2>
 
     <p><strong>Name:</strong> ${fullname}</p>
     <p><strong>Email:</strong> ${email}</p>
@@ -56,6 +63,7 @@ const Contact = async (req, res) => {
     <p style="margin-top:30px;font-size:12px;color:#888;text-align:center">
       This email was sent from the Arenq contact form.
     </p>
+
   </div>
 </body>
 </html>
@@ -64,10 +72,16 @@ const Contact = async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ message: "Contact request sent successfully" });
+    res.status(200).json({
+      message: "Contact request sent successfully",
+    });
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
+    console.error("MAIL ERROR:", error);
+
+    res.status(500).json({
+      error: "Server error",
+    });
   }
 };
 
