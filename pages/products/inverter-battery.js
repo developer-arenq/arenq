@@ -23,6 +23,7 @@ import {
 const heroSlides = [
   "https://arenq.s3.ap-south-1.amazonaws.com/1kva.png",
   "https://arenq.s3.ap-south-1.amazonaws.com/2kva.png",
+  "https://arenq.s3.ap-south-1.amazonaws.com/3098455.png",
   "/images/products/invert-1.webp",
   "/images/products/Invert-2.webp",
   // "/images/products/New-Project-50.webp",
@@ -305,11 +306,10 @@ export default function InverterBattery() {
                 <button
                   key={i}
                   onClick={() => setSlide(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === slide
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === slide
                       ? "w-6 bg-[#FFAF00]"
                       : "w-1.5 bg-white/70 hover:bg-white"
-                  }`}
+                    }`}
                   aria-label={`Slide ${i + 1}`}
                 />
 
@@ -415,6 +415,7 @@ export default function InverterBattery() {
 
             <div className="mt-8 flex flex-wrap items-center gap-6">
 
+              {/* Enquire Now */}
               <motion.a
                 href="/contact-us/"
                 whileHover={{
@@ -431,23 +432,59 @@ export default function InverterBattery() {
                 }}
               >
                 Enquire Now
-
                 <ArrowRight size={18} />
-
               </motion.a>
-
-
-              <a
+               
+  <a
                 href="/images/brochure/Inverter-Batteries.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
               >
-
                 <FileDown size={20} />
+                 Inverter Battery
+              </a>
+              {/* ESS PowerX */}
+              <a
+                href="/images/brochure/ess-powerX.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
+              >
+                <FileDown size={20} />
+                ESS PowerX
+              </a>
 
-                Download Brochure
+              {/* Home Inverter Battery */}
+            
+              <a
+                href="/images/brochure/Home_inverter_battery.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
+              >
+                <FileDown size={20} />
+                Home Inverter Battery
+              </a>
 
+              {/* PowerX Pro */}
+              <a
+                href="/images/brochure/powerxPro.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
+              >
+                <FileDown size={20} />
+                PowerX Pro
+              </a>
+              <a
+                href="/images/brochure/stackable.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
+              >
+                <FileDown size={20} />
+                Stackable
               </a>
 
             </div>

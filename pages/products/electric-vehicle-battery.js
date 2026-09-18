@@ -136,7 +136,7 @@ export default function ElectricVehicleBattery() {
                         <span className="text-[#FFB600]">Future of Electric Mobility.</span>
                     </motion.h1>
 
-                   
+
                 </div>
             </section>
             {/* Hero */}
@@ -176,8 +176,8 @@ export default function ElectricVehicleBattery() {
                                     key={i}
                                     onClick={() => setSlide(i)}
                                     className={`h-1.5 rounded-full transition-all duration-300 ${i === slide
-                                            ? "w-6 bg-[#FFAF00]"
-                                            : "w-1.5 bg-white/70 hover:bg-white"
+                                        ? "w-6 bg-[#FFAF00]"
+                                        : "w-1.5 bg-white/70 hover:bg-white"
                                         }`}
                                     aria-label={`Slide ${i + 1}`}
                                 />
@@ -238,6 +238,7 @@ export default function ElectricVehicleBattery() {
                                 <ArrowRight size={18} />
                             </motion.a>
 
+                            {/* EV Battery */}
                             <a
                                 href="/images/brochure/EV-Battery.pdf"
                                 target="_blank"
@@ -245,7 +246,18 @@ export default function ElectricVehicleBattery() {
                                 className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
                             >
                                 <FileDown size={20} />
-                                Download Brochure
+                                EV Battery
+                            </a>
+
+                            {/* E-Scooter Battery */}
+                            <a
+                                href="/images/brochure/E-Scooter_Battery.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
+                            >
+                                <FileDown size={20} />
+                                E-Scooter Battery
                             </a>
                         </div>
                     </motion.div>

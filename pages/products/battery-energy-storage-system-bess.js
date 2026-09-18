@@ -163,12 +163,15 @@ export default function BESS() {
                 />
               </motion.div>
             </AnimatePresence>
+
             <div className="absolute bottom-5 inset-x-0 flex justify-center gap-2">
               {heroSlides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setSlide(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${i === slide ? "w-6 bg-[#FFAF00]" : "w-1.5 bg-white/70 hover:bg-white"
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === slide
+                    ? "w-6 bg-[#FFAF00]"
+                    : "w-1.5 bg-white/70 hover:bg-white"
                     }`}
                   aria-label={`Slide ${i + 1}`}
                 />
@@ -194,6 +197,7 @@ export default function BESS() {
             <span className="mt-5 inline-block text-[#FFAF00] font-semibold uppercase tracking-[3px]">
               BESS
             </span>
+
             <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-[#0A528F] leading-tight">
               Smart, Scalable, Solar-Ready Energy Storage
             </h1>
@@ -204,21 +208,21 @@ export default function BESS() {
               currently <strong>under development</strong>.
               Designed for{" "}
               <strong>
-                commercial, industrial, and hybrid solar
-                environments
+                commercial, industrial, and hybrid solar environments
               </strong>
               , it combines <strong>robust capacity</strong>,{" "}
               <strong>smart energy management</strong>, and{" "}
               <strong>modular scalability</strong>.
             </p>
+
             <p className="mt-4 text-gray-600 leading-8">
               With dual <strong>48V 1000Ah LiFePO₄ battery banks</strong>,
               the system aims to deliver <strong>96 kWh</strong> of
               clean, dependable energy — engineered for long
-              life, advanced safety, and seamless solar
-              integration.
+              life, advanced safety, and seamless solar integration.
             </p>
 
+            {/* Buttons */}
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <motion.a
                 href="/contact-us/"
@@ -234,15 +238,138 @@ export default function BESS() {
                 Enquire Now
                 <ArrowRight size={18} />
               </motion.a>
-              <a
-                href="/images/brochure/BESS.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
-              >
-                <FileDown size={20} />
-                Download Brochure
-              </a>
+
+              {/* Brochure Dropdown */}
+              <div className="relative group">
+                {/* <button
+                  type="button"
+                  className="inline-flex items-center gap-2 text-[#0A528F] font-semibold hover:text-[#FFAF00] transition-colors"
+                >
+                  <FileDown size={20} />
+                  Download Brochure
+                  <ChevronRight
+                    size={16}
+                    className="rotate-90 transition-transform group-hover:translate-y-1"
+                  />
+                </button> */}
+
+                {/* PDF List */}
+                <div className="mt-8">
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {[
+                      {
+                        name: "BESS",
+                        file: "BESS.pdf",
+                      },
+                      {
+                        name: "BESS Energy Storage",
+                        file: "bess_energy_storage.pdf",
+                      },
+                      {
+                        name: "BESS Liquid Cooled",
+                        file: "bess_liquid_cooled.pdf",
+                      },
+                      {
+                        name: "BESS Liquid Cooled Cabinet",
+                        file: "BESS_liquid_cooled_cabinet.pdf",
+                      },
+                      {
+                        name: "BESS Liquid Cooled INT Cabinet",
+                        file: "BESS_liquid_cooled_int_cabinet.pdf",
+                      },
+                      {
+                        name: "BESS Liquid Cooled Integrated Cabinet",
+                        file: "BESS_liquidcooled_inte_cabinet.pdf",
+                      },
+                      {
+                        name: "BESS Powerstring",
+                        file: "bess_powerstring.pdf",
+                      },
+                      {
+                        name: "BESS PV Energy Storage",
+                        file: "BESS_PV_Energy_storage.pdf",
+                      },
+                      {
+                        name: "BESS PV ESS All-in-One",
+                        file: "BESS_PV_ESS_alline.pdf",
+                      },
+                    ].map((brochure) => (
+                      <motion.a
+                        key={brochure.file}
+                        href={`/images/brochure/${brochure.file}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ y: -2 }}
+                        className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl border border-gray-200 bg-white hover:border-[#0A528F] hover:shadow-md transition-all duration-300 group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-[#0A528F]/10 flex items-center justify-center shrink-0">
+                            <FileDown
+                              size={18}
+                              className="text-[#0A528F] group-hover:text-[#FFAF00] transition-colors"
+                            />
+                          </div>
+
+                          <span className="text-sm font-semibold text-gray-700 group-hover:text-[#0A528F] transition-colors">
+                            {brochure.name}
+                          </span>
+                        </div>
+
+                        <ArrowRight
+                          size={17}
+                          className="text-gray-400 group-hover:text-[#FFAF00] group-hover:translate-x-1 transition-all"
+                        />
+                      </motion.a>
+                    ))}
+                  </div>
+                </div><div className="absolute left-0 top-full mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50 invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  {[
+                    {
+                      name: "BESS Energy Storage",
+                      file: "bess_energy_storage.pdf",
+                    },
+                    {
+                      name: "BESS Liquid Cooled",
+                      file: "bess_liquid_cooled.pdf",
+                    },
+                    {
+                      name: "BESS Liquid Cooled Cabinet",
+                      file: "BESS_liquid_cooled_cabinet.pdf",
+                    },
+                    {
+                      name: "BESS Liquid Cooled INT Cabinet",
+                      file: "BESS_liquid_cooled_int_cabinet.pdf",
+                    },
+                    {
+                      name: "BESS Liquid Cooled Integrated Cabinet",
+                      file: "BESS_liquidcooled_inte_cabinet.pdf",
+                    },
+                    {
+                      name: "BESS Powerstring",
+                      file: "bess_powerstring.pdf",
+                    },
+                    {
+                      name: "BESS PV Energy Storage",
+                      file: "BESS_PV_Energy_storage.pdf",
+                    },
+                    {
+                      name: "BESS PV ESS All-in-One",
+                      file: "BESS_PV_ESS_alline.pdf",
+                    },
+                  ].map((brochure) => (
+                    <a
+                      key={brochure.file}
+                      href={`/images/brochure/${brochure.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-gray-700 hover:bg-[#0A528F] hover:text-white transition-all duration-200"
+                    >
+                      <FileDown size={18} className="shrink-0" />
+                      <span>{brochure.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
