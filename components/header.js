@@ -629,7 +629,7 @@ export default function Header() {
 
                 {/* FAQs */}
                 <button
-                  onClick={() => router.push("/faqs-page")}
+                  onClick={() => router.push("/faqs")}
                   className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 
                     ${isScrolled || isNavHovered
                       ? "text-[hsl(218_55%_12%)] hover:text-[#0A528F]"
