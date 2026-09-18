@@ -15,6 +15,7 @@ import Videosec from "../components/Videosec";
 import About from "../components/About-Arenq";
 import HeroPowerAnimation from "../components/Power";
 import HomePage from "../components/Home";
+import OurClients from "../components/OurClients";
 /* ---------------------------
    Intersection Lazy Wrapper
 ---------------------------- */
@@ -174,12 +175,15 @@ export default function Home() {
         <Sourcing />
         <WhyChooseUs />
         <Process />
+
         <Videosec />
         {/* <Quality/> */}
         {/* <CustomersSay /> */}
         <OurStory />
+
         {/* <Occasion /> */}
         <Certification />
+        <OurClients />
       </main>
     </>
   );
