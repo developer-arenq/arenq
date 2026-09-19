@@ -42,7 +42,7 @@ const OurStory = () => {
                         <div className="relative fade-up">
 
                             <img
-                                src="https://arenq.co.in/wp-content/uploads/2025/08/BESS-Hero-Image1_page-0001-2048x1152.jpg"
+                                src="/images/products/Bess.webp"
                                 alt="ARENQ Energy Solutions"
                                 className="rounded-3xl object-cover w-full shadow-xl"
                                 style={{

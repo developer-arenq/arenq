@@ -37,7 +37,7 @@ const Sourcing = () => {
             desc:
                 'High performance lithium battery solutions designed for electric mobility with longer life and reliable power output.',
             image:
-                'https://arenq.co.in/wp-content/uploads/2025/06/11-2.jpeg',
+                '/images/products/11-1.webp',
             color: 'hsl(145 35% 22%)',
             icon: '🚗',
             quote:
@@ -55,7 +55,7 @@ const Sourcing = () => {
             desc:
                 'Smart solar energy storage solutions built for homes, businesses and renewable power applications.',
             image:
-                'https://arenq.co.in/wp-content/uploads/2025/07/13634.jpg',
+                '/images/products/13634.webp',
             color: 'hsl(12 55% 38%)',
             icon: '☀️',
             quote:
@@ -73,7 +73,7 @@ const Sourcing = () => {
             desc:
                 'Reliable industrial battery systems engineered for continuous performance and demanding applications.',
             image:
-                'https://arenq.co.in/wp-content/uploads/2025/08/49266.jpg',
+                '/images/products/49266.webp',
             color: 'hsl(28 65% 44%)',
             icon: '🏭',
             quote:
@@ -91,7 +91,7 @@ const Sourcing = () => {
             desc:
                 'Advanced battery energy storage systems supporting telecom infrastructure and future energy needs.',
             image:
-                'https://arenq.co.in/wp-content/uploads/2025/07/45509.jpg',
+                '/images/products/45509.webp',
             color: 'hsl(200 70% 40%)',
             icon: '🔋',
             quote:
