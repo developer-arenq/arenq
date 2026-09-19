@@ -58,12 +58,12 @@ const coreLeadership = [
         image: "/images/Visionaries/team-02.webp",
         bio: "A results-driven Operations Leader with hands-on expertise in Lead Acid Battery, Lithium Battery, and EV Manufacturing. An Electrical Engineer overseeing end-to-end plant functions, driving quality, productivity, and safety through lean practices like QCC, Kaizen, 5S, and JIT — with 22 years of experience.",
     },
-    {
-        name: "Naresh Arora",
-        role: "Marketing Director",
-        image: "/images/Visionaries/team-02.webp",
-        bio: "A results-driven Operations Leader and Electrical Engineer with 22 years of experience across Lead Acid Battery, Lithium Battery, and EV Manufacturing. Experienced in overseeing end-to-end plant operations, driving quality, productivity, and safety through lean manufacturing practices including QCC, Kaizen, 5S, and JIT."
-    },
+    // {
+    //     name: "Naresh Arora",
+    //     role: "Marketing Director",
+    //     image: "/images/Visionaries/team-02.webp",
+    //     bio: "A results-driven Operations Leader and Electrical Engineer with 22 years of experience across Lead Acid Battery, Lithium Battery, and EV Manufacturing. Experienced in overseeing end-to-end plant operations, driving quality, productivity, and safety through lean manufacturing practices including QCC, Kaizen, 5S, and JIT."
+    // },
     // {
     //     name: "Amol Chaudhary",
     //     role: "Production Manager",
