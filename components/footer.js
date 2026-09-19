@@ -247,7 +247,7 @@ export default function Footer() {
               >
 
                 <Image
-                  src="https://arenq.co.in/wp-content/uploads/2025/06/Arenq-logo-animation.2.gif"
+                  src="/images/logo/Arenq-logo-animation.2.gif"
                   width={170}
                   height={70}
                   alt="Logo"

@@ -35,7 +35,7 @@ const Loader = () => {
         >
 
           <img
-            src="https://arenq.co.in/wp-content/uploads/2025/06/Arenq-logo-animation.2.gif"
+            src="/images/logo/Arenq-logo-animation.2.gif"
             alt="Loading..."
             className="
             rounded-full 
