@@ -1,117 +1,65 @@
-import dbConnect from "../database/conn";
-import Product from "../models/productSchema";
 
 export async function getServerSideProps({ res }) {
   const siteUrl = "https://www.arenq.co.in";
 
-  await dbConnect();
-
-  const products = await Product.find(
-    {},
-    "slug updatedAt images name alt_text main_image category_id"
-  ).lean();
-
-  /* 🔥 STATIC PAGES */
+  // Static website pages
   const staticPages = [
-    "",
     "/shop",
     "/about-us",
     "/contact-us",
   ];
 
+  // Product pages - based on pages available in /products
+  const productPages = [
+    "agricultural-battery",
+    "battery-energy-storage-system-bess",
+    "electric-vehicle-battery",
+    "electromagnetic-crane-battery",
+    "engine-cranking-battery",
+    "golf-cart-buggy-battery",
+    "industrial-ups-battery",
+    "inverter-battery",
+    "lead-acid-vs-lithium-battery",
+    "manufacturing-setup-capacity",
+    "marine-battery",
+    "medical-battery",
+    "mhe-battery",
+    "power-sector-battery",
+    "robotics-battery",
+    "solar-street-light-battery",
+    "telecom-battery",
+  ];
+
+  // Static URLs
   const staticUrls = staticPages
     .map(
       (page) => `
     <url>
       <loc>${siteUrl}${page}</loc>
-      <changefreq>daily</changefreq>
-      <priority>${page === "" ? "1.0" : "0.9"}</priority>
-    </url>
-  `
-    )
-    .join("");
-
-  /* 🔥 CATEGORY URLS */
-  const categories = [
-    "industrial-ups-battery",
-    "ev-battery",
-    "engine-cranking-battery",
-    "golf-cart-buggy-battery",
-    "marine-battery",
-    "agv-battery",
-    "mhe-battery",
-    "power-sector-battery",
-    "electromagnetic-crane-battery",
-    "bess-battery",
-    "telecom-battery",
-    "medical-battery",
-    "inverter-battery",
-    "agricultural-battery",
-    "solar-street-light-battery",
-  ];
-
-  const categoryUrls = categories
-    .map(
-      (cat) => `
-    <url>
-      <loc>${siteUrl}/collections/${cat}</loc>
       <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
+      <priority>${page === "/shop" ? "1.0" : "0.8"}</priority>
     </url>
   `
     )
     .join("");
 
-  /* 🔥 PRODUCT URLS */
-  const productUrls = products
-    .map((product) => {
-      const url = `${siteUrl}/products/${product.slug}`;
-
-      const lastmod = new Date(
-        product.updatedAt || Date.now()
-      ).toISOString();
-
-      const rawImages = [
-        product.main_image,
-        ...(Array.isArray(product.images) ? product.images : []),
-      ].filter(Boolean);
-
-      const images = [...new Set(rawImages)];
-
-      const imageBlocks = images
-        .slice(0, 5)
-        .map(
-          (img) => `
-      <image:image>
-        <image:loc>${img}</image:loc>
-        <image:title><![CDATA[${product.name}]]></image:title>
-        <image:caption><![CDATA[${product.alt_text || product.name
-            }]]></image:caption>
-      </image:image>
-    `
-        )
-        .join("");
-
-      return `
-      <url>
-        <loc>${url}</loc>
-        <lastmod>${lastmod}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-        ${imageBlocks}
-      </url>
-    `;
-    })
+  // Product URLs
+  const productUrls = productPages
+    .map(
+      (page) => `
+    <url>
+      <loc>${siteUrl}/products/${page}</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.9</priority>
+    </url>
+  `
+    )
     .join("");
 
-  /* 🔥 FINAL XML */
+  // Final XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${staticUrls}
-  ${categoryUrls}
   ${productUrls}
 </urlset>`;
 
@@ -132,3 +80,4 @@ export async function getServerSideProps({ res }) {
 export default function SiteMap() {
   return null;
 }
+
