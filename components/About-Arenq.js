@@ -326,19 +326,19 @@ const FEATURES = [
 
 const STATS = [
     {
-        value: '10',
+        value: '20',
         suffix: '+',
         label: 'Battery Models',
         delay: '0s',
     },
     {
-        value: '25',
+        value: '50',
         suffix: '+',
         label: 'Business Partners',
         delay: '0.1s',
     },
     {
-        value: '100',
+        value: '500',
         suffix: '+',
         label: 'Projects Supported',
         delay: '0.2s',
