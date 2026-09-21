@@ -588,7 +588,7 @@ export default function Header() {
                 </div>
 
 
-                {/* <button
+                <button
                   onClick={() => router.push("/gallery")}
                   className={`px-3 py-2 rounded-lg text-sm font-bold transition-colors duration-200 hover:bg-white 
                     ${isScrolled || isNavHovered
@@ -600,7 +600,7 @@ export default function Header() {
                   }}
                 >
                   Gallery
-                </button> */}
+                </button>
 
                 {/* Blogs */}
                 <button

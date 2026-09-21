@@ -68,8 +68,8 @@ const journey = [
     },
     {
         year: "2025",
-        title: "Distribution network started with NNP Power India LLP",
-        image: "/images/about/NNP.webp",
+        title: "Pan India Distribution Network Started",
+        image: "/images/about/pan.jpg",
     },
     {
         year: "2025",
@@ -283,11 +283,10 @@ export default function About() {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true, amount: 0.3 }}
                                         transition={{ duration: 0.6, ease: "easeOut" }}
-                                        className={`relative flex flex-col sm:flex-row items-start gap-5 pl-12 sm:pl-0 ${
-                                            isEven
+                                        className={`relative flex flex-col sm:flex-row items-start gap-5 pl-12 sm:pl-0 ${isEven
                                                 ? "sm:flex-row"
                                                 : "sm:flex-row-reverse"
-                                        }`}
+                                            }`}
                                     >
                                         {/* Dot */}
                                         <span className="absolute left-4 sm:left-1/2 top-1 h-3 w-3 -translate-x-1/2 rounded-full bg-[#FFAF00] ring-4 ring-white" />
@@ -295,11 +294,10 @@ export default function About() {
                                         {/* Card */}
                                         <div className="sm:w-1/2 sm:px-8 w-full">
                                             <div
-                                                className={`rounded-2xl bg-white shadow-lg overflow-hidden border border-gray-100 ${
-                                                    isEven
+                                                className={`rounded-2xl bg-white shadow-lg overflow-hidden border border-gray-100 ${isEven
                                                         ? "sm:ml-auto sm:mr-0"
                                                         : "sm:mr-auto sm:ml-0"
-                                                }`}
+                                                    }`}
                                                 style={{ maxWidth: "420px" }}
                                             >
                                                 <div className="relative w-full aspect-video">

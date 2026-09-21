@@ -439,6 +439,10 @@ export default function Footer() {
                 <Mail size={15} style={{ color: '#FFB600' }} />
                 <a href="mailto:info@arenq.co.in">info@arenq.co.in</a>
               </li>
+              <li className="flex items-center gap-2.5 text-sm opacity-70">
+                <Mail size={15} style={{ color: '#FFB600' }} />
+                <a href="mailto:sales@arenq.co.in">sales@arenq.co.in</a>
+              </li>
             </ul>
 
             <div className="mt-4 text-xs opacity-60">

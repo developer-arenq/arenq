@@ -22,8 +22,8 @@ import {
 } from "lucide-react";
 
 const heroSlides = [
-  "/images/products/Bess.webp",
-  "/images/products/solar-container-unit-3d-rendering-concept-white-industrial-battery-energy-storage-container-with-mounted-black-solar-panels-situated-fresh-green-grass-late-sunny-weather-scaled.webp",
+  "/images/products/Bess.png",
+  "/images/products/solar-container.png",
 ];
 
 const features = [

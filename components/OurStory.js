@@ -42,7 +42,7 @@ const OurStory = () => {
                         <div className="relative fade-up">
 
                             <img
-                                src="/images/products/Bess.webp"
+                                src="/images/products/Bess.png"
                                 alt="ARENQ Energy Solutions"
                                 className="rounded-3xl object-cover w-full shadow-xl"
                                 style={{

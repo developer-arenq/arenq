@@ -22,7 +22,7 @@ const galleryData = [
     {
         id: 1,
         category: "Factory",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/16-4.jpeg",
+        image: "/images/uploads/16-4.jpeg",
         title: "Battery Manufacturing",
         description:
             "Automated cell assembly line producing high-density lithium battery packs under strict quality control.",
@@ -30,7 +30,7 @@ const galleryData = [
     {
         id: 7,
         category: "Factory",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/11-2.jpeg",
+        image: "/images/uploads/11-2.jpeg",
         title: "Battery Manufacturing",
         description:
             "Automated cell assembly line producing high-density lithium battery packs under strict quality control.",
@@ -38,7 +38,7 @@ const galleryData = [
     {
         id: 2,
         category: "Factory",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/13-3.jpeg",
+        image: "/images/uploads/13-3.jpeg",
         title: "Production Line",
         description:
             "Precision testing stations ensuring every battery pack meets safety and performance standards.",
@@ -46,7 +46,7 @@ const galleryData = [
     {
         id: 3,
         category: "Expo",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/Expo.jpeg",
+        image: "/images/uploads/Expo.jpeg",
         title: "Industrial Expo",
         description:
             "ARENQ showcasing next-gen lithium technology to industry leaders and partners.",
@@ -54,7 +54,7 @@ const galleryData = [
     {
         id: 5,
         category: "Products",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/E-Kart.jpeg",
+        image: "/images/uploads/E-Kart.jpeg",
         title: "Golf Cart Battery",
         description:
             "Compact, high-cycle-life battery designed for golf carts and utility electric vehicles.",
@@ -62,24 +62,24 @@ const galleryData = [
     {
         id: 9,
         category: "Products",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/Expo-1.jpeg",
+        image: "/images/uploads/Expo-1.jpeg",
         title: "EV Battery",
         description:
             "Purpose-built lithium battery pack engineered for e-auto and light electric vehicles.",
     },
-    {
-        id: 4,
-        category: "Products",
-        image: "https://arenq.co.in/wp-content/uploads/2025/06/DSC07669-copy-1-scaled-1.jpg",
-        title: "EV Battery",
-        description:
-            "Purpose-built lithium battery pack engineered for e-auto and light electric vehicles.",
-    },
+    // {
+    //     id: 4,
+    //     category: "Products",
+    //     image: "/images/uploads/DSC07669-copy-1-scaled-1.jpg",
+    //     title: "EV Battery",
+    //     description:
+    //         "Purpose-built lithium battery pack engineered for e-auto and light electric vehicles.",
+    // },
     {
         id: 6,
         category: "Events",
         image:
-            "https://arenq.co.in/wp-content/uploads/2025/06/DSC07679-copy-4.jpg",
+            "/images/uploads/DSC07679-copy-4.jpg",
         title: "Corporate Event",
         description:
             "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
@@ -88,7 +88,7 @@ const galleryData = [
         id: 8,
         category: "Events",
         image:
-            "https://arenq.co.in/wp-content/uploads/2025/06/WhatsApp-Image-2023-12-05-at-16.34.29-1-3.jpeg",
+            "/images/uploads/WhatsApp-Image-2023-12-05-at-16.34.29-1-3.jpeg",
         title: "Corporate Event",
         description:
             "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
@@ -97,7 +97,7 @@ const galleryData = [
         id: 10,
         category: "Events",
         image:
-            "https://arenq.co.in/wp-content/uploads/2025/06/Expo-0-1.jpeg",
+            "/images/uploads/Expo-0-1.jpeg",
         title: "Corporate Event",
         description:
             "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
@@ -390,7 +390,7 @@ export default function Gallery() {
                             className="absolute inset-0 w-full h-full object-cover rounded-3xl"
                         >
                             <source
-                                src="https://arenq.co.in/wp-content/uploads/2025/06/1-KAL-E-Cart-AD-2K-MP4.mp4"
+                                src="/images/uploads/1-KAL-E-Cart-AD-2K-MP4.mp4"
                                 type="video/mp4"
                             />
                         </video>
