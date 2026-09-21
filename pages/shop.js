@@ -102,19 +102,19 @@ export default function Shop({ initialProducts, pagination, initialCategory }) {
   return (
     <>
       <Head>
-        <title>Shop | Arenq</title>
+        <title>Products | Arenq – Energy Storage Solutions</title>
         <meta
           name="description"
-          content="Explore authentic mountain-made products — Tea, Chocolates, Handicrafts, and more."
+          content="Explore Arenq's range of advanced energy storage products and Battery Energy Storage Systems (BESS) built for reliable, efficient, and scalable power solutions."
         />
       </Head>
 
       <main className="bg-[#f5f9fc]">
-       
+
 
         {/* ---------------- Product Section ---------------- */}
         <section className="w-full md:w-[85%] mx-auto px-2 sm:px-4 py-10">
-          <h1 className="text-2xl font-semibold text-[#0A528F] mb-6">
+          <h1 className="text-2xl font-semibold text-[#0A528F] mb-6 mt-6">
             Our Collection
           </h1>
 
@@ -185,8 +185,8 @@ export default function Shop({ initialProducts, pagination, initialCategory }) {
                         >
                           <span
                             className={`px-3 py-2 border-r ${p === currentPage
-                                ? "bg-black text-white font-semibold"
-                                : "hover:bg-gray-100"
+                              ? "bg-black text-white font-semibold"
+                              : "hover:bg-gray-100"
                               }`}
                           >
                             {p}
