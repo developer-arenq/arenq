@@ -88,7 +88,7 @@ const categories = [
   {
     name: "Robotics Battery",
     sub: "Automation Energy",
-    category: "agv-battery",
+    category: "robotics-battery",
     href: "/products/robotics-battery",
     img: "/images/products/7297.webp",
     icon: "🤖",
@@ -122,7 +122,7 @@ const categories = [
     sub: "Battery Energy Storage System",
     category: "battery-energy-storage-system-bess",
     href: "/products/battery-energy-storage-system-bess",
-    img: "/images/products/Bess.webp",
+    img: "/images/products/Bess.png",
     icon: "🔋",
   },
   {
@@ -264,7 +264,7 @@ font-bold mt-2
           </div>
 
           <Link
-            href="/search"
+            href="/shop"
             className="hidden md:flex items-center gap-2 text-sm font-semibold  hover:text-black transition"
             style={{
               color: "hsl(198 90% 40%)"
