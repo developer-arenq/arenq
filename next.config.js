@@ -1,21 +1,48 @@
 const withTM = require("next-transpile-modules")(["react-draft-wysiwyg"]);
+
 const webpack = require("webpack");
 
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
 
-
+  async redirects() {
+    return [
+      {
+        source: "/inverter-battery",
+        destination: "/products/inverter-battery",
+        permanent: true, // 301 redirect
+      },
+    ];
+  },
 
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "arenq.s3.ap-south-1.amazonaws.com" },
-      { protocol: "https", hostname: "arenq.s3.amazonaws.com" },
-      { protocol: "https", hostname: "res.cloudinary.com" },
-      { protocol: "https", hostname: "www.arenq.co.in" },
-      { protocol: "https", hostname: "arenq.co.in" },
+      {
+        protocol: "https",
+        hostname: "arenq.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "arenq.s3.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.arenq.co.in",
+      },
+      {
+        protocol: "https",
+        hostname: "arenq.co.in",
+      },
     ],
+
     formats: ["image/avif", "image/webp"],
+
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
@@ -28,6 +55,7 @@ const nextConfig = {
         })
       );
     }
+
     return config;
   },
 };
