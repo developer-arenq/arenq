@@ -38,23 +38,7 @@ export default function Document() {
 
         {/* ---------------- Google Analytics ---------------- */}
 
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-4XFEJF8XST"
-        />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-4XFEJF8XST');
-            `,
-          }}
-        />
-
+    
         {/* ---------------- Structured Data ---------------- */}
         <script
           type="application/ld+json"
