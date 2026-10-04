@@ -9,16 +9,52 @@ export default function Document() {
         <meta charSet="UTF-8" />
 
         <meta name="robots" content="index,follow" />
+
         {/* ---------------- Resource Hints ---------------- */}
-        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://res.cloudinary.com"
+          crossOrigin="anonymous"
+        />
+
         <link
           rel="preconnect"
           href="https://arenq.s3.ap-south-1.amazonaws.com"
           crossOrigin="anonymous"
         />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* ---------------- Google Analytics ---------------- */}
+
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-4XFEJF8XST"
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-4XFEJF8XST');
+            `,
+          }}
+        />
+
         {/* ---------------- Structured Data ---------------- */}
         <script
           type="application/ld+json"
@@ -34,8 +70,10 @@ export default function Document() {
         />
 
         {/* ---------------- Site Verification ---------------- */}
-     
-        <meta name="google-site-verification" content="RFi1c7hBBAGrx9xQfHji7xFArADz4UQbTUN-f1_qaMo" />
+        <meta
+          name="google-site-verification"
+          content="RFi1c7hBBAGrx9xQfHji7xFArADz4UQbTUN-f1_qaMo"
+        />
       </Head>
 
       <body>
