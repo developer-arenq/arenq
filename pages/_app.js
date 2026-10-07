@@ -53,12 +53,10 @@ const CookieConsent = dynamic(
 ========================================================= */
 
 /*
-  IMPORTANT:
-  Replace this with the Measurement ID of your
-  actual ARENQ Google Analytics property.
+  ARENQ Google Analytics Measurement ID
 */
 
-const GA_ID = "G-9C84EK7RVK";
+const GA_ID = "G-6HJT9LZS8R";
 
 /* =========================================================
    Google Analytics Page View
@@ -208,7 +206,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       {/* =====================================================
-          GOOGLE ANALYTICS SCRIPT
+          GOOGLE ANALYTICS
       ====================================================== */}
 
       <Script
@@ -257,10 +255,16 @@ function MyApp({ Component, pageProps }) {
 
         <Provider store={store}>
 
-          {/* Cart Sync */}
+          {/* =================================================
+              CART SYNC
+          ================================================== */}
+
           <CartSync />
 
-          {/* Main Application */}
+          {/* =================================================
+              MAIN APPLICATION
+          ================================================== */}
+
           <AppComponent {...pageProps} />
 
           {/* =================================================
@@ -279,5 +283,9 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
+/* =========================================================
+   EXPORT
+========================================================= */
 
 export default MyApp;
