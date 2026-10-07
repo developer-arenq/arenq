@@ -58,6 +58,7 @@ const CookieConsent = dynamic(
 
 const GA_ID = "G-6HJT9LZS8R";
 
+
 /* =========================================================
    Google Analytics Page View
 ========================================================= */
@@ -157,7 +158,7 @@ function MyApp({ Component, pageProps }) {
     <Layout>
       <Component {...props} />
 
-      <CookieConsent />
+      {/* <CookieConsent /> */}
     </Layout>
   ));
 
