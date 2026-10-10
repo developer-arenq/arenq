@@ -223,7 +223,7 @@ const FreshStock = () => {
   return (
     <>
    
-      <div  className="relative mx-auto w-[100%] lg:w-[95%] max-w-[1400px] px-2 py-6">
+      <div  className="relative mx-auto w-[100%] lg:w-[95%]  px-2 py-6">
 
         <div className="w-full flex items-center justify-between gap-2">
           <div className="flex-1 flex justify-start">
@@ -247,7 +247,7 @@ const FreshStock = () => {
         {/* Left Arrow */}
         <button
           onClick={() => scrollBy("left")}
-          className="hidden sm:flex absolute top-1/2 -translate-y-1/2 -left-10 z-20 bg-white border border-gray-300 text-gray-700 rounded-full p-3 shadow-md hover:bg-gray-200 transition"
+          className="hidden sm:flex absolute top-1/2 -translate-y-1/2 -left-8 z-20 bg-white border border-gray-300 text-gray-700 rounded-full p-3 shadow-md hover:bg-gray-200 transition"
         >
           <MdKeyboardArrowLeft size={28} />
         </button>
@@ -450,7 +450,7 @@ min-h-[35px]
         {/* Right Arrow */}
         <button
           onClick={() => scrollBy("right")}
-          className="hidden sm:flex absolute top-1/2 -translate-y-1/2 -right-10 z-20 bg-white border border-gray-300 text-gray-700 rounded-full p-3 shadow-md hover:bg-gray-200 transition"
+          className="hidden sm:flex absolute top-1/2 -translate-y-1/2 -right-8 z-20 bg-white border border-gray-300 text-gray-700 rounded-full p-3 shadow-md hover:bg-gray-200 transition"
         >
           <MdKeyboardArrowRight size={28} />
         </button>

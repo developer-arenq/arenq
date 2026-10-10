@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
       active: true,
     })
       .sort({ updatedAt: -1 })
-      .limit(10)
+      .limit(20)
       .select(`
         _id
         name

@@ -384,8 +384,8 @@ export default function Home() {
         <CategorySlider />
 
         <About />
-
         <FreshStock />
+
 
         <HeroPowerAnimation />
 
