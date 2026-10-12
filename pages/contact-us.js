@@ -128,53 +128,72 @@ export default function ContactPage() {
   }, [showToast]);
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const errs = validate();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
-    }
+  const errs = validate();
 
-    setErrors({});
+  if (Object.keys(errs).length > 0) {
+    setErrors(errs);
+    return;
+  }
 
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
+  setErrors({});
+  setLoading(true);
+  setError(null);
+  setSuccess(null);
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+  try {
+    // Call our Next.js backend API
+    // Backend will send data to RAIYA CRM + Zoho Email
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullname: formData.fullname,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+      }),
+    });
+
+    const data = await res.json();
+
+    console.log("Contact API Response:", data);
+
+    if (res.ok) {
+      setSuccess("Your message has been sent successfully.");
+      setShowToast(true);
+
+      setFormData({
+        fullname: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
       });
+    } else {
+      console.error("Contact API Error:", data);
 
-      const data = await res.json();
-
-      if (res.status === 200) {
-        setSuccess("Your message has been sent successfully.");
-        setShowToast(true);
-
-        setFormData({
-          fullname: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        setError(data.error || "Something went wrong");
-      }
-    } catch {
-      setError("Server error. Please try again later.");
-    } finally {
-      setLoading(false);
+      setError(
+        data?.error ||
+        data?.message ||
+        "Something went wrong. Please try again."
+      );
     }
-  };
+  } catch (error) {
+    console.error("Contact Form Error:", error);
 
+    setError(
+      "Server error. Please try again later."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
   const inputClass = (field) =>
     `w-full px-4 py-3 rounded-xl border text-sm font-body transition-colors outline-none focus:ring-2 ${errors[field]
       ? 'border-red-400 bg-red-50 focus:ring-red-200'
@@ -249,7 +268,7 @@ export default function ContactPage() {
                 <p className="font-body text-sm mt-2" style={{ color: 'hsl(30 12% 55%)' }}>
                   Explore ARENQ advanced energy solutions.
                 </p>
-            
+
               </div>
             ) : (
               <>
@@ -492,7 +511,7 @@ export default function ContactPage() {
                   { icon: <Instagram size={18} />, label: 'Instagram', href: 'https://www.instagram.com/arenqindia', bg: 'hsl(300 60% 55%)' },
                   { icon: <Facebook size={18} />, label: 'Facebook', href: 'https://facebook.com/arenq', bg: 'hsl(220 60% 50%)' },
                   { icon: <Youtube size={18} />, label: 'YouTube', href: 'https://youtube.com/@arenq', bg: 'hsl(0 80% 55%)' },
-                 
+
                 ].map(s => (
                   <a
                     key={s.label}
