@@ -68,6 +68,7 @@ const Videosec = () => {
 
                         <div className="w-full max-w-4xl aspect-video overflow-hidden rounded-2xl shadow-2xl">
 
+                          
                             <video
                                 className="w-full h-full object-cover"
                                 src="https://arenq.co.in/wp-content/uploads/2026/04/Image_to_Video_Final_Clean.mp4"

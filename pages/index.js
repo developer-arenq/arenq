@@ -395,7 +395,7 @@ export default function Home() {
 
         <Process />
 
-        <Videosec />
+        {/* <Videosec /> */}
 
         {/* <Quality /> */}
 
