@@ -20,29 +20,40 @@ import {
 
 const galleryData = [
     {
-        id: 1,
-        category: "Factory",
-        image: "/images/uploads/16-4.jpeg",
-        title: "Battery Manufacturing",
+        id: 11,
+        category: "Client Visit",
+        image: "/images/uploads/1.jpg",
+        title: "Oman Client Visit",
         description:
-            "Automated cell assembly line producing high-density lithium battery packs under strict quality control.",
+            "Welcoming our valued clients from Oman to explore ARENQ's advanced energy solutions and manufacturing capabilities.",
     },
     {
-        id: 7,
-        category: "Factory",
-        image: "/images/uploads/11-2.jpeg",
-        title: "Battery Manufacturing",
+        id: 12,
+        category: "Client Visit",
+        image: "/images/uploads/2.jpg",
+        title: "Oman Client Visit",
         description:
-            "Automated cell assembly line producing high-density lithium battery packs under strict quality control.",
+            "Our Oman clients visiting the facility and experiencing ARENQ's technology, products, and manufacturing processes.",
+    },
+
+
+    {
+        id: 14,
+        category: "Client Visit",
+        image: "/images/uploads/4.jpg",
+        title: "Oman Client Visit",
+        description:
+            "Strengthening international partnerships through our valued Oman client's visit to ARENQ.",
     },
     {
-        id: 2,
-        category: "Factory",
-        image: "/images/uploads/13-3.jpeg",
-        title: "Production Line",
+        id: 15,
+        category: "Events",
+        image: "/images/uploads/6.jpg",
+        title: "Switching AVO",
         description:
-            "Precision testing stations ensuring every battery pack meets safety and performance standards.",
+            "A special interaction highlighting collaboration, technology, and innovative energy solutions.",
     },
+
     {
         id: 3,
         category: "Expo",
@@ -51,53 +62,27 @@ const galleryData = [
         description:
             "ARENQ showcasing next-gen lithium technology to industry leaders and partners.",
     },
-    {
-        id: 5,
-        category: "Products",
-        image: "/images/uploads/E-Kart.jpeg",
-        title: "Golf Cart Battery",
-        description:
-            "Compact, high-cycle-life battery designed for golf carts and utility electric vehicles.",
-    },
+    // {
+    //     id: 5,
+    //     category: "Products",
+    //     image: "/images/uploads/E-Kart.jpeg",
+    //     title: "Golf Cart Battery",
+    //     description:
+    //         "Compact, high-cycle-life battery designed for golf carts and utility electric vehicles.",
+    // },
     {
         id: 9,
         category: "Products",
         image: "/images/uploads/Expo-1.jpeg",
-        title: "EV Battery",
-        description:
-            "Purpose-built lithium battery pack engineered for e-auto and light electric vehicles.",
-    },
-    // {
-    //     id: 4,
-    //     category: "Products",
-    //     image: "/images/uploads/DSC07669-copy-1-scaled-1.jpg",
-    //     title: "EV Battery",
-    //     description:
-    //         "Purpose-built lithium battery pack engineered for e-auto and light electric vehicles.",
-    // },
-    {
-        id: 6,
-        category: "Events",
-        image:
-            "/images/uploads/DSC07679-copy-4.jpg",
         title: "Corporate Event",
         description:
             "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
     },
-    {
-        id: 8,
-        category: "Events",
-        image:
-            "/images/uploads/WhatsApp-Image-2023-12-05-at-16.34.29-1-3.jpeg",
-        title: "Corporate Event",
-        description:
-            "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
-    },
+   
     {
         id: 10,
         category: "Events",
-        image:
-            "/images/uploads/Expo-0-1.jpeg",
+        image: "/images/uploads/Expo-0-1.jpeg",
         title: "Corporate Event",
         description:
             "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
@@ -106,7 +91,7 @@ const galleryData = [
 
 const stats = [
     { icon: ImageIcon, value: "500+", label: "Project Images", color: "text-[#0A528F]" },
-    { icon: Building2, value: "75+", label: "Industrial Projects", color: "text-[#FFB600]" },
+    { icon: Building2, value: "500+", label: "Industrial Projects", color: "text-[#FFB600]" },
     { icon: Camera, value: "25+", label: "Events Covered", color: "text-[#0A528F]" },
     { icon: Award, value: "20+", label: "Years of Excellence", color: "text-[#FFB600]" },
 ];
@@ -428,6 +413,7 @@ export default function Gallery() {
                     </motion.div>
 
                     {/* Gallery Grid */}
+                    {/* Gallery Grid */}
                     <motion.div
                         layout
                         className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16"
@@ -440,40 +426,55 @@ export default function Gallery() {
                                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
+                                    transition={{
+                                        duration: 0.45,
+                                        delay: i * 0.06,
+                                        ease: "easeOut",
+                                    }}
                                     onClick={() => setSelectedImage(item)}
                                     className="group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-500"
                                 >
                                     <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+
+                                        {/* Image */}
                                         <img
                                             src={item.image}
                                             alt={item.title}
-
-
                                             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                                         />
 
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A528F]/90 via-[#0A528F]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                                            <div className="p-5 sm:p-6 translate-y-3 group-hover:translate-y-0 transition-transform duration-500">
-                                                <span className="inline-block bg-[#FFB600] text-black text-xs font-bold px-3 py-1 rounded-full">
-                                                    {item.category}
-                                                </span>
-                                                <h3 className="mt-4 text-white text-xl sm:text-2xl font-bold">
-                                                    {item.title}
-                                                </h3>
-                                            </div>
+                                        {/* Permanent Gradient */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+
+                                        {/* Details - Always Visible */}
+                                        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+
+                                            {/* Category */}
+                                            {/* <span className="inline-block bg-[#FFB600] text-black text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                                                {item.category}
+                                            </span> */}
+
+                                            {/* Title */}
+                                            <h3 className="mt-3 text-white text-xl sm:text-2xl font-bold">
+                                                {item.title}
+                                            </h3>
+
+                                            {/* Description */}
+                                            <p className="mt-2 text-white/85 text-sm leading-5 line-clamp-2 max-w-md">
+                                                {item.description}
+                                            </p>
+
                                         </div>
 
-                                        <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            <ZoomIn size={18} className="text-[#0A528F]" />
+                                        {/* Zoom Icon */}
+                                        <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                            <ZoomIn
+                                                size={18}
+                                                className="text-[#0A528F]"
+                                            />
                                         </div>
+
                                     </div>
-
-                                    {/* <div className="p-5">
-                                        <p className="text-gray-500 text-sm leading-6 line-clamp-2">
-                                            {item.description}
-                                        </p>
-                                    </div> */}
                                 </motion.div>
                             ))}
                         </AnimatePresence>
@@ -548,6 +549,7 @@ export default function Gallery() {
             </section>
 
             {/* Lightbox */}
+            {/* Lightbox */}
             <AnimatePresence>
                 {selectedImage && (
                     <motion.div
@@ -557,42 +559,73 @@ export default function Gallery() {
                         onClick={() => setSelectedImage(null)}
                         className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 sm:p-8"
                     >
+
+                        {/* Close Button */}
                         <motion.button
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             onClick={() => setSelectedImage(null)}
-                            className="absolute top-5 right-5 sm:top-8 sm:right-8 h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                            className="absolute top-5 right-5 sm:top-8 sm:right-8 h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-50"
+                            aria-label="Close image"
                         >
                             <X size={22} />
                         </motion.button>
 
+                        {/* Lightbox Content */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            initial={{
+                                opacity: 0,
+                                scale: 0.92,
+                                y: 20,
+                            }}
+                            animate={{
+                                opacity: 1,
+                                scale: 1,
+                                y: 0,
+                            }}
+                            exit={{
+                                opacity: 0,
+                                scale: 0.92,
+                                y: 20,
+                            }}
+                            transition={{
+                                duration: 0.3,
+                                ease: "easeOut",
+                            }}
                             onClick={(e) => e.stopPropagation()}
-                            className="max-w-4xl w-full"
+                            className="max-w-5xl w-full"
                         >
-                            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black">
+
+                            {/* Image Container */}
+                            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black shadow-2xl">
+
                                 <img
                                     src={selectedImage.image}
                                     alt={selectedImage.title}
-
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain"
                                 />
+
+                                {/* Bottom Gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
+
+                                {/* Image Details */}
+                                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+
+                                    {/* <span className="inline-block bg-[#FFB600] text-black text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full">
+                                        {selectedImage.category}
+                                    </span> */}
+
+                                    <h3 className="mt-3 text-white text-2xl sm:text-3xl font-bold">
+                                        {selectedImage.title}
+                                    </h3>
+
+                                    <p className="mt-2 text-white/80 text-sm sm:text-base leading-6 max-w-2xl">
+                                        {selectedImage.description}
+                                    </p>
+
+                                </div>
+
                             </div>
-                            {/* <div className="mt-5 text-center">
-                                <span className="inline-block bg-[#FFB600] text-black text-xs font-bold px-3 py-1 rounded-full">
-                                    {selectedImage.category}
-                                </span>
-                                <h3 className="mt-3 text-white text-2xl font-bold">
-                                    {selectedImage.title}
-                                </h3>
-                                <p className="mt-2 text-white/70 max-w-xl mx-auto">
-                                    {selectedImage.description}
-                                </p>
-                            </div> */}
                         </motion.div>
                     </motion.div>
                 )}

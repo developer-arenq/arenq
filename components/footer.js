@@ -355,6 +355,7 @@ export default function Footer() {
                 ['Products', '/search'],
                 ['Blogs', '/blog'],
                 ['Contact Us', '/contact-us'],
+                ['Privacy Policy', '/privacy-policy'],
               ].map(([label, href]) => (
                 <li key={label}>
                   <Link
