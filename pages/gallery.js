@@ -20,6 +20,14 @@ import {
 
 const galleryData = [
     {
+        id: 15,
+        category: "Awards & Recognition",
+        image: "/images/uploads/qcfi.jpeg",
+        title: "Young Entrepreneur Excellence Award – QCFI",
+        description:
+            "A proud moment for ARENQ as Mr. Jitendra Patil, Managing Director, was honoured with the Young Entrepreneur Excellence Award by QCFI in Surat, Gujarat.",
+    },
+    {
         id: 11,
         category: "Client Visit",
         image: "/images/uploads/1.jpg",
@@ -78,7 +86,7 @@ const galleryData = [
         description:
             "Team and leadership coming together to celebrate milestones in ARENQ's growth story.",
     },
-   
+
     {
         id: 10,
         category: "Events",
