@@ -756,7 +756,7 @@ export default function Header() {
                 {[
 
 
-                  { label: 'Blog', href: '/gallery' },
+                  { label: 'Gallery', href: '/gallery' },
                   { label: 'Blog', href: '/blog' },
 
                   { label: 'Contact Us', href: '/contact-us' },
