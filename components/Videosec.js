@@ -71,7 +71,7 @@ const Videosec = () => {
                           
                             <video
                                 className="w-full h-full object-cover"
-                                src="https://arenq.co.in/wp-content/uploads/2026/04/Image_to_Video_Final_Clean.mp4"
+                                src="/video/home/home.mp4"
                                 title="ARENQ Energy Solutions"
                                 autoPlay
                                 muted
