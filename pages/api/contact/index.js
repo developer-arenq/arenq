@@ -2,39 +2,134 @@ import main from "../../../database/conn";
 import nodemailer from "nodemailer";
 
 const Contact = async (req, res) => {
-  // Only POST request allowed
+  // =====================================================
+  // ONLY POST REQUEST ALLOWED
+  // =====================================================
+
   if (req.method !== "POST") {
     return res.status(405).json({
+      success: false,
       error: "Method not allowed",
     });
   }
 
   try {
+    // =====================================================
+    // DATABASE CONNECTION
+    // =====================================================
+
     await main();
 
-    const { fullname, email, phone, subject, message } = req.body;
+    // =====================================================
+    // GET FORM DATA
+    // =====================================================
 
-    // Validation
-    if (!fullname || !email || !phone || !subject || !message) {
+    const {
+      fullname,
+      email,
+      phone,
+      address,
+      city,
+      state,
+      pincode,
+      subject,
+      message,
+    } = req.body;
+
+    // =====================================================
+    // VALIDATION
+    // =====================================================
+
+    if (
+      !fullname?.trim() ||
+      !email?.trim() ||
+      !phone ||
+      !address?.trim() ||
+      !city?.trim() ||
+      !state?.trim() ||
+      !pincode?.trim() ||
+      !subject?.trim() ||
+      !message?.trim()
+    ) {
       return res.status(400).json({
+        success: false,
         error: "All fields are required",
       });
     }
 
-    /**
-     * Phone example:
-     * Incoming: 919607128284
-     * Email display: +91 9607128284
-     */
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    const cleanPhone = phone.replace(/\D/g, "");
+    if (!emailRegex.test(email.trim())) {
+      return res.status(400).json({
+        success: false,
+        error: "Please enter a valid email address",
+      });
+    }
+
+    // =====================================================
+    // PHONE NUMBER FORMATTING
+    // =====================================================
+
+    /*
+      react-phone-input-2 example:
+
+      Incoming:
+      919607128284
+
+      CRM:
+      919607128284
+
+      Email:
+      +91 9607128284
+    */
+
+    const cleanPhone = String(phone).replace(/\D/g, "");
+
+    if (cleanPhone.length < 10) {
+      return res.status(400).json({
+        success: false,
+        error: "Please enter a valid phone number",
+      });
+    }
 
     const localNumber = cleanPhone.slice(-10);
 
-    const countryCode =
-      "+" + cleanPhone.slice(0, cleanPhone.length - 10);
+    const extractedCountryCode = cleanPhone.slice(
+      0,
+      cleanPhone.length - 10
+    );
+
+    const countryCode = extractedCountryCode
+      ? `+${extractedCountryCode}`
+      : "+91";
 
     const fullPhone = `${countryCode} ${localNumber}`;
+
+    // =====================================================
+    // PINCODE VALIDATION
+    // =====================================================
+
+    const cleanPincode = String(pincode).replace(/\D/g, "");
+
+    if (!/^\d{6}$/.test(cleanPincode)) {
+      return res.status(400).json({
+        success: false,
+        error: "Please enter a valid 6-digit pincode",
+      });
+    }
+
+    // =====================================================
+    // CLEAN VALUES
+    // =====================================================
+
+    const cleanFullname = fullname.trim();
+    const cleanEmail = email.trim();
+    const cleanAddress = address.trim();
+    const cleanCity = city.trim();
+    const cleanState = state.trim();
+    const cleanSubject = subject.trim();
+    const cleanMessage = message.trim();
 
     // =====================================================
     // RAIYA CRM API
@@ -52,17 +147,33 @@ const Contact = async (req, res) => {
           },
 
           body: JSON.stringify({
-            fullName: fullname,
-            email: email,
+            fullName: cleanFullname,
 
-            // Send clean number to CRM
+            email: cleanEmail,
+
+            // Clean phone number for CRM
             mobile: cleanPhone,
 
-            // Contact form currently has no company field
+            // No company field in website contact form
             companyName: "",
 
-            // Send complete enquiry details
-            description: `Subject: ${subject}\nMessage: ${message}`,
+            /*
+              Until RAIYA confirms dedicated API fields
+              for address / city / state / pincode,
+              send them inside description so the
+              information is not lost.
+            */
+            description: `
+Address: ${cleanAddress}
+City: ${cleanCity}
+State: ${cleanState}
+Pincode: ${cleanPincode}
+
+Subject: ${cleanSubject}
+
+Message:
+${cleanMessage}
+            `.trim(),
 
             client_id: 19,
             lead_source_id: 81,
@@ -77,9 +188,7 @@ const Contact = async (req, res) => {
       let crmData = {};
 
       try {
-        crmData = crmText
-          ? JSON.parse(crmText)
-          : {};
+        crmData = crmText ? JSON.parse(crmText) : {};
       } catch {
         crmData = {
           message: crmText,
@@ -99,22 +208,28 @@ const Contact = async (req, res) => {
         );
 
         /*
-         * IMPORTANT:
-         * CRM failure will NOT stop email.
-         * Email will still be sent.
-         */
+          IMPORTANT:
+          CRM failure will NOT stop the email.
+
+          Customer enquiry will still be sent
+          to ARENQ through Zoho email.
+        */
       }
     } catch (crmError) {
-      console.error("RAIYA CRM CONNECTION ERROR:", crmError);
+      console.error(
+        "RAIYA CRM CONNECTION ERROR:",
+        crmError
+      );
 
       /*
-       * CRM connection failed.
-       * Continue execution so enquiry email is not lost.
-       */
+        CRM connection failed.
+        Continue execution so enquiry email
+        is not lost.
+      */
     }
 
     // =====================================================
-    // ZOHO EMAIL
+    // ZOHO EMAIL CONFIGURATION
     // =====================================================
 
     const transporter = nodemailer.createTransport({
@@ -128,82 +243,296 @@ const Contact = async (req, res) => {
       },
     });
 
+    // Verify SMTP connection
     await transporter.verify();
 
+    // =====================================================
+    // EMAIL CONTENT
+    // =====================================================
+
     const mailOptions = {
-      from: `"Arenq Website" <${process.env.MAIL}>`,
+      from: `"ARENQ Website" <${process.env.MAIL}>`,
 
       to: process.env.MAIL,
 
-      replyTo: email,
+      replyTo: cleanEmail,
 
-      subject: `New Contact Request: ${subject}`,
+      subject: `New Contact Request: ${cleanSubject}`,
 
       html: `
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 </head>
 
-<body style="
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
-">
+<body
+  style="
+    margin: 0;
+    padding: 20px;
+    background: #f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
+  "
+>
 
-  <div style="
-    max-width: 600px;
-    margin: auto;
-    background: #ffffff;
-    padding: 24px;
-    border-radius: 8px;
-  ">
+  <div
+    style="
+      max-width: 650px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    "
+  >
 
-    <h2 style="
-      color: #2f855a;
-      text-align: center;
-    ">
-      New Contact Request
-    </h2>
+    <!-- HEADER -->
 
-    <p>
-      <strong>Name:</strong>
-      ${fullname}
-    </p>
+    <div
+      style="
+        background: #0a528f;
+        padding: 24px;
+        text-align: center;
+      "
+    >
 
-    <p>
-      <strong>Email:</strong>
-      ${email}
-    </p>
+      <h2
+        style="
+          margin: 0;
+          color: #ffffff;
+          font-size: 24px;
+        "
+      >
+        New ARENQ Website Enquiry
+      </h2>
 
-    <p>
-      <strong>Phone:</strong>
-      ${fullPhone}
-    </p>
-
-    <p>
-      <strong>Subject:</strong>
-      ${subject}
-    </p>
-
-    <div style="
-      margin-top: 12px;
-      padding: 12px;
-      background: #f9fafb;
-      border-left: 4px solid #2f855a;
-    ">
-      ${message}
     </div>
 
-    <p style="
-      margin-top: 30px;
-      font-size: 12px;
-      color: #888;
-      text-align: center;
-    ">
-      This email was sent from the Arenq contact form.
-    </p>
+    <!-- CUSTOMER DETAILS -->
+
+    <div style="padding: 24px;">
+
+      <h3
+        style="
+          margin-top: 0;
+          color: #0a528f;
+        "
+      >
+        Customer Details
+      </h3>
+
+      <table
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 14px;
+        "
+      >
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+              width: 150px;
+            "
+          >
+            <strong>Name</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanFullname}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>Email</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanEmail}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>Phone</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${fullPhone}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>Address</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanAddress}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>City</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanCity}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>State</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanState}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>Pincode</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanPincode}
+          </td>
+        </tr>
+
+        <tr>
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            <strong>Subject</strong>
+          </td>
+
+          <td
+            style="
+              padding: 10px;
+              border-bottom: 1px solid #eeeeee;
+            "
+          >
+            ${cleanSubject}
+          </td>
+        </tr>
+
+      </table>
+
+      <!-- MESSAGE -->
+
+      <h3
+        style="
+          margin-top: 25px;
+          color: #0a528f;
+        "
+      >
+        Customer Message
+      </h3>
+
+      <div
+        style="
+          padding: 15px;
+          background: #f9fafb;
+          border-left: 4px solid #ffb600;
+          border-radius: 4px;
+          white-space: pre-wrap;
+          line-height: 1.6;
+        "
+      >${cleanMessage}</div>
+
+      <!-- FOOTER -->
+
+      <p
+        style="
+          margin-top: 30px;
+          font-size: 12px;
+          color: #888888;
+          text-align: center;
+        "
+      >
+        This enquiry was submitted through the
+        ARENQ website contact form.
+      </p>
+
+    </div>
 
   </div>
 
@@ -211,6 +540,10 @@ const Contact = async (req, res) => {
 </html>
       `,
     };
+
+    // =====================================================
+    // SEND EMAIL
+    // =====================================================
 
     await transporter.sendMail(mailOptions);
 
@@ -222,13 +555,12 @@ const Contact = async (req, res) => {
       success: true,
       message: "Contact request sent successfully",
     });
-
   } catch (error) {
     console.error("CONTACT API ERROR:", error);
 
     return res.status(500).json({
       success: false,
-      error: "Server error",
+      error: "Server error. Please try again later.",
     });
   }
 };

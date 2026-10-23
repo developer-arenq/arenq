@@ -69,6 +69,10 @@ export default function ContactPage() {
     fullname: "",
     email: "",
     phone: "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
     subject: "",
     message: "",
   });
@@ -112,7 +116,53 @@ export default function ContactPage() {
       errs.message = "Please write at least 10 characters";
     }
 
+    function validate() {
+      const errs = {};
 
+      if (!formData.fullname.trim()) {
+        errs.name = "Name is required";
+      }
+
+      if (
+        !formData.email.trim() ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+      ) {
+        errs.email = "Valid email required";
+      }
+
+      if (!formData.phone) {
+        errs.phone = "Phone number is required";
+      }
+
+      if (!formData.address.trim()) {
+        errs.address = "Address is required";
+      }
+
+      if (!formData.city.trim()) {
+        errs.city = "City is required";
+      }
+
+      if (!formData.state.trim()) {
+        errs.state = "State is required";
+      }
+
+      if (!/^\d{6}$/.test(formData.pincode)) {
+        errs.pincode = "Enter a valid 6-digit pincode";
+      }
+
+      if (!formData.subject) {
+        errs.subject = "Please select a subject";
+      }
+
+      if (
+        !formData.message.trim() ||
+        formData.message.trim().length < 10
+      ) {
+        errs.message = "Please write at least 10 characters";
+      }
+
+      return errs;
+    }
 
     return errs;
   }
@@ -128,72 +178,91 @@ export default function ContactPage() {
   }, [showToast]);
 
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const errs = validate();
+    const errs = validate();
 
-  if (Object.keys(errs).length > 0) {
-    setErrors(errs);
-    return;
-  }
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
 
-  setErrors({});
-  setLoading(true);
-  setError(null);
-  setSuccess(null);
+    setErrors({});
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
-  try {
-    // Call our Next.js backend API
-    // Backend will send data to RAIYA CRM + Zoho Email
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullname: formData.fullname,
-        email: formData.email,
-        phone: formData.phone,
-        subject: formData.subject,
-        message: formData.message,
-      }),
-    });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
 
-    const data = await res.json();
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-    console.log("Contact API Response:", data);
+        body: JSON.stringify({
+          fullname: formData.fullname,
+          email: formData.email,
+          phone: formData.phone,
 
-    if (res.ok) {
-      setSuccess("Your message has been sent successfully.");
-      setShowToast(true);
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.pincode,
 
-      setFormData({
-        fullname: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
-    } else {
-      console.error("Contact API Error:", data);
+
+      const data = await res.json();
+
+      console.log("Contact API Response:", data);
+
+      if (res.ok) {
+        setSuccess(
+          "Your message has been sent successfully."
+        );
+
+        setShowToast(true);
+
+        setFormData({
+          fullname: "",
+          email: "",
+          phone: "",
+          address: "",
+          city: "",
+          state: "",
+          pincode: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        console.error(
+          "Contact API Error:",
+          data
+        );
+
+        setError(
+          data?.error ||
+          data?.message ||
+          "Something went wrong. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Contact Form Error:",
+        error
+      );
 
       setError(
-        data?.error ||
-        data?.message ||
-        "Something went wrong. Please try again."
+        "Server error. Please try again later."
       );
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Contact Form Error:", error);
-
-    setError(
-      "Server error. Please try again later."
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+  };
   const inputClass = (field) =>
     `w-full px-4 py-3 rounded-xl border text-sm font-body transition-colors outline-none focus:ring-2 ${errors[field]
       ? 'border-red-400 bg-red-50 focus:ring-red-200'
@@ -278,53 +347,87 @@ export default function ContactPage() {
                 <p className="font-body text-sm mb-6" style={{ color: 'hsl(30 12% 50%)' }}>
                   Fill in the form and we'll be in touch soon.
                 </p>
-                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                <form
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="space-y-4"
+                >
+                  {/* NAME + EMAIL */}
+
                   <div className="grid sm:grid-cols-2 gap-4">
+
                     <div>
-                      <label className={labelClass} style={{ color: 'hsl(20 25% 28%)' }}>Your Name *</label>
+                      <label
+                        className={labelClass}
+                        style={{ color: "hsl(20 25% 28%)" }}
+                      >
+                        Your Name *
+                      </label>
+
                       <input
                         type="text"
                         name="fullname"
                         value={formData.fullname}
                         onChange={handleChange}
                         placeholder="Enter your name"
-                        className={inputClass('name')}
+                        className={inputClass("name")}
                         autoComplete="name"
                       />
+
                       {errors.name && (
                         <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                          <AlertCircle size={11} /> {errors.name}
+                          <AlertCircle size={11} />
+                          {errors.name}
                         </p>
                       )}
                     </div>
+
                     <div>
-                      <label className={labelClass} style={{ color: 'hsl(20 25% 28%)' }}>Email Address *</label>
+                      <label
+                        className={labelClass}
+                        style={{ color: "hsl(20 25% 28%)" }}
+                      >
+                        Email Address *
+                      </label>
+
                       <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@example.com"
-                        className={inputClass('email')}
+                        className={inputClass("email")}
                         autoComplete="email"
                       />
+
                       {errors.email && (
                         <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                          <AlertCircle size={11} /> {errors.email}
+                          <AlertCircle size={11} />
+                          {errors.email}
                         </p>
                       )}
                     </div>
+
                   </div>
+
+                  {/* PHONE */}
+
                   <div>
-                    <label className={labelClass} style={{ color: 'hsl(20 25% 28%)' }}>Phone Number (optional)</label>
+                    <label
+                      className={labelClass}
+                      style={{ color: "hsl(20 25% 28%)" }}
+                    >
+                      Phone Number *
+                    </label>
+
                     <PhoneInput
                       country={"in"}
                       value={formData.phone}
                       onChange={(phone) =>
-                        setFormData({
-                          ...formData,
+                        setFormData((prev) => ({
+                          ...prev,
                           phone,
-                        })
+                        }))
                       }
                       enableSearch
                       inputProps={{
@@ -338,55 +441,252 @@ export default function ContactPage() {
                         width: "100%",
                         height: "52px",
                         borderRadius: "12px",
-                        border: "1px solid #e7e5e4",
+                        border: errors.phone
+                          ? "1px solid #f87171"
+                          : "1px solid #e7e5e4",
                         fontSize: "14px",
                       }}
                     />
+
                     {errors.phone && (
                       <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                        <AlertCircle size={11} /> {errors.phone}
+                        <AlertCircle size={11} />
+                        {errors.phone}
                       </p>
                     )}
                   </div>
+
+                  {/* ADDRESS */}
+
                   <div>
-                    <label className={labelClass} style={{ color: 'hsl(20 25% 28%)' }}>Subject *</label>
-                    <select
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className={inputClass('subject') + ' cursor-pointer'}
+                    <label
+                      className={labelClass}
+                      style={{ color: "hsl(20 25% 28%)" }}
                     >
-                      <option value="">Select a subject</option>
-                      {SUBJECTS.map(s => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                    {errors.subject && (
+                      Address *
+                    </label>
+
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="House / Flat / Street / Area"
+                      className={inputClass("address")}
+                      autoComplete="street-address"
+                    />
+
+                    {errors.address && (
                       <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                        <AlertCircle size={11} /> {errors.subject}
+                        <AlertCircle size={11} />
+                        {errors.address}
                       </p>
                     )}
                   </div>
+
+                  {/* CITY + STATE */}
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+
+                    <div>
+                      <label
+                        className={labelClass}
+                        style={{ color: "hsl(20 25% 28%)" }}
+                      >
+                        City *
+                      </label>
+
+                      <input
+                        type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        placeholder="Enter city"
+                        className={inputClass("city")}
+                        autoComplete="address-level2"
+                      />
+
+                      {errors.city && (
+                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                          <AlertCircle size={11} />
+                          {errors.city}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label
+                        className={labelClass}
+                        style={{ color: "hsl(20 25% 28%)" }}
+                      >
+                        State *
+                      </label>
+
+                      <input
+                        type="text"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleChange}
+                        placeholder="Enter state"
+                        className={inputClass("state")}
+                        autoComplete="address-level1"
+                      />
+
+                      {errors.state && (
+                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                          <AlertCircle size={11} />
+                          {errors.state}
+                        </p>
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {/* PINCODE */}
+
+                    <div>
+                      <label
+                        className={labelClass}
+                        style={{ color: "hsl(20 25% 28%)" }}
+                      >
+                        Pincode *
+                      </label>
+
+                      <input
+                        type="text"
+                        name="pincode"
+                        value={formData.pincode}
+                        onChange={(e) => {
+                          const value = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 6);
+
+                          setFormData((prev) => ({
+                            ...prev,
+                            pincode: value,
+                          }));
+                        }}
+                        placeholder="Enter 6-digit pincode"
+                        className={inputClass("pincode")}
+                        inputMode="numeric"
+                        maxLength={6}
+                        autoComplete="postal-code"
+                      />
+
+                      {errors.pincode && (
+                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                          <AlertCircle size={11} />
+                          {errors.pincode}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* SUBJECT */}
+
+                    <div>
+                      <label
+                        className={labelClass}
+                        style={{ color: "hsl(20 25% 28%)" }}
+                      >
+                        Subject *
+                      </label>
+
+                      <select
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className={
+                          inputClass("subject") +
+                          " cursor-pointer"
+                        }
+                      >
+                        <option value="">
+                          Select a subject
+                        </option>
+
+                        {SUBJECTS.map((s) => (
+                          <option
+                            key={s}
+                            value={s}
+                          >
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+
+                      {errors.subject && (
+                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                          <AlertCircle size={11} />
+                          {errors.subject}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+
+
+                  {/* MESSAGE */}
+
                   <div>
-                    <label className={labelClass} style={{ color: 'hsl(20 25% 28%)' }}>Message *</label>
+                    <label
+                      className={labelClass}
+                      style={{ color: "hsl(20 25% 28%)" }}
+                    >
+                      Message *
+                    </label>
+
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
                       placeholder="Tell us how we can help you..."
-                      className={inputClass('message') + ' resize-none'}
+                      className={
+                        inputClass("message") +
+                        " resize-none"
+                      }
                     />
+
                     {errors.message && (
                       <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                        <AlertCircle size={11} /> {errors.message}
+                        <AlertCircle size={11} />
+                        {errors.message}
                       </p>
                     )}
                   </div>
+
+                  {/* ERROR MESSAGE */}
+
+                  {error && (
+                    <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
+                      {error}
+                    </div>
+                  )}
+
+                  {/* SUBMIT BUTTON */}
+
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 rounded-xl text-white font-display text-base font-bold transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 flex items-center justify-center gap-2"
+                    className="
+      w-full
+      py-4
+      rounded-xl
+      text-white
+      font-display
+      text-base
+      font-bold
+      transition-all
+      hover:opacity-90
+      active:scale-[0.98]
+      disabled:opacity-60
+      flex
+      items-center
+      justify-center
+      gap-2
+    "
                     style={{
                       background: "hsl(12 55% 38%)",
                     }}
@@ -394,6 +694,7 @@ export default function ContactPage() {
                     {loading ? (
                       <>
                         <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+
                         Sending...
                       </>
                     ) : (
@@ -403,6 +704,7 @@ export default function ContactPage() {
                       </>
                     )}
                   </button>
+
                 </form>
               </>
             )}
@@ -546,7 +848,7 @@ export default function ContactPage() {
                 <p className="font-display font-bold text-base drop-shadow">ARENQ Energy Solutions</p>
                 <p className="font-body text-sm text-white/80 drop-shadow">Maharashtra, India</p>
                 <a
-                  href="https://maps.app.goo.gl/95426wchEhFCxsBG9"
+                  href="https://maps.app.goo.gl/Ec5nX2Fw45MowEZu9"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-3 text-xs font-semibold font-body px-4 py-1.5 rounded-full bg-white/20 border border-white/30 hover:bg-white/30 transition-colors"
