@@ -23,11 +23,16 @@ import {
 
 const SUBJECTS = [
   "General Inquiry",
-  "Battery Requirement",
-  "EV Battery Solution",
-  "Solar Energy Storage",
-  "OEM / Partnership",
-  "Technical Support",
+  "Product Inquiry",
+  "Lithium Battery Requirement",
+  "ESS / Energy Storage Solution",
+  "BESS Requirement",
+  "Inverter & Battery Solution",
+  "Solar Energy Storage Solution",
+  "Distributorship / Dealership",
+  "OEM / Business Partnership",
+  "Technical Support / Service",
+  "Other Inquiry",
 ];
 
 const FAQS = [
